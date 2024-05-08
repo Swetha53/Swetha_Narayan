@@ -1,6 +1,8 @@
 $primary: #F2F4FB;
 $secondary: #D22780;
 $tertiary: #F8B500;
+$tertiary-50: rgba(248, 181, 0, 0.5);
+$tertiary-10: rgba(248, 181, 0, 0.1);
 
 :root {
   font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -15,6 +17,21 @@ $tertiary: #F8B500;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: unset;
+}
+
+.monofett {
+  font-family: "Monofett", monospace;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 // a {
