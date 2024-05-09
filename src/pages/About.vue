@@ -1,4 +1,74 @@
 <script setup lang="ts">
+import Skills from "./../components/Skills.vue"
+
+const skills = [
+    {
+        title: "JAVA",
+        amount: 80,
+        project: 5,
+        exp: 5
+    },
+    {
+        title: "C++",
+        amount: 70,
+        project: 2,
+        exp: 3
+    },
+    {
+        title: "Python",
+        amount: 50,
+        project: 3,
+        exp: 1
+    },
+    {
+        title: "C",
+        amount: 40,
+        project: 1,
+        exp: 2
+    },
+    {
+        title: "HTML",
+        amount: 90,
+        project: 10,
+        exp: 6
+    },
+    {
+        title: "CSS",
+        amount: 85,
+        project: 10,
+        exp: 6
+    },
+    {
+        title: "JavaScript",
+        amount: 80,
+        project: 7,
+        exp: 6
+    },
+    {
+        title: "SQL",
+        amount: 50,
+        project: 3,
+        exp: 4
+    },
+    {
+        title: "Angular JS",
+        amount: 50,
+        project: 2,
+        exp: 2
+    },
+    {
+        title: "Vue",
+        amount: 70,
+        project: 5,
+        exp: 2
+    },
+    {
+        title: "React",
+        amount: 50,
+        project: 1,
+        exp: 2
+    }
+]
 </script>
 
 <template>
@@ -15,6 +85,13 @@
         </p>
     </div>
     <h1>Skills</h1>
+    <Skills v-for="skill in skills"
+        :amount="skill.amount"
+        :title="skill.title"
+        :project="skill.project"
+        :exp="skill.exp"
+    >
+    </Skills>
     <h1>Timeline</h1>
 </template>
 
