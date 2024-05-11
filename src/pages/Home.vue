@@ -61,10 +61,12 @@ import DownloadButton from "./../components/DownloadButton.vue"
             grid-area: summary;
             border: 1px solid $secondary;
             border-radius: 8px;
+            border-bottom-right-radius: 0px;
         }
         &__button {
             grid-area: button;
-            margin: 0 auto;
+            margin-left: auto;
+            margin-right: 0;
         }
     }
 </style>

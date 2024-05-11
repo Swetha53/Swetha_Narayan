@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Skills from "./../components/Skills.vue"
+import SlideShow from "./../components/SlideShow.vue"
+import TimelineItem from "./../components/TimelineItem.vue"
 
 const skills = [
     {
@@ -69,6 +71,90 @@ const skills = [
         exp: 2
     }
 ]
+
+const events = [
+    {
+        type: "EDU",
+        title: "Master of Computer Science",
+        organization: "University of Ottawa",
+        startDate: 1693526400000,
+        endDate: 1756684800000,
+        slides: [
+            {
+                type: 'text'
+            }
+        ]
+    },
+    {
+        type: "JOB",
+        title: "Software Engineer",
+        organization: "Quinbay Pvt. Ltd.",
+        startDate: 1619827200000,
+        endDate: 1682899200000,
+        slides: [
+            {
+                type: 'image'
+            }
+        ]
+    },
+    {
+        type: "JOB",
+        title: "Software Engineer Intern",
+        organization: "Quinbay Pvt. Ltd.",
+        startDate: 1609459200000,
+        endDate: 1617235200000,
+        slides: [
+            {
+                type: 'text'
+            }
+        ]
+    },
+    {
+        type: "EDU",
+        title: "B.Tech. Computer Science",
+        organization: "SRM - IST",
+        startDate: 1504224000000,
+        endDate: 1617235200000,
+        slides: [
+            {
+                type: 'text'
+            }
+        ]
+    },
+    {
+        type: "JOB",
+        title: "Intern",
+        organization: "Verzeo",
+        startDate: 1593561600000,
+        endDate: 1596240000000,
+        slides: [
+            {
+                type: 'text'
+            }
+        ]
+    },
+    {
+        type: "JOB",
+        title: "Intern",
+        organization: "JK Tech. Pvt. Ltd.",
+        startDate: 1559347200000,
+        endDate: 1561852800000,
+        slides: [
+            {
+                type: 'text'
+            }
+        ]
+    }
+]
+
+function getEventDate(eventDate: number) {
+    let date = new Date(eventDate)
+    return date.toLocaleString('default', { month: 'short' }) + ' ' + String(date.getFullYear())
+}
+
+function showSlideshow(slides: Array<Object>) {
+    // TODO complete the function
+}
 </script>
 
 <template>
@@ -93,6 +179,30 @@ const skills = [
     >
     </Skills>
     <h1>Timeline</h1>
+    <div class="timeline">
+        <!-- TODO fix it so it moves down when timeline moved but not up when going above timeline -->
+        <!-- TODO slideshow on hover or click -->
+        <SlideShow></SlideShow>
+        <div class="timeline__structure">
+            <template v-for="event in events">
+                <TimelineItem v-if="event.type == 'EDU'"
+                    :organization="event.organization"
+                    :title="event.title"
+                    @showSlideshow="showSlideshow(event.slides)"></TimelineItem>
+                <div class="timeline__structure-text" v-else>
+                    {{ getEventDate(event.startDate) }} - {{ getEventDate(event.endDate) }}
+                </div>
+                <div class="timeline__structure-circle" :class="event.type == 'EDU' ? 'timeline__structure-circle-left' : 'timeline__structure-circle-right'"></div>
+                <div class="timeline__structure-text" v-if="event.type == 'EDU'">
+                    {{ getEventDate(event.startDate) }} - {{ getEventDate(event.endDate) }}
+                </div>
+                <TimelineItem v-else
+                    :organization="event.organization"
+                    :title="event.title"
+                    @showSlideshow="showSlideshow(event.slides)"></TimelineItem>
+            </template>
+        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -104,5 +214,50 @@ const skills = [
         width: 80%;
         margin: 0 auto;
         box-shadow: 5px 5px 10px $tertiary;
+    }
+    .timeline {
+        display: flex;
+        justify-content: space-around;
+        &__structure {
+            width: 45%;
+            display: grid;
+            grid: repeat(6, auto) / 40% 20% 40%;
+            row-gap: 10px;
+            place-items: center;
+            margin-top: 76px;
+            &-circle {
+                $horizontalLine: 70px;
+                $verticalLine: 142px;
+                width: 20px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                border: 1px solid $secondary;
+                position: relative;
+                background-color: $primary;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    height: 1px;
+                    width: $horizontalLine;
+                    top: 10px;
+                    background-color: $secondary;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 1px;
+                    height: $verticalLine;
+                    background-color: $secondary;
+                    top: - $verticalLine;
+                    left: 10px;
+                }
+                &-left::before {
+                    left: - $horizontalLine;
+                }
+                &-right::before {
+                    left: 21px;
+                }
+            }
+        }
     }
 </style>
