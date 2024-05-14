@@ -1,15 +1,19 @@
 <script setup lang="ts">
 defineProps<{ organization: string, title: string }>()
 
-const emit = defineEmits(['showSlideshow'])
+const emit = defineEmits(['showSlideshow', 'closeSlideshow'])
 
 function emitHover() {
     emit('showSlideshow')
 }
+
+function emitClose() {
+    emit('closeSlideshow')
+}
 </script>
 
 <template>
-    <div class="timeline-item" @mouseover="emitHover()">
+    <div class="timeline-item" @mouseover="emitHover()" @mouseleave="emitClose()">
         <div class="timeline-item__ribbon">
             <p>{{ organization }}</p>
         </div>

@@ -2,6 +2,7 @@
 import Skills from "./../components/Skills.vue"
 import SlideShow from "./../components/SlideShow.vue"
 import TimelineItem from "./../components/TimelineItem.vue"
+import { ref } from 'vue'
 
 const skills = [
     {
@@ -71,6 +72,8 @@ const skills = [
         exp: 2
     }
 ]
+const initialSlides = <Array<{type: string, text?: string, image?: string}>>[]
+const currentSlides = ref<Array<{type: string, text?: string, image?: string}>>([])
 
 const events = [
     {
@@ -81,7 +84,12 @@ const events = [
         endDate: 1756684800000,
         slides: [
             {
-                type: 'text'
+                type: 'image',
+                image: 'uOttawa.png'
+            },
+            {
+                type: 'text',
+                text: 'Studied in University of Ottawa in Ottawa in Ontario province in Canada.'
             }
         ]
     },
@@ -93,7 +101,24 @@ const events = [
         endDate: 1682899200000,
         slides: [
             {
-                type: 'image'
+                type: 'image',
+                image: 'quinbay.jpeg'
+            },
+            {
+                type: 'text',
+                text: 'Company situated in Bangalore, Karnataka, India'
+            },
+            {
+                type: 'text',
+                text: 'Worked in the merchant side of an eCommerce platform.'
+            },
+            {
+                type: 'text',
+                text: 'Worked as front-end developer for 2 years.'
+            },
+            {
+                type: 'text',
+                text: 'Worked extensively in Vue and React. Have done some work in Angular.'
             }
         ]
     },
@@ -105,7 +130,8 @@ const events = [
         endDate: 1617235200000,
         slides: [
             {
-                type: 'text'
+                type: 'image',
+                image: 'quinbay.jpeg'
             }
         ]
     },
@@ -117,7 +143,8 @@ const events = [
         endDate: 1617235200000,
         slides: [
             {
-                type: 'text'
+                type: 'image',
+                image: 'srm.png'
             }
         ]
     },
@@ -129,7 +156,8 @@ const events = [
         endDate: 1596240000000,
         slides: [
             {
-                type: 'text'
+                type: 'image',
+                image: 'verzeo.png'
             }
         ]
     },
@@ -141,7 +169,8 @@ const events = [
         endDate: 1561852800000,
         slides: [
             {
-                type: 'text'
+                type: 'image',
+                image: 'JKT.jpg'
             }
         ]
     }
@@ -150,10 +179,6 @@ const events = [
 function getEventDate(eventDate: number) {
     let date = new Date(eventDate)
     return date.toLocaleString('default', { month: 'short' }) + ' ' + String(date.getFullYear())
-}
-
-function showSlideshow(slides: Array<Object>) {
-    // TODO complete the function
 }
 </script>
 
@@ -182,13 +207,14 @@ function showSlideshow(slides: Array<Object>) {
     <div class="timeline">
         <!-- TODO fix it so it moves down when timeline moved but not up when going above timeline -->
         <!-- TODO slideshow on hover or click -->
-        <SlideShow></SlideShow>
+        <SlideShow :key="currentSlides.length" :slides="currentSlides"></SlideShow>
         <div class="timeline__structure">
             <template v-for="event in events">
                 <TimelineItem v-if="event.type == 'EDU'"
                     :organization="event.organization"
                     :title="event.title"
-                    @showSlideshow="showSlideshow(event.slides)"></TimelineItem>
+                    @showSlideshow="currentSlides = event.slides"
+                    @closeSlideshow="currentSlides = initialSlides"></TimelineItem>
                 <div class="timeline__structure-text" v-else>
                     {{ getEventDate(event.startDate) }} - {{ getEventDate(event.endDate) }}
                 </div>
@@ -199,7 +225,8 @@ function showSlideshow(slides: Array<Object>) {
                 <TimelineItem v-else
                     :organization="event.organization"
                     :title="event.title"
-                    @showSlideshow="showSlideshow(event.slides)"></TimelineItem>
+                    @showSlideshow="currentSlides = event.slides"
+                    @closeSlideshow="currentSlides = initialSlides"></TimelineItem>
             </template>
         </div>
     </div>
