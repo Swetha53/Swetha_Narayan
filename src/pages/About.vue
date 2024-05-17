@@ -249,8 +249,6 @@ onUnmounted(() => {
         </Skills>
         <h1>Timeline</h1>
         <div class="timeline">
-            <!-- TODO fix it so it moves down when timeline moved but not up when going above timeline -->
-            <!-- TODO slideshow on hover or click -->
             <div class="timeline__slides">
                 <div :class="{'fixed-div': state.timelineShowing}">
                     <SlideShow :key="state.currentSlides.length" :slides="state.currentSlides"></SlideShow>
