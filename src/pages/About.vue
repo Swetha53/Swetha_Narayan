@@ -1,14 +1,9 @@
 <script setup lang="ts">
+import {slideType} from "./../common/dataType.ts"
 import Skills from "./../components/Skills.vue"
 import SlideShow from "./../components/SlideShow.vue"
 import TimelineItem from "./../components/TimelineItem.vue"
 import { reactive, onMounted, onUnmounted } from 'vue'
-
-type slides = {
-    type: string,
-    text?: string,
-    image?: string
-}
 
 type miniEventType = {
     type: string,
@@ -16,7 +11,7 @@ type miniEventType = {
     organization: string,
     startDate: number,
     endDate: number,
-    slides: Array<slides>
+    slides: Array<slideType>
 }
 
 const skills = [
@@ -90,7 +85,7 @@ const skills = [
 
 const state = reactive({
     timelineShowing: false,
-    currentSlides: <Array<slides>>[]
+    currentSlides: <Array<slideType>>[]
 })
 
 const events = [
@@ -100,7 +95,7 @@ const events = [
         organization: "University of Ottawa",
         startDate: 1693526400000,
         endDate: 1756684800000,
-        slides: <Array<slides>>[
+        slides: <Array<slideType>>[
             {
                 type: 'image',
                 image: 'uOttawa.png'
@@ -117,7 +112,7 @@ const events = [
         organization: "Quinbay Pvt. Ltd.",
         startDate: 1619827200000,
         endDate: 1682899200000,
-        slides: <Array<slides>>[
+        slides: <Array<slideType>>[
             {
                 type: 'image',
                 image: 'quinbay.jpeg'
@@ -146,7 +141,7 @@ const events = [
         organization: "Quinbay Pvt. Ltd.",
         startDate: 1609459200000,
         endDate: 1617235200000,
-        slides: <Array<slides>>[
+        slides: <Array<slideType>>[
             {
                 type: 'image',
                 image: 'quinbay.jpeg'
@@ -159,7 +154,7 @@ const events = [
         organization: "SRM - IST",
         startDate: 1504224000000,
         endDate: 1617235200000,
-        slides: <Array<slides>>[
+        slides: <Array<slideType>>[
             {
                 type: 'image',
                 image: 'srm.png'
@@ -172,7 +167,7 @@ const events = [
         organization: "Verzeo",
         startDate: 1593561600000,
         endDate: 1596240000000,
-        slides: <Array<slides>>[
+        slides: <Array<slideType>>[
             {
                 type: 'image',
                 image: 'verzeo.png'
@@ -185,7 +180,7 @@ const events = [
         organization: "JK Tech. Pvt. Ltd.",
         startDate: 1559347200000,
         endDate: 1561852800000,
-        slides: <Array<slides>>[
+        slides: <Array<slideType>>[
             {
                 type: 'image',
                 image: 'JKT.jpg'

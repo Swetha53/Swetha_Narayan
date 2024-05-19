@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted, reactive} from 'vue'
-const props = defineProps<{ slides: Array<{type: string, text?: string, image?: string}> }>()
+import {slideType} from "./../common/dataType.ts"
+const props = defineProps<{ slides: Array<slideType> }>()
 const state = reactive({
     slideNumber: 0
 })
