@@ -1,36 +1,81 @@
 <script setup lang="ts">
+import { slideType } from "../common/dataType";
 import SlideShow from "./../components/SlideShow.vue"
-import {reactive} from 'vue'
+import {reactive, onMounted} from 'vue'
 
 const projects = [
     {
+        key: "Py_TBA",
         title: "Text Based Adventure",
-        link: "https://github.com/Swetha53/TextBasedAdventure"
+        link: "https://github.com/Swetha53/TextBasedAdventure",
+        slides: <Array<slideType>>[
+            {
+                type: "text",
+                text: "Lang: Python"
+            }
+        ]
     },
     {
-        title: "Digital Delivery Authentication",
-        link: "https://github.com/Swetha53/TextBasedAdventure"
+        key: "DDA",
+        title: "Digital Delivery Auth.",
+        link: "https://github.com/Swetha53/TextBasedAdventure",
+        slides: <Array<slideType>>[
+            {
+                type: "text",
+                text: "Framework: Vue 2.0"
+            }
+        ]
     },
     {
+        key: "Blibli",
         title: "Blibli",
-        link: "https://github.com/Swetha53/TextBasedAdventure"
+        link: "https://github.com/Swetha53/TextBasedAdventure",
+        slides: <Array<slideType>>[
+            {
+                type: "text",
+                text: "Used Vue 2.0, React JS and Angular JS framework for different projects of same website."
+            }
+        ]
     },
     {
+        key: "TS_Resume",
         title: "Resume",
-        link: "https://github.com/Swetha53/Swetha_Narayan"
+        link: "https://github.com/Swetha53/Swetha_Narayan",
+        slides: <Array<slideType>>[
+            {
+                type: "text",
+                text: "Lang: Typescript, Framework: Vue 3.0"
+            }
+        ]
     }
 ]
 
 const state = reactive({
-    activeProjectIndex: -1
+    activeProjectIndex: -1,
+    currentSlides: <Array<slideType>>[]
+})
+
+onMounted(() => {
+    projects.forEach(project => {
+        const images = import.meta.glob('/src/assets/Py_TBA/*.{png, svg}')
+        Object.keys(images).forEach(image => {
+            const imageName = image.replace('/src/assets/', '')
+            project.slides.push({
+                type: "image",
+                image: imageName
+            })
+        })
+    })
 })
 
 function showProjectFooter(index: number) {
     state.activeProjectIndex = index
+    state.currentSlides = projects[index].slides
 }
 
 function closeProjectFooter() {
     state.activeProjectIndex = -1
+    state.currentSlides = []
 }
 </script>
 
@@ -38,9 +83,7 @@ function closeProjectFooter() {
     <h1>Portfolio</h1>
     <div class="portfolio">
         <div class="portfolio__slides">
-            <!-- <div :class="{'fixed-div': state.timelineShowing}"> -->
-            <SlideShow :slides="[]"></SlideShow>
-            <!-- </div> -->
+            <SlideShow :slides="state.currentSlides" :key="state.currentSlides.length"></SlideShow>
         </div>
         <div class="portfolio__grid">
             <div class="portfolio__grid-cell monofett" :class="{'disabled-cell': !projects[i-1] || !projects[i-1].title}" v-for="i in 15" :key="i"
