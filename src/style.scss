@@ -2,6 +2,7 @@
 
 $primary: #F2F4FB;
 $secondary: #D22780;
+$secondary-50:rgba(210, 39, 128, 0.5);
 $tertiary: #F8B500;
 $tertiary-50: rgba(248, 181, 0, 0.5);
 $tertiary-10: rgba(248, 181, 0, 0.1);
@@ -22,6 +23,10 @@ $black-100: rgba(0, 0, 0, 1);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: $tertiary outset 1px;
 }
 
 h1 {
