@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {reactive} from 'vue'
 import Input from "./../components/Input.vue"
 
 const mainInfo = {
@@ -6,10 +7,27 @@ const mainInfo = {
     "Location": "Ottawa, Ontario, Canada",
     "Languages": ["English", "Hindi", "Tamil"]
 }
-
 const socialLinks = {
     "LinkedIn": "https://www.linkedin.com/in/swetha-narayan-engineer/",
     "Github": "https://github.com/Swetha53"
+}
+const state = reactive({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+})
+
+function storeInputData(variableName: string, inputValue: string) {
+    state[variableName] = inputValue
+    console.log(state[variableName])
+}
+
+function startFormEvaluations() {
+    // name: not empty, no unique characters or numbers
+    // email: not empty, should have @ and dot, no space
+    // subject: not empty, not just space
+    // message: not empty, not just space
 }
 </script>
 
@@ -35,11 +53,11 @@ const socialLinks = {
             </div>
         </div>
         <div class="grid__cell grid">
-            <Input inputType="text" placeholder="Name"/>
-            <Input inputType="email" placeholder="Email"/>
-            <Input inputType="text" placeholder="Subject"/>
-            <Input inputType="textarea" placeholder="Your Message"/>
-            <button>
+            <Input inputType="text" placeholder="Name" name="name" @storeInputData="storeInputData"/>
+            <Input inputType="email" placeholder="Email" name="email" @storeInputData="storeInputData"/>
+            <Input inputType="text" placeholder="Subject" name="subject" @storeInputData="storeInputData"/>
+            <Input inputType="textarea" placeholder="Your Message" name="message" @storeInputData="storeInputData"/>
+            <button @click="startFormEvaluations">
                 Submit
             </button>
             <div class="grid__cell-ribbon__left">
@@ -155,6 +173,7 @@ const socialLinks = {
                 background-color: $tertiary;
                 color: $secondary;
                 box-shadow: none;
+                cursor: pointer;
             }
         }
     }

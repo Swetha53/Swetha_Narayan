@@ -118,6 +118,7 @@ function closeProjectFooter() {
                 "cell3 cell5 cell8 cell10 cell12 cell15"
                 "cell3 . cell8 . cell12 .";
             &-cell {
+                cursor: pointer;
                 box-shadow: 2px 2px 5px $tertiary;
                 border: 1px solid $secondary;
                 height: auto;

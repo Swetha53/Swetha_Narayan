@@ -27,6 +27,7 @@ function emitClose() {
     $ribbon: 30px;
 
     .timeline-item {
+        cursor: pointer;
         z-index: 100;
         border: 1px solid $secondary;
         border-radius: 8px;
