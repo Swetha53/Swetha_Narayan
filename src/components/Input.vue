@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {reactive} from 'vue'
 
-const props = defineProps<{ inputType: string, placeholder: string, name: string}>()
+const props = defineProps<{ inputType: string, placeholder: string, name: string, hasError: boolean }>()
 const emit = defineEmits(['storeInputData'])
 const state = reactive({
     inputData: ""
@@ -13,23 +13,40 @@ function focusEventHandler() {
 </script>
 
 <template>
-    <textarea v-if="inputType === 'textarea'"
-        v-model="state.inputData"
-        :placeholder
-        rows="10"
-        :name
-        @focusout="focusEventHandler">
-    </textarea>
-    <input v-else
-        v-model="state.inputData"
-        :type="inputType"
-        :placeholder
-        :name
-        @focusout="focusEventHandler"/>
+    <div class="input">
+        <textarea v-if="inputType === 'textarea'"
+            v-model="state.inputData"
+            :placeholder
+            rows="10"
+            :name
+            :class="{'input__error': hasError}"
+            @focusout="focusEventHandler">
+        </textarea>
+        <input v-else
+            v-model="state.inputData"
+            :type="inputType"
+            :placeholder
+            :name
+            :class="{'input__error': hasError}"
+            @focusout="focusEventHandler"/>
+        <span v-if="hasError" class="input__error-message">
+            This field has some issues please re-check the value before trying again.
+        </span>
+    </div>
 </template>
 
 <style lang="scss" scoped>
     @import "./../style.scss";
+    .input {
+        &__error {
+            border: 2px solid red;
+            &-message {
+                color: red;
+                position: relative;
+                font-size: 16px;
+            }
+        }
+    }
     input, textarea {
         border: 1px solid $secondary;
         border-radius: 8px;

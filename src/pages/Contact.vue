@@ -2,45 +2,6 @@
 import {reactive} from 'vue'
 import Input from "./../components/Input.vue"
 
-const validations = [
-    {
-        key: "name",
-        validationFunc: isTooLittleValidation,
-        evaluator: 1,
-        validationStatus: false
-    },
-    {
-        key: "name",
-        validationFunc: isInvalidPatternValidation,
-        evaluator: new RegExp(/^[A-Za-z][A-Za-z0-9\s]+$/),
-        validationStatus: false
-    },
-    {
-        key: "email",
-        validationFunc: isTooLittleValidation,
-        evaluator: 1,
-        validationStatus: false
-    },
-    {
-        key: "email",
-        validationFunc: isInvalidPatternValidation,
-        evaluator: new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
-        validationStatus: false
-    },
-    {
-        key: "subject",
-        validationFunc: isTooLittleValidation,
-        evaluator: 3,
-        validationStatus: false
-    },
-    {
-        key: "message",
-        validationFunc: isTooLittleValidation,
-        evaluator: 3,
-        validationStatus: false
-    }
-]
-
 const mainInfo = {
     "Email": "swethanarayan25@gmail.com",
     "Location": "Ottawa, Ontario, Canada",
@@ -51,16 +12,43 @@ const socialLinks = {
     "Github": "https://github.com/Swetha53"
 }
 const state = reactive({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    hasError: 'true',
-    finalValidation: 'true'
+    infoVariables: {
+        'name': "",
+        'subject': "",
+        'message': ""
+    },
+    hasError: false,
+    finalValidation: true,
+    validations: [
+        {
+            key: "name",
+            validationFunc: isTooLittleValidation,
+            evaluator: 1,
+            validationStatus: false
+        },
+        {
+            key: "name",
+            validationFunc: isInvalidPatternValidation,
+            evaluator: new RegExp(/^[A-Za-z][A-Za-z0-9\s]+$/),
+            validationStatus: false
+        },
+        {
+            key: "subject",
+            validationFunc: isTooLittleValidation,
+            evaluator: 3,
+            validationStatus: false
+        },
+        {
+            key: "message",
+            validationFunc: isTooLittleValidation,
+            evaluator: 3,
+            validationStatus: false
+        }
+    ]
 })
 
 function storeInputData(variableName: string, inputValue: string) {
-    state[variableName as keyof typeof state] = inputValue.replace(/\s+/g, ' ').trim()
+    state.infoVariables[variableName as keyof typeof state.infoVariables] = inputValue.replace(/\s+/g, ' ').trim()
 }
 
 function isInvalidPatternValidation (stringToEvaluate: string, pattern: RegExp) {
@@ -72,16 +60,18 @@ function isTooLittleValidation (stringToEvaluate: string, minLength: number) {
 }
 
 function startFormEvaluations() {
-    state.finalValidation = 'true'
-    validations.forEach(validation => {
-        const result = validation.validationFunc(state[validation.key], validation.evaluator)
+    state.finalValidation = true
+    state.validations.forEach(validation => {
+        const result = validation.validationFunc(state.infoVariables[validation.key], validation.evaluator)
         validation.validationStatus = !result
         if (!validation.validationStatus) {
-            state.finalValidation = 'false'
+            state.finalValidation = false
         }
     })
-    console.log(state.finalValidation)
-    console.log(validations)
+    state.hasError = !state.finalValidation
+    if (state.finalValidation) {
+        window.open(`mailto:swethanarayan25@gmail.com?subject=${state.infoVariables.subject}&body=${state.infoVariables.message}`);
+    }
 }
 </script>
 
@@ -107,10 +97,15 @@ function startFormEvaluations() {
             </div>
         </div>
         <div class="grid__cell grid">
-            <Input inputType="text" placeholder="Name" name="name" @storeInputData="storeInputData"/>
-            <Input inputType="email" placeholder="Email" name="email" @storeInputData="storeInputData"/>
-            <Input inputType="text" placeholder="Subject" name="subject" @storeInputData="storeInputData"/>
-            <Input inputType="textarea" placeholder="Your Message" name="message" @storeInputData="storeInputData"/>
+            <Input inputType="text" placeholder="Name" name="name"
+                :hasError="state.hasError && (!state.validations[0].validationStatus || !state.validations[1].validationStatus)"
+                @storeInputData="storeInputData"/>
+            <Input inputType="text" placeholder="Subject" name="subject"
+                :hasError="state.hasError && !state.validations[2].validationStatus"
+                @storeInputData="storeInputData"/>
+            <Input inputType="textarea" placeholder="Your Message" name="message"
+                :hasError="state.hasError && !state.validations[3].validationStatus"
+                @storeInputData="storeInputData"/>
             <button @click="startFormEvaluations">
                 Submit
             </button>
