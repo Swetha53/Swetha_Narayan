@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import {ref, watchEffect} from 'vue'
     import {useRouter} from 'vue-router'
+    import Menu from "./../components/Menu.vue"
     const router = useRouter()
     const activeSection = ref<string>('Home')
     watchEffect(() => {
@@ -10,7 +11,9 @@
 
 <template>
     <div class="grid monofett">
-        <div class="grid__cell"></div>
+        <div class="grid__cell">
+            <Menu></Menu>
+        </div>
         <div class="grid__cell" :class="{'grid__active': activeSection == 'Home'}" @click="activeSection='Home'">
             <img src="./../assets/home.svg" alt="Home">
             <p>Home</p>
@@ -38,14 +41,16 @@
         font-size: 32px;
         &__cell {
             cursor: pointer;
-            display: grid;
-            grid: auto / 25% 75%;
             place-items: center;
             border-right: 2px solid $secondary;
             img {
                 height: 32px;
                 width: 32px;
             }
+        }
+        &__cell:not(:first-child) {
+            display: grid;
+            grid: auto / 25% 75%;
         }
         &__active {
             border: 3px solid $tertiary;
