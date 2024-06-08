@@ -9,14 +9,10 @@
     })
 
     const state = reactive({
-        toggleMenu: false
+        toggleMenu: 'none'
     })
     function receiveToggleData(toggleState: string) {
-        if (toggleState == 'open') {
-            state.toggleMenu = true
-        } else {
-            state.toggleMenu = false
-        }
+        state.toggleMenu = toggleState
     }
 </script>
 
@@ -25,21 +21,25 @@
         <div class="grid__cell">
             <Menu @sendToggleData="receiveToggleData"></Menu>
         </div>
-        <div v-if="state.toggleMenu" class="grid__cell" :class="{'grid__active': activeSection == 'Home'}" @click="activeSection='Home'">
+        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'Home'}" @click="activeSection='Home'">
             <img src="./../assets/home.svg" alt="Home">
             <p>Home</p>
         </div>
-        <div v-if="state.toggleMenu" class="grid__cell" :class="{'grid__active': activeSection == 'About'}" @click="activeSection='About'">
+        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'About'}" @click="activeSection='About'">
             <img src="./../assets/profile.svg" alt="About Me">
             <p>About Me</p>
         </div>
-        <div v-if="state.toggleMenu" class="grid__cell" :class="{'grid__active': activeSection == 'Portfolio'}" @click="activeSection='Portfolio'">
+        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'Portfolio'}" @click="activeSection='Portfolio'">
             <img src="./../assets/website.svg" alt="Portfolio">
             <p>Portfolio</p>
         </div>
-        <div v-if="state.toggleMenu" class="grid__cell" :class="{'grid__active': activeSection == 'Contact'}" @click="activeSection='Contact'">
+        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'Contact'}" @click="activeSection='Contact'">
             <img src="./../assets/contact.svg" alt="Contact">
             <p>Contact</p>
+        </div>
+        <div v-if="state.toggleMenu == 'none'" class="menu__info">
+            <i v-for="i in 3" :key="i" class="menu__info-arrow"></i>
+            <p>Click here to open the menu</p>
         </div>
     </div>
 </template>
@@ -72,6 +72,36 @@
         &__active {
             border: 3px solid $tertiary;
             background-image: radial-gradient(farthest-corner at 0% 0%, $tertiary-10 10%, $tertiary-50 70%, $tertiary 100%);
+        }
+    }
+    .menu__info {
+        font-size: 22px;
+        place-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        animation: 2s infinite normal move;
+        animation-fill-mode: forwards;
+        width: 375px;
+        &-arrow {
+            border: solid $secondary;
+            border-width: 0 10px 10px 0;
+            display: inline-block;
+            padding: 14px;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+        p {
+            font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
+        }
+    }
+    @keyframes move {
+        0% {
+            right: -70%;
+        }
+        100% {
+            right: 5%;
         }
     }
 </style>
