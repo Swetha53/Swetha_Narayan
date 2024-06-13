@@ -25,6 +25,11 @@ $black-100: rgba(0, 0, 0, 1);
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  position: fixed;
+  width: calc(100% - 16px);
+}
+
 :focus-visible {
   outline: $tertiary outset 1px;
 }

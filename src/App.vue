@@ -1,5 +1,20 @@
 <script setup lang="ts">
 import Header from './components/Header.vue'
+import { onMounted, onUnmounted } from "vue";
+import store from './store/index'
+
+onMounted(() => {
+  window.addEventListener('resize', resizeEventHandler)
+  resizeEventHandler()
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', resizeEventHandler)
+})
+
+function resizeEventHandler() {
+  console.log(window.screen.width)
+  store.commit('setLayoutValue')
+}
 </script>
 
 <template>

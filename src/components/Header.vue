@@ -1,44 +1,55 @@
 <script setup lang="ts">
-    import {ref, watchEffect, reactive} from 'vue'
+    import {reactive} from 'vue'
     import {useRouter} from 'vue-router'
     import Menu from "./Menu.vue"
+    import store from "./../store"
+
     const router = useRouter()
-    const activeSection = ref<string>('Home')
-    watchEffect(() => {
-      router.push({ name: activeSection.value })
+    const state = reactive({
+        toggleMenu: 'none',
+        activeSection: 'Home'
     })
 
-    const state = reactive({
-        toggleMenu: 'none'
-    })
     function receiveToggleData(toggleState: string) {
         state.toggleMenu = toggleState
+    }
+    function redirectToPage(section: string) {
+        state.activeSection = section
+        router.push({ name: section })
     }
 </script>
 
 <template>
-    <div class="grid monofett">
-        <div class="grid__cell">
+    <div class="header monofett" :class="state.toggleMenu == 'open' ? 'header__open' : 'header__close'">
+        <div class="header__cell">
             <Menu @sendToggleData="receiveToggleData"></Menu>
         </div>
-        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'Home'}" @click="activeSection='Home'">
-            <img src="./../assets/home.svg" alt="Home">
-            <p>Home</p>
+        <div class="header__cell" :class="{'header__cell-active': state.activeSection == 'Home', 'header__cell-mobile': store.getters.getLayoutValue}"
+            v-if="state.toggleMenu == 'open'"
+            @click="redirectToPage('Home')">
+            <img class="header__image" src="./../assets/home.svg" alt="Home">
+            <p v-if="!store.getters.getLayoutValue">Home</p>
         </div>
-        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'About'}" @click="activeSection='About'">
-            <img src="./../assets/profile.svg" alt="About Me">
-            <p>About Me</p>
+        <div class="header__cell" :class="{'header__cell-active': state.activeSection == 'About', 'header__cell-mobile': store.getters.getLayoutValue}"
+            v-if="state.toggleMenu == 'open'" 
+            @click="redirectToPage('About')">
+            <img class="header__image" src="./../assets/profile.svg" alt="About Me">
+            <p v-if="!store.getters.getLayoutValue">About Me</p>
         </div>
-        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'Portfolio'}" @click="activeSection='Portfolio'">
-            <img src="./../assets/website.svg" alt="Portfolio">
-            <p>Portfolio</p>
+        <div class="header__cell" :class="{'header__cell-active': state.activeSection == 'Portfolio', 'header__cell-mobile': store.getters.getLayoutValue}"
+            v-if="state.toggleMenu == 'open'"
+            @click="redirectToPage('Portfolio')">
+            <img class="header__image" src="./../assets/website.svg" alt="Portfolio">
+            <p v-if="!store.getters.getLayoutValue">Portfolio</p>
         </div>
-        <div v-if="state.toggleMenu == 'open'" class="grid__cell" :class="{'grid__active': activeSection == 'Contact'}" @click="activeSection='Contact'">
-            <img src="./../assets/contact.svg" alt="Contact">
-            <p>Contact</p>
+        <div class="header__cell" :class="{'header__cell-active': state.activeSection == 'Contact', 'header__cell-mobile': store.getters.getLayoutValue}"
+            v-if="state.toggleMenu == 'open'" 
+            @click="redirectToPage('Contact')">
+            <img class="header__image" src="./../assets/contact.svg" alt="Contact">
+            <p v-if="!store.getters.getLayoutValue">Contact</p>
         </div>
-        <div v-if="state.toggleMenu == 'none'" class="menu__info">
-            <i v-for="i in 3" :key="i" class="menu__info-arrow"></i>
+        <div v-if="state.toggleMenu == 'none'" class="header__info">
+            <i v-for="i in 3" :key="i" class="header__info-arrow"></i>
             <p>Click here to open the menu</p>
         </div>
     </div>
@@ -46,62 +57,81 @@
 
 <style lang="scss" scoped>
     @import "./../style.scss";
-    .grid {
+    .header {
         display: grid;
-        grid: auto / repeat(5, minmax(0, 1fr));
         font-size: 32px;
-        min-height: 118px;
+        min-height: 118px; //TODO: change to %age
+        position: relative;
+        &__open {
+            grid: auto / repeat(5, minmax(0, 1fr));
+        }
+        &__close {
+            grid: auto / 1fr 4fr;
+        }
         &__cell {
             cursor: pointer;
             place-items: center;
-            img {
-                height: 32px;
-                width: 32px;
+            display: grid;
+            grid: auto / 1fr 3fr;
+            border-left: 2px solid $secondary;
+            &:first-child {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-left: none;
+            }
+            &-active {
+                border: 3px solid $tertiary;
+                background-image: radial-gradient(farthest-corner at 0% 0%, $tertiary-10 10%, $tertiary-50 70%, $tertiary 100%);
+            }
+            &-mobile {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
-        &__cell:first-child {
+        &__image {
+            height: 32px;
+            width: 32px;
+        }
+        &__info {
+            position: relative;
+            font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
+            font-size: 22px;
+            place-self: center;
+            animation: 2s infinite normal move;
+            animation-fill-mode: forwards;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        &__cell:not(:first-child) {
-            display: grid;
-            grid: auto / 25% 75%;
-            border-left: 2px solid $secondary;
-        }
-        &__active {
-            border: 3px solid $tertiary;
-            background-image: radial-gradient(farthest-corner at 0% 0%, $tertiary-10 10%, $tertiary-50 70%, $tertiary 100%);
+            width: 50%;
+            &-arrow {
+                border: solid $secondary;
+                border-width: 0 10px 10px 0;
+                display: inline-block;
+                padding: 14px;
+                transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+            }
         }
     }
-    .menu__info {
-        font-size: 22px;
-        place-self: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        animation: 2s infinite normal move;
-        animation-fill-mode: forwards;
-        width: 375px;
-        &-arrow {
-            border: solid $secondary;
-            border-width: 0 10px 10px 0;
-            display: inline-block;
-            padding: 14px;
-            transform: rotate(135deg);
-            -webkit-transform: rotate(135deg);
-        }
-        p {
-            font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
+    @media (max-width: 900px) {
+        .header {
+            &__info {
+                font-size: 14px;
+                &-arrow {
+                    border-width: 0 5px 5px 0;
+                    padding: 7px;
+                }
+            }
         }
     }
     @keyframes move {
         0% {
-            right: -70%;
+            right: -20%;
         }
         100% {
-            right: 5%;
+            right: 20%;
         }
     }
 </style>
