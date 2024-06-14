@@ -22,51 +22,86 @@ import DownloadButton from "./../components/DownloadButton.vue"
 <style lang="scss" scoped>
     @import "./../style.scss";
     .home {
-        margin: 32px;
-        margin-left: calc(50% + 15px);
+        width: 90%;
+        margin-left: 50%;
         transform: translateX(-50%);
         display: grid;
         grid: auto auto / 15% 85%;
         grid-template-areas: "frame summary"
-        "frame button";
-        width: 80%;
+                        "frame button";
         &__frame {
             grid-area: frame;
             position: relative;
             &-outer {
                 height: 600px;
-                width: 400px;
+                aspect-ratio: 2 / 3;
                 background: $secondary;
                 border-radius: 50%;
                 display: flex;
-                align-items: center;
                 justify-content: center;
-                position: absolute;
-                left: -30px;
+                align-items: center;
             }
             // TODO change profile picture
             &-inner {
-                height: 540px;
-                width: 360px;
+                height: 550px;
+                aspect-ratio: 2 / 3;
+                border-radius: 50%;
                 background-image: url("src/assets/profile_pic.png");
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
-                border-radius: 50%;
             }
         }
         &__summary {
-            padding: 5px;
-            padding-left: 20%;
             grid-area: summary;
             border: 1px solid $secondary;
             border-radius: 8px;
             border-bottom-right-radius: 0px;
+            padding: 5px;
+            padding-left: 18%;
         }
         &__button {
             grid-area: button;
             margin-left: auto;
             margin-right: 0;
+            width: 80%;
+        }
+    }
+    @media (max-width: 900px) {
+        .home {
+            position: relative;
+            width: 100%;
+            grid: auto auto auto / auto;
+            grid-template-areas: "frame"
+                            "summary"
+                            "button";
+            margin: unset;
+            transform: unset;
+            &__frame {
+                z-index: 2;
+                display: flex;
+                justify-content: center;
+                position: relative;
+                top: 2rem;
+                &-outer {
+                    height: 400px;
+                }
+                &-inner {
+                    height: 350px;
+                }
+            }
+            &__summary {
+                width: 90%;
+                padding: 5px;
+                padding-top: 2rem;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                border-bottom-right-radius: 8px;
+            }
+            &__button {
+                margin: auto;
+            }
         }
     }
 </style>

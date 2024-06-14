@@ -1,6 +1,8 @@
+// TODO optimise css
 <script setup lang="ts">
 import {reactive} from 'vue'
 import keyboard from './../assets/keyboard.jpeg'
+import store from "./../store"
 
 const emit = defineEmits(['sendToggleData'])
 const state = reactive({
@@ -27,7 +29,8 @@ function toggleDevice() {
             </div>
         </div>
         <div class="device__bottom">
-            <img :src="keyboard" alt="">
+            <img v-if="!store.getters.getLayoutValue" :src="keyboard" alt="Keyboard">
+            <div v-else class="device__display-below"></div>
         </div>
     </div>
 </template>
@@ -103,49 +106,94 @@ function toggleDevice() {
         }
     }
     .open {
-        .device__back {
-            animation: 6s 1 normal deviceTop;
-            animation-fill-mode: forwards;
-        }
-        .device__bottom {
-            animation: 2s 1 normal deviceVisible;
-            animation-fill-mode: forwards;
-            animation-delay: 3s;
-        }
-        .device__front {
-            animation: 2s 1 normal deviceBackHidden;
-            animation-fill-mode: forwards;
-            animation-delay: 2.25s;
-        }
-        .device__display {
-            animation: 2s 1 normal deviceVisible;
-            animation-fill-mode: forwards;
-            animation-delay: 3s;
+        .device {
+            &__back {
+                animation: 6s 1 normal deviceTop;
+                animation-fill-mode: forwards;
+            }
+            &__bottom {
+                animation: 2s 1 normal deviceVisible;
+                animation-fill-mode: forwards;
+                animation-delay: 3s;
+            }
+            &__front {
+                animation: 2s 1 normal deviceBackHidden;
+                animation-fill-mode: forwards;
+                animation-delay: 2.25s;
+            }
+            &__display {
+                animation: 2s 1 normal deviceVisible;
+                animation-fill-mode: forwards;
+                animation-delay: 3s;
+            }
         }
     }
     .close {
-        .device__back {
-            animation: 6s 1 normal deviceTopClose;
-            animation-fill-mode: forwards;
+        .device {
+            &__back {
+                animation: 6s 1 normal deviceTopClose;
+                animation-fill-mode: forwards;
+            }
+            &__bottom {
+                visibility: visible;
+                animation: 2s 1 normal deviceInvisible;
+                animation-fill-mode: forwards;
+                animation-delay: 2.5s;
+            }
+            &__front {
+                backface-visibility: hidden;
+                background: $secondary;
+                animation: 0s 1 normal deviceBackVisible;
+                animation-fill-mode: forwards;
+                animation-delay: 2.5s;
+            }
+            &__display {
+                visibility: visible;
+                animation: 0s 1 normal deviceInvisible;
+                animation-fill-mode: forwards;
+                animation-delay: 2.5s;
+            }
         }
-        .device__bottom {
-            visibility: visible;
-            animation: 2s 1 normal deviceInvisible;
-            animation-fill-mode: forwards;
-            animation-delay: 2.5s;
+    }
+    @media (max-width: 900px) {
+        .device {
+            width: calc($height/2);
+            &__back {
+                height: calc($height/2);
+                aspect-ratio: 1 / 1;
+                background-size: contain;
+                box-shadow: inset 2px 2px 2px $tertiary, inset -2px -2px 2px $tertiary;
+            }
+            &__front {
+                height: calc($height/2);
+                aspect-ratio: 1 / 1;
+            }
+            &__display {
+                height: calc($height/2 - 5px);
+                aspect-ratio: 1 / 1;
+                box-shadow: inset -2px -2px 5px $tertiary, inset 2px 2px 5px $tertiary;
+                &-below {
+                    height: calc($height/3 - 5px);
+                    width: calc($height/3 + 15px);
+                    position: absolute;
+                    top: 8.5%;
+                    left: 5%;
+                    box-shadow: inset -2px -2px 5px $tertiary, inset 2px 2px 5px $tertiary;
+                }
+            }
+            &__bottom {
+                height: calc($height/3);
+                width: calc($height/3 + 20px);
+                top: 82%;
+            }
         }
-        .device__front {
-            backface-visibility: hidden;
-            background: $secondary;
-            animation: 0s 1 normal deviceBackVisible;
-            animation-fill-mode: forwards;
-            animation-delay: 2.5s;
-        }
-        .device__display {
-            visibility: visible;
-            animation: 0s 1 normal deviceInvisible;
-            animation-fill-mode: forwards;
-            animation-delay: 2.5s;
+        .close {
+            .device {
+                &__back {
+                    animation: 6s 1 normal deviceTopCloseMobile;
+                    animation-fill-mode: forwards;
+                }
+            }
         }
     }
     @keyframes deviceTop {
@@ -183,6 +231,21 @@ function toggleDevice() {
             transform-origin: bottom;
             transform-style: preserve-3d;
             transform: perspective(390px) rotateX(-107deg);
+        }
+        100% {
+            transform-origin: bottom;
+            transform: rotateX(0deg);
+        }
+    }
+    @keyframes deviceTopCloseMobile {
+        0% {
+            transform-origin: bottom;
+            transform: rotateX(0deg);
+        }
+        75% {
+            transform-origin: bottom;
+            transform-style: preserve-3d;
+            transform: perspective(390px) rotateX(-116deg);
         }
         100% {
             transform-origin: bottom;

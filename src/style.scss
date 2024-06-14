@@ -26,8 +26,8 @@ $black-100: rgba(0, 0, 0, 1);
 }
 
 html, body {
-  position: fixed;
-  width: calc(100% - 16px);
+  width: 100%;
+  margin: unset;
 }
 
 :focus-visible {

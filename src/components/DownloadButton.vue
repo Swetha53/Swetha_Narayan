@@ -1,14 +1,12 @@
-
-
 <template>
-    <a class="flex-container button" href="src/assets/Swetha_Narayan.pdf" download>
-        <div class="monofett button__logo">
-            <div class="button__logo-circle">
+    <a class="flex-container downloadButton" href="src/assets/Swetha_Narayan.pdf" download>
+        <div class="monofett downloadButton__arrow">
+            <div class="downloadButton__arrow-base">
                 <p>CV</p>
             </div>
-            <div class="button__logo-triangle"></div>
+            <div class="downloadButton__arrow-triangle"></div>
         </div>
-        <div class="button__text">
+        <div class="downloadButton__placeholder">
             <p>Download</p>
         </div>
     </a>
@@ -16,70 +14,66 @@
 
 <style lang="scss" scoped>
     @import "./../style.scss";
-    $width: 800px;
     $height: 60px;
 
-    .button {
+    .downloadButton {
         background-color: $secondary;
-        width: $width;
-        height: $height;
         color: $tertiary;
+        width: 100%;
+        height: $height;
         border-radius: 8px;
         border-top-right-radius: 0px;
         &:link {
             text-decoration: none;
         }
-        &__logo {
+        &__arrow {
             position: relative;
             width: $height;
-            height: $height;
+            aspect-ratio: 1 / 1;
             font-size: 1.75em;
-            &-circle {
-                position: absolute;
+            &-base {
                 background-color: $tertiary;
                 width: 100%;
-                height: 100%;
-                left: - calc($height / 2);
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                aspect-ratio: 1 / 1;
                 p {
                     margin: unset;
                     color: $secondary;
+                    text-align: center;
                 }
             }
             &-triangle {
-                position: relative;
                 &::after {
                     position: absolute;
+                    top: $height;
+                    left: calc(0px - $height/2);
                     content: "";
                     border-top: $height solid $tertiary;
                     border-bottom: $height solid transparent;
                     border-left: $height solid transparent;
                     border-right: $height solid transparent;
-                    top: $height;
-                    left: - $height;
                 }
             }
         }
-        &__text {
-            min-width: 60%;
+        &__placeholder {
+            width: 100%;
+            text-align: center;
             p {
-                margin: calc($height / 2);
-                margin-left: unset;
+                margin: unset;
             }
         }
         &:hover {
             background-color: $tertiary;
             color: $secondary;
-            .button__logo-circle {
-                background-color: $secondary;
-                p {
-                    color: $tertiary;
+            .downloadButton__arrow {
+                &-base {
+                    background-color: $secondary;
+                    p {
+                        color: $tertiary;
+                    }
                 }
-            }
-            .button__logo-triangle::after {
-                border-top: $height solid $secondary;
+                &-triangle::after {
+                    border-top: $height solid $secondary;
+                }
             }
         }
     }
