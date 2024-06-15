@@ -97,4 +97,19 @@ const cssProps = computed(() => {
             }
         }
     }
+
+    @media (max-width: 900px) {
+        .skills {
+            width: 25%;
+            grid: auto calc($width / 2) auto / auto;
+            grid-template-areas: "title"
+                                "chart"
+                                "summary";
+            font-size: 20px;
+            &__summary {
+                padding: 10px;
+                padding-top: calc($width / 2 + 10px);
+            }
+        }
+    }
 </style>

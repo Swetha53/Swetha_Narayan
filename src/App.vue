@@ -12,7 +12,6 @@ onUnmounted(() => {
 })
 
 function resizeEventHandler() {
-  console.log(window.screen.width)
   store.commit('setLayoutValue')
 }
 </script>

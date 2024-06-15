@@ -221,9 +221,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div id="container">
+    <div class="about">
         <h1>About Me</h1>
-        <div class="about">
+        <div class="about__summary">
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet consectetur. Tristique risus nec feugiat in fermentum posuere urna nec. Gravida dictum fusce ut placerat orci nulla. Mattis ullamcorper velit sed ullamcorper morbi. Quis enim lobortis scelerisque fermentum. Ipsum dolor sit amet consectetur adipiscing. Tristique sollicitudin nibh sit amet. Purus in massa tempor nec feugiat nisl pretium fusce id. Tincidunt id aliquet risus feugiat in ante metus dictum. Nunc eget lorem dolor sed viverra ipsum nunc. Turpis egestas sed tempus urna et pharetra. Nam at lectus urna duis convallis. Diam sit amet nisl suscipit adipiscing bibendum est ultricies integer. In egestas erat imperdiet sed. Nulla facilisi morbi tempus iaculis urna id volutpat lacus. Et leo duis ut diam. Rhoncus urna neque viverra justo nec ultrices dui sapien eget. Pellentesque nec nam aliquam sem et tortor consequat id.
             </p>
@@ -235,13 +235,15 @@ onUnmounted(() => {
             </p>
         </div>
         <h1>Skills</h1>
-        <Skills v-for="skill in skills"
+        <div class="about__skills">
+            <Skills v-for="skill in skills"
             :amount="skill.amount"
             :title="skill.title"
             :project="skill.project"
             :exp="skill.exp"
-        >
-        </Skills>
+            >
+            </Skills>
+        </div>
         <h1>Timeline</h1>
         <div class="timeline">
             <div class="timeline__slides">
@@ -277,13 +279,27 @@ onUnmounted(() => {
 <style lang="scss" scoped>
     @import "./../style.scss";
     .about {
-        padding: 0px 24px;
-        border: 1px solid $secondary;
-        border-radius: 8px;
-        width: 80%;
-        margin: 0 auto;
-        box-shadow: 5px 5px 10px $tertiary;
+        &__summary {
+            width: 80%;
+            padding: 0 1rem;
+            border: 1px solid $secondary;
+            border-radius: 8px;
+            margin: 0 auto;
+            box-shadow: 2px 2px 8px $tertiary;
+        }
     }
+    @media (max-width: 900px) {
+        .about {
+            &__skills {
+                width: 95%;
+                display: inline-flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+    }
+    // TODO continue here
     .timeline {
         display: flex;
         justify-content: space-around;

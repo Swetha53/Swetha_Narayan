@@ -62,6 +62,7 @@ function toggleDevice() {
         }
         &__display {
             visibility: hidden;
+            background: $primary;
             height: calc($height - 10px);
             aspect-ratio: 2 / 1;
             position: absolute;
@@ -173,6 +174,7 @@ function toggleDevice() {
                 aspect-ratio: 1 / 1;
                 box-shadow: inset -2px -2px 5px $tertiary, inset 2px 2px 5px $tertiary;
                 &-below {
+                    background: $primary;
                     height: calc($height/3 - 5px);
                     width: calc($height/3 + 15px);
                     position: absolute;

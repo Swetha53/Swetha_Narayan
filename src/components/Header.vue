@@ -1,10 +1,11 @@
 <script setup lang="ts">
     import {reactive} from 'vue'
-    import {useRouter} from 'vue-router'
+    import {useRouter, useRoute} from 'vue-router'
     import Menu from "./Menu.vue"
     import store from "./../store"
 
     const router = useRouter()
+    const route = useRoute()
     const state = reactive({
         toggleMenu: 'none',
         activeSection: 'Home'
@@ -12,6 +13,9 @@
 
     function receiveToggleData(toggleState: string) {
         state.toggleMenu = toggleState
+        if (toggleState == 'open' && route.name) {
+            state.activeSection = <string>route.name
+        }
     }
     function redirectToPage(section: string) {
         state.activeSection = section
