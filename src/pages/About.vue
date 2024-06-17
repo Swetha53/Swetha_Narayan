@@ -4,6 +4,7 @@ import Skills from "./../components/Skills.vue"
 import SlideShow from "./../components/SlideShow.vue"
 import TimelineItem from "./../components/TimelineItem.vue"
 import { reactive, onMounted, onUnmounted } from 'vue'
+import store from "./../store"
 
 type miniEventType = {
     type: string,
@@ -195,8 +196,8 @@ function getEventDate(eventDate: number) {
 }
 
 function scrollHandler() {
-    const element = <HTMLElement>document.getElementsByClassName('timeline__slides')[0]
-    if (element !== null && window.scrollY >= element.offsetTop) {
+    const element = <HTMLElement>document.getElementsByClassName('about__timeline-slides')[0]
+    if (element !== null && !store.getters.getLayoutValue && window.scrollY >= element.offsetTop) {
         state.timelineShowing = true
     } else {
         state.timelineShowing = false
@@ -245,24 +246,24 @@ onUnmounted(() => {
             </Skills>
         </div>
         <h1>Timeline</h1>
-        <div class="timeline">
-            <div class="timeline__slides">
-                <div :class="{'fixed-div': state.timelineShowing}">
+        <div class="about__timeline">
+            <div class="about__timeline-slides">
+                <div :class="{'about__timeline-slides__fixed': state.timelineShowing}">
                     <SlideShow :key="state.currentSlides.length" :slides="state.currentSlides"></SlideShow>
                 </div>
             </div>
-            <div class="timeline__structure">
+            <div class="about__timeline-structure">
                 <template v-for="event in events">
                     <TimelineItem v-if="event.type == 'EDU'"
                         :organization="event.organization"
                         :title="event.title"
                         @showSlideshow="showSlideshow(event)"
                         @closeSlideshow="closeSlideshow"></TimelineItem>
-                    <div class="timeline__structure-text" v-else>
+                    <div class="about__timeline-structure__dates" v-else>
                         {{ getEventDate(event.startDate) }} - {{ getEventDate(event.endDate) }}
                     </div>
-                    <div class="timeline__structure-circle" :class="event.type == 'EDU' ? 'timeline__structure-circle-left' : 'timeline__structure-circle-right'"></div>
-                    <div class="timeline__structure-text" v-if="event.type == 'EDU'">
+                    <div class="about__timeline-structure__connector" :class="event.type == 'EDU' ? 'about__timeline-structure__connector-left' : 'about__timeline-structure__connector-right'"></div>
+                    <div class="about__timeline-structure__dates" v-if="event.type == 'EDU'">
                         {{ getEventDate(event.startDate) }} - {{ getEventDate(event.endDate) }}
                     </div>
                     <TimelineItem v-else
@@ -278,6 +279,8 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
     @import "./../style.scss";
+    $horizontalLine: 3rem;
+    $verticalLine: 6.5rem;
     .about {
         &__summary {
             width: 80%;
@@ -287,8 +290,59 @@ onUnmounted(() => {
             margin: 0 auto;
             box-shadow: 2px 2px 8px $tertiary;
         }
+        &__timeline {
+            display: flex;
+            justify-content: space-around;
+            &-slides {
+                position: relative;
+                width: 18rem;
+                &__fixed {
+                    position: fixed;
+                    top: 0px;
+                }
+            }
+            &-structure {
+                display: grid;
+                grid: repeat(6, auto) / 40% 20% 40%;
+                row-gap: 0.5rem;
+                place-items: center;
+                margin-top: 4rem;
+                &__connector {
+                    position: relative;
+                    width: 1rem;
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                    border: 1px solid $secondary;
+                    background-color: $primary;
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        height: 1px;
+                        width: $horizontalLine;
+                        background-color: $secondary;
+                        top: .5rem;
+                    }
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        width: 1px;
+                        height: $verticalLine;
+                        background-color: $secondary;
+                        top: -$verticalLine;
+                        left: .5rem;
+                    }
+                    &-left::before {
+                        left: -$horizontalLine;
+                    }
+                    &-right::before {
+                        left: 1rem;
+                    }
+                }
+            }
+        }
     }
     @media (max-width: 900px) {
+        $verticalLine: 5rem;
         .about {
             &__skills {
                 width: 95%;
@@ -297,61 +351,23 @@ onUnmounted(() => {
                 align-items: center;
                 flex-wrap: wrap;
             }
-        }
-    }
-    // TODO continue here
-    .timeline {
-        display: flex;
-        justify-content: space-around;
-        &__slides {
-            position: relative;
-            width: 350px;
-            height: 480px;
-        }
-        &__structure {
-            width: 45%;
-            display: grid;
-            grid: repeat(6, auto) / 40% 20% 40%;
-            row-gap: 10px;
-            place-items: center;
-            margin-top: 76px;
-            &-circle {
-                $horizontalLine: 70px;
-                $verticalLine: 142px;
-                width: 20px;
-                aspect-ratio: 1;
-                border-radius: 50%;
-                border: 1px solid $secondary;
-                position: relative;
-                background-color: $primary;
-                &::before {
-                    content: "";
-                    position: absolute;
-                    height: 1px;
-                    width: $horizontalLine;
-                    top: 10px;
-                    background-color: $secondary;
+            &__timeline {
+                display: block;
+                &-slides {
+                    z-index: 3;
+                    margin: auto;
+                    width: 95%;
                 }
-                &::after {
-                    content: "";
-                    position: absolute;
-                    width: 1px;
-                    height: $verticalLine;
-                    background-color: $secondary;
-                    top: - $verticalLine;
-                    left: 10px;
-                }
-                &-left::before {
-                    left: - $horizontalLine;
-                }
-                &-right::before {
-                    left: 21px;
+                &-structure {
+                    margin: 1rem auto;
+                    &__connector {
+                        &::after {
+                            height: $verticalLine;
+                            top: -$verticalLine;
+                        }
+                    }
                 }
             }
         }
-    }
-    .fixed-div {
-        position: fixed;
-        top: 32px;
     }
 </style>

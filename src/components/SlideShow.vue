@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted, reactive} from 'vue'
 import {slideType} from "./../common/dataType.ts"
+import store from "./../store"
 const props = defineProps<{ slides: Array<slideType> }>()
 const state = reactive({
     slideNumber: 0
@@ -30,7 +31,10 @@ onUnmounted(() => {
 <template>
     <div class="slideshow">
         <div class="slideshow__inner">
-            <p v-if="!slides.length" class="slideshow__placeholder monofett">Hover over an event to see more info here.</p>
+            <p v-if="!slides.length" class="slideshow__placeholder monofett">
+                <span v-if="!store.getters.getLayoutValue">Hover over an event to see more info here.</span>
+                <span v-else>Click over an event to see more info here.</span>
+            </p>
             <div v-if="slides.length" v-for="(slide, index) in slides" v-show="state.slideNumber == index" class="slideshow__slide">
                 <p v-if="slide.type == 'text'">
                     {{ slide.text }}
@@ -44,18 +48,18 @@ onUnmounted(() => {
 <style lang="scss" scoped>
     @import "./../style.scss";
     .slideshow {
-        width: 350px;
-        height: 480px;
+        width: 18rem;
+        aspect-ratio: 5 / 6;
         background-color: $secondary;
-        position: relative;
         border-radius: 8px;
+        position: relative;
         &__inner {
-            width: 310px;
-            height: 400px;
+            width: 16rem;
+            aspect-ratio: 1;
             background-color: $primary;
             position: absolute;
-            left: 20px;
-            top: 20px;
+            left: 1rem;
+            top: 1rem;
             border-radius: 8px;
             display: flex;
             justify-content: center;
@@ -79,6 +83,18 @@ onUnmounted(() => {
                 height: 100%;
                 width: 100%;
                 border-radius: 8px;
+            }
+        }
+    }
+    @media (max-width: 900px) {
+        .slideshow {
+            aspect-ratio: 3 / 2.25;
+            width: 100%;
+            &__inner {
+                width: 90%;
+                aspect-ratio: 3 / 2;
+                left: 5%;
+                top: 5%; 
             }
         }
     }

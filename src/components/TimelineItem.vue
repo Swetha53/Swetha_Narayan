@@ -13,65 +13,81 @@ function emitClose() {
 </script>
 
 <template>
-    <div class="timeline-item" @mouseover="emitHover()" @mouseleave="emitClose()">
-        <div class="timeline-item__ribbon">
+    <div class="timelineItem" @mouseover="emitHover()" @mouseleave="emitClose()">
+        <div class="timelineItem__ribbon">
             <p>{{ organization }}</p>
         </div>
-        <p class="timeline-item__title">{{ title }}</p>
+        <p class="timelineItem__title">{{ title }}</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
     @import "./../style.scss";
-    $fold: 15px;
-    $ribbon: 30px;
-
-    .timeline-item {
-        cursor: pointer;
-        z-index: 100;
+    .timelineItem {
+        $fold: 0.75rem;
+        $ribbon: 1rem;
+        height: 7rem;
+        aspect-ratio: 5 / 3;
         border: 1px solid $secondary;
         border-radius: 8px;
-        height: 150px;
-        width: 250px;
+        cursor: pointer;
+        background-color: $primary;
+        z-index: 2;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $primary;
         &__ribbon {
             color: $primary;
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            height: 40px;
-            width: 200px;
-            background: $secondary;
+            background-color: $secondary;
+            font-size: 0.75rem;
+            height: 1.75rem;
+            aspect-ratio: 5 / 1;
             border-bottom: $fold solid $black-33;
             border-left: $ribbon solid $black;
             clip-path: 
                 polygon(0 0, 100% 0, 100% calc(100% - $fold), calc(100% - $fold) 100%,
                 calc(100% - $fold) calc(100% - $fold), 0 calc(100% - $fold),
                 $ribbon calc(50% - $fold/2));
+            position: absolute;
             right: calc(-1*$fold);
             top: -1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             p {
                 margin: unset;
             }
         }
         &__title {
             margin: unset;
-            margin-top: 10px;
+            margin-top: 0.5rem;
             width: 90%;
             text-align: center;
         }
         &:hover {
             background-color: $secondary;
             color: $primary;
-            .timeline-item__ribbon {
+            .timelineItem__ribbon {
                 background-color: $tertiary;
                 color: $secondary;
+            }
+        }
+    }
+    @media (max-width: 900px) {
+        .timelineItem {
+            $fold: 0.5rem;
+            $ribbon: 0.75rem;
+            height: 5.5rem;
+            &__ribbon {
+                height: 1.5rem;
+                border-bottom: $fold solid $black-33;
+                border-left: $ribbon solid $black;
+                clip-path: 
+                    polygon(0 0, 100% 0, 100% calc(100% - $fold), calc(100% - $fold) 100%,
+                    calc(100% - $fold) calc(100% - $fold), 0 calc(100% - $fold),
+                    $ribbon calc(50% - $fold/2));
+                right: calc(-1*$fold);
             }
         }
     }
