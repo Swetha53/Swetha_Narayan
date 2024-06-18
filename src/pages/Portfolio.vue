@@ -85,13 +85,13 @@ function closeProjectFooter() {
         <div class="portfolio__slides">
             <SlideShow :slides="state.currentSlides" :key="state.currentSlides.length"></SlideShow>
         </div>
-        <div class="portfolio__grid">
-            <div class="portfolio__grid-cell monofett" :class="{'disabled-cell': !projects[i-1] || !projects[i-1].title}" v-for="i in 15" :key="i"
+        <div class="portfolio__projects">
+            <div class="portfolio__projects-project monofett" :class="{'portfolio__projects-project__future': !projects[i-1] || !projects[i-1].title}" v-for="i in 15" :key="i"
                 @mouseover="showProjectFooter(i-1)"
                 @mouseleave="closeProjectFooter">
                 <span v-if="projects[i-1] && projects[i-1].title">{{projects[i - 1].title}}</span>
                 <span v-else>Coming soon!!</span>
-                <div class="portfolio__grid-cell__footer" v-if="state.activeProjectIndex == (i-1) && projects[i-1] && projects[i-1].link">
+                <div class="portfolio__projects-project__link" v-if="state.activeProjectIndex == (i-1) && projects[i-1] && projects[i-1].link">
                     <a :href="projects[i - 1].link" target="_blank">
                         <img src="./../assets/github_icon.png" alt="" srcset="">
                     </a>
@@ -106,91 +106,122 @@ function closeProjectFooter() {
     .portfolio {
         display: flex;
         justify-content: space-around;
-        &__grid {
+        &__projects {
             display: grid;
-            row-gap: 15px;
-            column-gap: 15px;
-            grid-template-areas: ". cell4 . cell9 . cell13"
-                "cell1 cell4 cell6 cell9 cell11 cell13"
-                "cell1 cell4 cell6 cell10 cell11 cell14"
-                "cell2 cell4 cell7 cell10 cell11 cell14"
-                "cell2 cell5 cell7 cell10 cell11 cell15"
-                "cell3 cell5 cell8 cell10 cell12 cell15"
-                "cell3 . cell8 . cell12 .";
-            &-cell {
-                cursor: pointer;
-                box-shadow: 2px 2px 5px $tertiary;
+            row-gap: 0.5rem;
+            column-gap: 0.5rem;
+            grid-template-areas: ". project4 . project9 . project13"
+                "project1 project4 project6 project9 project11 project13"
+                "project1 project4 project6 project10 project11 project14"
+                "project2 project4 project7 project10 project11 project14"
+                "project2 project5 project7 project10 project11 project15"
+                "project3 project5 project8 project10 project12 project15";
+            &-project {
                 border: 1px solid $secondary;
-                height: auto;
-                width: 150px;
+                border-radius: 8px;
+                width: 7rem;
+                box-shadow: 2px 2px 5px $tertiary;
+                cursor: pointer;
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 text-align: center;
                 position: relative;
                 &:nth-of-type(1) {
-                    grid-area: cell1;
+                    grid-area: project1;
                 }
                 &:nth-of-type(2) {
-                    grid-area: cell2;
+                    grid-area: project2;
                 }
                 &:nth-of-type(3) {
-                    grid-area: cell3;
+                    grid-area: project3;
                 }
                 &:nth-of-type(4) {
-                    grid-area: cell4;
+                    grid-area: project4;
                 }
                 &:nth-of-type(5) {
-                    grid-area: cell5;
+                    grid-area: project5;
                 }
                 &:nth-of-type(6) {
-                    grid-area: cell6;
+                    grid-area: project6;
                 }
                 &:nth-of-type(7) {
-                    grid-area: cell7;
+                    grid-area: project7;
                 }
                 &:nth-of-type(8) {
-                    grid-area: cell8;
+                    grid-area: project8;
                 }
                 &:nth-of-type(9) {
-                    grid-area: cell9;
+                    grid-area: project9;
                 }
                 &:nth-of-type(10) {
-                    grid-area: cell10;
+                    grid-area: project10;
                 }
                 &:nth-of-type(11) {
-                    grid-area: cell11;
+                    grid-area: project11;
                 }
                 &:nth-of-type(12) {
-                    grid-area: cell12;
+                    grid-area: project12;
                 }
                 &:nth-of-type(13) {
-                    grid-area: cell13;
+                    grid-area: project13;
                 }
                 &:nth-of-type(14) {
-                    grid-area: cell14;
+                    grid-area: project14;
                 }
                 &:nth-of-type(15) {
-                    grid-area: cell15;
+                    grid-area: project15;
                 }
                 &:hover {
                     background: $secondary;
                     color: $primary;
                 }
-                &__footer {
-                    position: absolute;
-                    bottom: 0;
+                &__link {
                     width: calc(100% - 10px);
                     padding: 5px;
                     border-top: 1px solid $primary;
+                    position: absolute;
+                    bottom: 0;
                     img {
-                        height: 24px;
+                        height: 1rem;
                     }
                 }
+                &__future {
+                    pointer-events: none;
+                    opacity: 0.4;
+                }
             }
-            .disabled-cell {
-                pointer-events: none;
-                opacity: .4;
-                align-items: center;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .portfolio {
+            display: block;
+            &__projects {
+                margin-top: 1rem;
+                grid-template-areas: "project1 project1 project2 project2 ."
+                                    ". project3 project3 project4 project4"
+                                    "project5 project5 project6 project6 ."
+                                    ". project7 project7 project8 project8"
+                                    "project9 project9 project10 project10 ."
+                                    ". project11 project11 project12 project12"
+                                    "project13 project13 project14 project14 ."
+                                    ". project15 project15 project15 project15";
+                &-project {
+                    width: 100%;
+                    height: 3rem;
+                    span {
+                        width: 80%;
+                    }
+                    &__link {
+                        position: unset;
+                        width: calc(20% - 6px);
+                        padding: 2.5px;
+                        border-top: unset;
+                        border-left: 1px solid $primary;
+                    }
+                }
+                                    
             }
         }
     }
