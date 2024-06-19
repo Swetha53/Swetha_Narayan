@@ -38,34 +38,45 @@ function focusEventHandler() {
 <style lang="scss" scoped>
     @import "./../style.scss";
     .input {
+        input, textarea {
+            border: 1px solid $secondary;
+            border-radius: 8px;
+            background-color: $primary;
+            color: $secondary;
+            font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
+            padding: 0.25rem;
+            width: calc(100% - 0.5rem - 2px);
+            &:focus-visible {
+                border: 1px solid $secondary;
+            }
+            &::placeholder {
+                color: $secondary-50;
+            }
+            &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover {
+                -webkit-text-fill-color: $secondary;
+                -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+                transition: background-color 5000s ease-in-out 0s;
+            }
+        }
         &__error {
-            border: 2px solid red;
+            border: 2px solid $tertiary !important;
             &-message {
-                color: red;
-                position: relative;
+                background-color: $tertiary-50;
+                color: $secondary;
                 font-size: 16px;
+                border-radius: 8px;
+                padding: 5px;
             }
         }
     }
-    input, textarea {
-        border: 1px solid $secondary;
-        border-radius: 8px;
-        background-color: $primary;
-        font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
-        color: $secondary;
-        padding: 7px;
-        min-width: 650px;
-        &:focus-visible {
-            border: 1px solid $secondary;
+    @media (max-width: 900px) {
+        .input {
+            &__error {
+                &-message {
+                    font-size: inherit;
+                    line-height: 2;
+                }
+            }
         }
-        &::placeholder {
-            color: $secondary-50;
-        }
-    }
-    input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {
-        color: $secondary !important;
-        -webkit-text-fill-color: $secondary;
-        -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-        transition: background-color 5000s ease-in-out 0s !important;
     }
 </style>

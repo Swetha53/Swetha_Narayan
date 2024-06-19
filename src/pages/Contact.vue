@@ -77,8 +77,8 @@ function startFormEvaluations() {
 
 <template>
     <h1>Contact</h1>
-    <div class="grid grid__parent">
-        <div class="grid__cell grid">
+    <div class="contact">
+        <div class="contact__block contact__mainInfo">
             <template v-for="key in Object.keys(mainInfo)">
                 <div>
                     {{ key }}:
@@ -92,11 +92,11 @@ function startFormEvaluations() {
                     {{ mainInfo[key as keyof typeof mainInfo] }}
                 </div>
             </template>
-            <div class="grid__cell-ribbon__right">
+            <div class="contact__block-ribbon contact__block-ribbon__right">
                 Information
             </div>
         </div>
-        <div class="grid__cell grid">
+        <div class="contact__block contact__form">
             <Input inputType="text" placeholder="Name" name="name"
                 :hasError="state.hasError && (!state.validations[0].validationStatus || !state.validations[1].validationStatus)"
                 @storeInputData="storeInputData"/>
@@ -109,11 +109,11 @@ function startFormEvaluations() {
             <button @click="startFormEvaluations">
                 Submit
             </button>
-            <div class="grid__cell-ribbon__left">
+            <div class="contact__block-ribbon contact__block-ribbon__left">
                 Contact Form
             </div>
         </div>
-        <div class="grid__cell grid">
+        <div class="contact__block contact__social">
             <template v-for="key in Object.keys(socialLinks)">
                 <div>
                     {{ key }}:
@@ -122,7 +122,7 @@ function startFormEvaluations() {
                     {{ socialLinks[key as keyof typeof socialLinks] }}
                 </a>
             </template>
-            <div class="grid__cell-ribbon__right">
+            <div class="contact__block-ribbon contact__block-ribbon__right">
                 Social Media
             </div>
         </div>
@@ -131,99 +131,101 @@ function startFormEvaluations() {
 
 <style lang="scss" scoped>
     @import "./../style.scss";
-    $height: 100px;
-    $fold: 15px;
-    $ribbon: 30px;
-    .grid {
+    $height: 5rem;
+    $fold: 0.75rem;
+    $ribbon: 1rem;
+    .contact {
         display: grid;
         row-gap: calc($height/4);
         column-gap: calc($height/2);
-        &__parent {
-            grid-template-areas: "mainInfo contact"
-                        "social contact";
-            justify-content: space-around;
-        }
-        &__cell {
-            row-gap: 0;
-            position: relative;
+        justify-content: space-around;
+        grid-template-columns: 45% 45%;
+        grid-template-areas: "mainInfo form"
+                            "social form";
+        &__block {
             min-height: $height;
-            min-width: calc(2*$height);
+            min-width: calc(4*$height - 3rem);
+            position: relative;
+            display: grid;
+            border-radius: 8px;
             border: 1px solid $secondary;
-            padding: 32px;
-            padding-top: 70px;
-            border-radius: 8px;
-            &:nth-of-type(1) {
-                grid-area: mainInfo;
-                grid: auto auto auto/auto auto;
-            }
-            &:nth-of-type(2) {
-                grid-area: contact;
-                row-gap: calc($height/4);
-            }
-            &:nth-of-type(3) {
-                grid-area: social;
-                grid: auto auto/auto auto;
-            }
-            &-ribbon__right {
+            padding: 1.5rem;
+            padding-top: 3.5rem;
+            &-ribbon {
+                height: 2.5rem;
+                aspect-ratio: 6 / 1;
+                position: absolute;
+                top: 0.5rem;
+                background-color: $secondary;
                 color: $primary;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                position: absolute;
-                height: 50px;
-                width: 300px;
-                background: $secondary;
                 border-bottom: $fold solid $black-33;
-                border-left: $ribbon solid $black;
-                clip-path: 
-                    polygon(0 0, 100% 0, 100% calc(100% - $fold), calc(100% - $fold) 100%,
-                    calc(100% - $fold) calc(100% - $fold), 0 calc(100% - $fold),
-                    $ribbon calc(50% - $fold/2));
-                right: calc(-1*$fold);
-                top: 10px;
+                &__right {
+                    border-right: $ribbon solid $black;
+                    clip-path: 
+                        polygon(0 0, 100% 0, 100% calc(100% - $fold), calc(100% - $fold) 100%,
+                        calc(100% - $fold) calc(100% - $fold), 0 calc(100% - $fold),
+                        $ribbon calc(50% - $fold/2));
+                    right: calc(-1*$fold);
+                }
+                &__left {
+                    border-left: $ribbon solid $black;
+                    clip-path:
+                        polygon(0 0, 0 calc(100% - $fold), $fold 100%,
+                        $fold calc(100% - $fold), 100% calc(100% - $fold),
+                        calc(100% - $ribbon) calc(50% - $fold/2), 100% 0);
+                    left: calc(-1*$fold);
+                }
             }
-            &-ribbon__left {
+            ul {
+                margin: unset;
+                padding-left: 1rem;
+                list-style-type: "✰";
+                li {
+                    padding-left: 0.5rem;
+                }
+            }
+            button {
+                background-color: $secondary;
                 color: $primary;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: absolute;
-                height: 50px;
-                width: 300px;
-                background: $secondary;
-                border-bottom: $fold solid $black-33;
-                border-right: $ribbon solid $black;
-                clip-path:
-                    polygon(0 0, 0 calc(100% - $fold), $fold 100%,
-                    $fold calc(100% - $fold), 100% calc(100% - $fold),
-                    calc(100% - $ribbon) calc(50% - $fold/2), 100% 0);
-                top: 10px;
-                left: calc(-1*$fold);
+                border-radius: 8px;
+                font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
+                box-shadow: 2px 2px 5px $tertiary;
+                border: none;
+                padding: 0.5rem;
+                &:hover {
+                    background-color: $tertiary;
+                    color: $secondary;
+                    box-shadow: none;
+                    cursor: pointer;
+                }
             }
         }
-        ul {
-            margin: unset;
-            padding-left: 20px;
-            list-style-type: "✰";
-            li {
-                padding-left: 10px;
-            }
+        &__mainInfo {
+            grid-area: mainInfo;
+            grid: auto auto auto / auto auto;
         }
-        button {
-            background-color: $secondary;
-            color: $primary;
-            border-radius: 8px;
-            font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
-            box-shadow: 2px 2px 5px $tertiary;
-            border: none;
-            min-height: 32px;
-            padding: 10px;
-            &:hover {
-                background-color: $tertiary;
-                color: $secondary;
-                box-shadow: none;
-                cursor: pointer;
-            }
+        &__form {
+            grid-area: form;
+            row-gap: calc($height/4);
+        }
+        &__social {
+            grid-area: social;
+            grid: auto auto / auto auto;
+            column-gap: calc($height/2);
+            word-break: break-all;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .contact {
+            grid-template-columns: 90%;
+            grid-template-areas: "form"
+                                "form"
+                                "mainInfo"
+                                "social";
         }
     }
 </style>
