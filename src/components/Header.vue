@@ -66,6 +66,7 @@
         font-size: 32px;
         min-height: 118px; //TODO: change to %age
         position: relative;
+        margin-bottom: 2rem;
         &__open {
             grid: auto / repeat(5, minmax(0, 1fr));
         }

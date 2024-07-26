@@ -11,7 +11,12 @@ import DownloadButton from "./../components/DownloadButton.vue"
         </div>
         <!-- TODO think what to write -->
         <div class="home__summary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui. Congue mauris rhoncus aenean vel. Tellus molestie nunc non blandit massa enim nec dui nunc. In massa tempor nec feugiat. Mattis aliquam faucibus purus in massa tempor nec feugiat nisl. Egestas integer eget aliquet nibh. Massa placerat duis ultricies lacus. Sit amet porttitor eget dolor morbi non. In hac habitasse platea dictumst quisque sagittis. Quis risus sed vulputate odio ut enim blandit. Neque volutpat ac tincidunt vitae semper quis lectus nulla. Habitant morbi tristique senectus et netus et. Elit duis tristique sollicitudin nibh sit amet commodo nulla. Placerat vestibulum lectus mauris ultrices eros. Et malesuada fames ac turpis egestas. In cursus turpis massa tincidunt dui ut ornare.
+            <h2>Hello! I am Swetha Narayan, a web developer based in Canada.</h2>
+            I have 2 years of experience working as a web developer in an e-commerce platform. Currently a master of computer science student in
+            University of Ottawa. I started my journey as a software engineer and more specifically as a web developer during my middle school when we started
+            learning about HTML in my computer science class. <br>
+            I have always had an organisational and a problem solving side which has helped me solve the trickiest of problems and complete my projects
+            on time. I love handling difficult problems and finding out-of-the box solutions for them.
         </div>
         <div class="home__button">
             <DownloadButton/>

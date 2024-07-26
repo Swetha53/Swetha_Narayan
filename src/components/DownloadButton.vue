@@ -29,12 +29,12 @@
         &__arrow {
             position: relative;
             width: $height;
-            aspect-ratio: 1 / 1;
+            height: $height;
             font-size: 1.75em;
             &-base {
                 background-color: $tertiary;
                 width: 100%;
-                aspect-ratio: 1 / 1;
+                height: 100%;
                 p {
                     margin: unset;
                     color: $secondary;
