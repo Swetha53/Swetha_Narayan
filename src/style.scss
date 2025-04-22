@@ -1,11 +1,12 @@
 // TODO allow to view the website in colors other than light and dark
 
-$primary: #F2F4FB;
-$secondary: #D22780;
-$secondary-50:rgba(210, 39, 128, 0.5);
-$tertiary: #F8B500;
-$tertiary-50: rgba(248, 181, 0, 0.5);
-$tertiary-10: rgba(248, 181, 0, 0.1);
+$primary: #fde8cd;
+$secondary: #433520;
+$secondary-50: rgba(67, 53, 32, 0.5);
+$secondary-20: rgba(67, 53, 32, 0.2);
+$tertiary: #00917c;
+$tertiary-50: rgba(0, 145, 124, 0.5);
+$tertiary-10: rgba(0, 145, 124, 0.1);
 $black: #0000;
 $black-33: rgba(0, 0, 0, 0.33);
 $black-100: rgba(0, 0, 0, 1);
@@ -26,7 +27,8 @@ $black-100: rgba(0, 0, 0, 1);
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   margin: unset;
 }
