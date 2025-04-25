@@ -311,19 +311,108 @@ const events = [
       },
       {
         type: "text",
-        text: "Based in Bangalore, Karnataka, India.",
+        text: "Worked in the merchant-facing team of a large-scale e-commerce platform.",
+      },
+      {
+        type: "header",
+        text: "Key Responsibilites",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Owned and built UI modules using Vue.js and React for the merchant and internal team dashboard.",
+          "Refactored legacy AngularJS modules into Vue components.",
+        ],
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Collaborated closely with backend teams to integrate APIs.",
+          "Participated in code reviews, sprint planning, and feature estimation.",
+        ],
+      },
+      {
+        type: "header",
+        text: "Hackathon Project",
       },
       {
         type: "text",
-        text: "Worked on the merchant-facing side of an e-commerce platform.",
+        text: "🏆 Participated in an internal company hackathon and built an AR model viewer web application.",
+      },
+      {
+        type: "list",
+        title: "Hackathon Highlights",
+        listItems: [
+          "Developed a web app to render 3D models in AR using WebXR and Model Viewer.",
+          "Integrated a Vue JS frontend with AR rendering support.",
+          "Collaborated with a cross-functional team to prototype and present in under 48 hours.",
+        ],
+      },
+      {
+        type: "header",
+        text: "Tech Stack",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Vue.js",
+          "Vuex",
+          "React.js",
+          "Redux",
+          "AngularJS",
+          "JavaScript (ES6+)",
+          "HTML5",
+          "CSS3 / SCSS",
+        ],
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "REST APIs",
+          "Git",
+          "JIRA",
+          "Social Share",
+          "Augmented Reality",
+          "Model Viewer",
+        ],
+      },
+      {
+        type: "list",
+        title: "Soft Skills & Culture",
+        listItems: [
+          "Agile methodology",
+          "Team collaboration",
+          "Mentorship",
+          "Problem-solving under tight deadlines",
+        ],
+      },
+      {
+        type: "header",
+        text: "Key Takeaways",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Reduced load time by 40% by optimizing component rendering.",
+          "Built and documented a reusable component library for Vue-based projects.",
+        ],
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Mentored 2 junior developers during onboarding.",
+          "Implemented a Social Sharing feature for promotional pages, enabling merchants to share offers directly via social media platforms.",
+        ],
       },
       {
         type: "text",
-        text: "Served as a frontend developer for 2 years, specializing in Vue.js and React.js.",
-      },
-      {
-        type: "text",
-        text: "Also contributed to AngularJS-based modules and collaborated closely with backend teams.",
+        text: "This role shaped my practical understanding of frontend development at scale, solidified my React and Vue expertise, and enhanced my cross-team collaboration skills.",
       },
     ],
   },
@@ -340,7 +429,97 @@ const events = [
       },
       {
         type: "text",
-        text: "Joined Quinbay as a frontend intern and transitioned to full-time software engineer.",
+        text: "Joined Quinbay as an intern and transitioned to full-time software engineer.",
+      },
+      {
+        type: "header",
+        text: "Training Projects",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Built a mini e-commerce platform with user authentication and product listing.",
+          "Worked on a CRM dashboard with user management and lead tracking features.",
+          "Created a Spring Boot application using Kafka, SQL and Mongo DB.",
+        ],
+      },
+      {
+        type: "list",
+        title: "Key Contributions",
+        listItems: [
+          "Contributed to UI and backend logic in collaborative group projects.",
+          "Wrote API endpoints, handled form validations, and built frontend interfaces.",
+          "Worked in different functional groups to simulate real agile team setups.",
+        ],
+      },
+      {
+        type: "header",
+        text: "Key Responsibilities",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Worked on UI screens for merchant dashboard components.",
+          "Fixed bugs, built reusable components, and performed unit testing.",
+          "Learned company-wide development practices and agile methodologies.",
+        ],
+      },
+      {
+        type: "header",
+        text: "Tech Stack",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Vue.js",
+          "Vuex",
+          "React.js",
+          "JavaScript",
+          "HTML/CSS",
+          "SCSS",
+          "Firebase",
+          "Figma (for UI references)",
+        ],
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Spring Boot",
+          "SQL",
+          "Mongo DB",
+          "REST APIs",
+          "Kafka",
+          "ElasticSearch",
+          "Git",
+        ],
+      },
+      {
+        type: "header",
+        text: "Skills Gained",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Full-stack development fundamentals",
+          "Backend API creation with Spring Boot",
+          "Team-based agile collaboration",
+          "Version control with Git",
+          "Code reviews",
+          "Attention to detail in UI implementation",
+        ],
+      },
+      {
+        type: "header",
+        text: "Key Takeaway",
+      },
+      {
+        type: "text",
+        text: "This internship not only gave me real-world frontend experience by giving me a solid foundation in Vue.js and collaborative workflows but also introduced me to backend development with Spring Boot and full project lifecycle management.",
       },
     ],
   },
@@ -516,8 +695,50 @@ const events = [
         text: "Short-term internship focused on foundational machine learning practices.",
       },
       {
+        type: "header",
+        text: "Key Responsibilities",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Trained ML models using scikit-learn for binary classification tasks.",
+          "Handled dataset preprocessing including missing values and normalization.",
+        ],
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Visualized training performance using Matplotlib.",
+          "Presented final model outcomes and accuracy reports to mentors.",
+        ],
+      },
+      {
+        type: "header",
+        text: "Skills Developed",
+      },
+      {
+        type: "list",
+        title: "Tech Stack",
+        listItems: ["Python", "Pandas", "NumPy", "scikit-learn", "Matplotlib"],
+      },
+      {
+        type: "list",
+        title: "Skills",
+        listItems: [
+          "Supervised learning",
+          "Python scripting",
+          "Model evaluation",
+        ],
+      },
+      {
+        type: "header",
+        text: "Key Takeaway",
+      },
+      {
         type: "text",
-        text: "Built a classification script using Python and Machine Learning algorithms",
+        text: "This internship introduced me to practical ML workflows and gave me confidence to explore real-world AI applications later in my academic projects.",
       },
     ],
   },
@@ -537,8 +758,56 @@ const events = [
         text: "Early internship experience learning software engineering and industry workflows.",
       },
       {
-        type: "text",
-        text: "Built a library web application using Advanced Java with a group of fellow interns.",
+        type: "header",
+        text: "Key Responsibilities",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Participated in the design and development of a Library Management System.",
+          "Worked with Advanced Java, Servlet for frontend and JDBC for backend database connectivity with SQL as the database.",
+        ],
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "Wrote reusable components for user login, book inventory, and transaction modules.",
+          "Collaborated with peers on version control using Git.",
+        ],
+      },
+      {
+        type: "header",
+        text: "Skills Developed",
+      },
+      {
+        type: "list",
+        title: "Tech Stack",
+        listItems: ["Advanced Java", "Servlet", "JDBC", "SQL", "Git"],
+      },
+      {
+        type: "list",
+        title: "Soft Skills",
+        listItems: [
+          "Team collaboration",
+          "Basic project planning",
+          "Version control with Git",
+          "Technical documentation",
+        ],
+      },
+      {
+        type: "header",
+        text: "Key Takeaways",
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: [
+          "First hands-on experience in building a full-stack application.",
+          "Learned how to break down features into small tasks and collaborate effectively.",
+          "Gained confidence working with Java in a real-world project setting.",
+        ],
       },
     ],
   },
