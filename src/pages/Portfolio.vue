@@ -18,7 +18,6 @@ const projects = [
   {
     key: "DDA",
     title: "Digital Delivery Auth.",
-    link: "https://github.com/Swetha53/TextBasedAdventure",
     slides: <Array<slideType>>[
       {
         type: "text",
@@ -27,13 +26,12 @@ const projects = [
       {
         type: "text",
         text: "Framework: Vue 2.0",
-      }
+      },
     ],
   },
   {
     key: "Blibli",
     title: "Blibli",
-    link: "https://github.com/Swetha53/TextBasedAdventure",
     slides: <Array<slideType>>[
       {
         type: "text",
@@ -65,17 +63,6 @@ const projects = [
     ],
   },
   {
-    key: "Novamart",
-    title: "E-Commerce with Augmented Reality",
-    link: "https://github.com/Swetha53/NovaMart",
-    slides: <Array<slideType>>[
-      {
-        type: "text",
-        text: "Lang: JavaScript, Framework: React",
-      },
-    ],
-  },
-  {
     key: "Novamart_Backend",
     title: "3D Model Generation from 2D Images",
     link: "https://github.com/Swetha53/Novamart-Backend",
@@ -91,8 +78,19 @@ const projects = [
       {
         type: "list",
         title: "Other Technologies:",
-        listItems: ["Kafka", "Open 3D", "Open MVS", "Colmap", "Blender"]
-      }
+        listItems: ["Kafka", "Open 3D", "Open MVS", "Colmap", "Blender"],
+      },
+    ],
+  },
+  {
+    key: "Novamart",
+    title: "E-Commerce with Augmented Reality",
+    link: "https://github.com/Swetha53/NovaMart",
+    slides: <Array<slideType>>[
+      {
+        type: "text",
+        text: "Lang: JavaScript, Framework: React",
+      },
     ],
   },
 ];
@@ -198,11 +196,11 @@ function closeProjectFooter() {
     row-gap: 0.5rem;
     column-gap: 0.5rem;
     grid-template-areas:
-      ". project4 . project9 . project13"
       "project1 project4 project6 project9 project11 project13"
-      "project1 project4 project6 project10 project11 project14"
-      "project2 project4 project7 project10 project11 project14"
-      "project2 project5 project7 project10 project11 project15"
+      "project1 project4 project6 project9 project11 project13"
+      "project2 project5 project6 project10 project11 project14"
+      "project2 project5 project7 project10 project11 project14"
+      "project2 project5 project8 project10 project12 project15"
       "project3 project5 project8 project10 project12 project15";
     &-project {
       border: 1px solid var(--secondary);
@@ -298,7 +296,7 @@ function closeProjectFooter() {
         ". project15 project15 project15 project15";
       &-project {
         width: 100%;
-        height: 3rem;
+        height: 4rem;
         span {
           width: 80%;
         }

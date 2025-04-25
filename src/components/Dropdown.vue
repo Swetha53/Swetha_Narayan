@@ -14,7 +14,9 @@ function updateTheme() {
   const root = document.querySelector(":root") as HTMLElement;
 
   for (const [key, value] of Object.entries(colors)) {
-    root.style.setProperty(key, value);
+    if (key.includes("--")) {
+      root.style.setProperty(key, value);
+    }
   }
 }
 </script>
@@ -32,14 +34,20 @@ function updateTheme() {
 .dropdown {
   width: 80%;
   background: var(--primary);
+  // background-image: linear-gradient(
+  //       135deg,
+  //       var(--primary) 35%,
+  //       var(--secondary) 45%,
+  //       var(--tertiary) 55%,
+  //       var(--secondary) 65%,
+  //       var(--primary) 100%
+  //     );
   background-image: linear-gradient(
-        135deg,
-        var(--primary) 35%,
-        var(--secondary) 45%,
-        var(--tertiary) 55%,
-        var(--secondary) 65%,
-        var(--primary) 100%
-      );
+    45deg,
+    var(--primary) 33%,
+    var(--secondary) 66%,
+    var(--tertiary) 100%
+  );
   color: var(--secondary);
   font-weight: 800;
   border: 1px solid var(--secondary);

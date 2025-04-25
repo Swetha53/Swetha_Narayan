@@ -18,7 +18,7 @@
 
 <style lang="scss" scoped>
 @import "./../style.scss";
-$height: 60px;
+$height: 3rem;
 
 .downloadButton {
   background-color: var(--secondary);

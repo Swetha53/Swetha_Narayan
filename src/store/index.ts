@@ -4,7 +4,7 @@ const { createStore } = Vuex;
 export default createStore({
   state: {
     isMobile: <boolean>false,
-    theme: <string>"Brown",
+    theme: <string>"Café Tropic",
   },
   getters: {
     getLayoutValue: (state: { isMobile: boolean }) => {

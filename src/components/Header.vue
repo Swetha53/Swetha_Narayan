@@ -27,7 +27,7 @@ function redirectToPage(section: string) {
 <template>
   <div
     class="header monofett"
-    :class="state.toggleMenu == 'open' ? 'header__open' : 'header__close'"
+    :class="state.toggleMenu == 'open' ? 'header-open' : 'header-close'"
   >
     <div class="header__cell">
       <Menu @sendToggleData="receiveToggleData"></Menu>
@@ -81,10 +81,11 @@ function redirectToPage(section: string) {
       <p v-if="!store.getters.getLayoutValue">Contact</p>
     </div>
     <div v-if="state.toggleMenu == 'none'" class="header__info">
-      <i v-for="i in 3" :key="i" class="header__info-arrow"></i>
-      <p>Click here to open the menu</p>
+      <i v-for="i in 2" :key="i" class="header__info-arrow"></i>
+      <p v-if="!store.getters.getLayoutValue">Click here to open the menu</p>
+      <p v-else>Open Menu</p>
     </div>
-    <!-- TODO -->
+    <div v-else-if="state.toggleMenu == 'close'" class="header__info"></div>
     <div class="header__dropdown"><Dropdown /></div>
   </div>
 </template>
@@ -93,14 +94,14 @@ function redirectToPage(section: string) {
 @import "./../style.scss";
 .header {
   display: grid;
-  font-size: 32px;
-  min-height: 118px; //TODO: change to %age
+  font-size: 1.5rem;
+  min-height: 118px;
   position: relative;
   margin-bottom: 2rem;
-  &__open {
+  &-open {
     grid: auto / repeat(6, minmax(0, 1fr));
   }
-  &__close {
+  &-close {
     grid: auto / 1fr 4fr 1fr;
   }
   &__cell {
@@ -140,8 +141,8 @@ function redirectToPage(section: string) {
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    width: 32px;
-    height: 32px;
+    width: 1.5rem;
+    height: 1.5rem;
     mask-image: url("./../assets/home.svg");
     -webkit-mask-image: url("./../assets/home.svg");
     background-color: var(--secondary);
@@ -161,9 +162,9 @@ function redirectToPage(section: string) {
   &__info {
     position: relative;
     font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 22px;
+    font-size: 1.25rem;
     place-self: center;
-    animation: 2s infinite normal move;
+    animation: 3s infinite normal move;
     animation-fill-mode: forwards;
     display: flex;
     justify-content: center;
@@ -171,9 +172,9 @@ function redirectToPage(section: string) {
     width: 50%;
     &-arrow {
       border: solid var(--secondary);
-      border-width: 0 10px 10px 0;
+      border-width: 0 0.5rem 0.5rem 0;
       display: inline-block;
-      padding: 14px;
+      padding: 0.5rem;
       transform: rotate(135deg);
       -webkit-transform: rotate(135deg);
     }
@@ -182,20 +183,19 @@ function redirectToPage(section: string) {
 @media (max-width: 900px) {
   .header {
     &__info {
-      font-size: 14px;
       &-arrow {
-        border-width: 0 5px 5px 0;
-        padding: 7px;
+        border-width: 0 0.25rem 0.25rem 0;
+        padding: 0.25rem;
       }
     }
   }
 }
 @keyframes move {
   0% {
-    right: -20%;
+    right: 0%;
   }
   100% {
-    right: 20%;
+    right: 30%;
   }
 }
 </style>
