@@ -34,21 +34,13 @@ function updateTheme() {
 .dropdown {
   width: 80%;
   background: var(--primary);
-  // background-image: linear-gradient(
-  //       135deg,
-  //       var(--primary) 35%,
-  //       var(--secondary) 45%,
-  //       var(--tertiary) 55%,
-  //       var(--secondary) 65%,
-  //       var(--primary) 100%
-  //     );
   background-image: linear-gradient(
     45deg,
     var(--primary) 33%,
     var(--secondary) 66%,
     var(--tertiary) 100%
   );
-  color: var(--secondary);
+  color: var(--tertiary);
   font-weight: 800;
   border: 1px solid var(--secondary);
   border-radius: 8px;

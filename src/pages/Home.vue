@@ -10,10 +10,9 @@ import DownloadButton from "./../components/DownloadButton.vue";
         Hello! I am Swetha Narayan, a passionate Full Stack Developer based in
         Canada.
       </h2>
-      <!-- TODO Change as soon as I get a degree -->
       With 2 years of experience building and maintaining e-commerce platforms,
       I specialize in creating clean, responsive, and user-friendly web
-      applications. I’m currently completing my Master’s in Computer Science at
+      applications. I have recently completed my Master’s in Computer Science at
       the University of Ottawa.<br />
       My journey into web development began back in middle school, when I first
       discovered HTML in a computer science class — and I’ve been hooked ever
