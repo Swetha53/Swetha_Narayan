@@ -56,14 +56,14 @@ $height: 80px;
   align-items: center;
   position: relative;
   &__back {
-    background: $secondary;
+    background: var(--secondary);
     height: $height;
     aspect-ratio: 2 / 1;
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 40%;
-    box-shadow: 2px 4px 2px $secondary;
+    box-shadow: 2px 4px 2px var(--secondary);
     background-image: url("./../assets/logo.svg");
     z-index: 1;
   }
@@ -91,10 +91,10 @@ $height: 80px;
     visibility: hidden;
     height: calc($height / 2);
     width: calc(2 * $height + 40px);
-    background: $secondary;
+    background: var(--secondary);
     position: absolute;
     top: 85%;
-    border-bottom: 1px solid $tertiary;
+    border-bottom: 1px solid var(--tertiary);
     transform-origin: bottom;
     transform-style: preserve-3d;
     transform: perspective(80px) rotateX(30deg);
@@ -110,7 +110,7 @@ $height: 80px;
       height: 5px;
       bottom: -5px;
       transform: perspective(2000px) rotateX(-30deg);
-      background: $secondary;
+      background: var(--secondary);
     }
     img {
       position: absolute;
@@ -161,7 +161,7 @@ $height: 80px;
     }
     &__front {
       backface-visibility: hidden;
-      background: $secondary;
+      background: var(--secondary);
       animation: 0s 1 normal deviceBackVisible;
       animation-fill-mode: forwards;
       animation-delay: 2.5s;
@@ -181,7 +181,7 @@ $height: 80px;
       height: calc($height/2);
       aspect-ratio: 1 / 1;
       background-size: 80%;
-      box-shadow: 2px 2px 2px $secondary;
+      box-shadow: 2px 2px 2px var(--secondary);
     }
     &__front {
       height: calc($height/2);
@@ -245,7 +245,7 @@ $height: 80px;
 @keyframes deviceBackHidden {
   100% {
     backface-visibility: hidden;
-    background: $secondary;
+    background: var(--secondary);
   }
 }
 @keyframes deviceTopClose {

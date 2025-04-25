@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import Header from './components/Header.vue'
+import Header from "./components/Header.vue";
 import { onMounted, onUnmounted } from "vue";
-import store from './store/index'
+import store from "./store/index";
 
 onMounted(() => {
-  window.addEventListener('resize', resizeEventHandler)
-  resizeEventHandler()
-})
+  window.addEventListener("resize", resizeEventHandler);
+  resizeEventHandler();
+});
 onUnmounted(() => {
-  window.removeEventListener('resize', resizeEventHandler)
-})
+  window.removeEventListener("resize", resizeEventHandler);
+});
 
 function resizeEventHandler() {
-  store.commit('setLayoutValue')
+  store.commit("setLayoutValue");
 }
 </script>
 
 <template>
-  <Header class="header"/>
+  <Header class="header" />
   <router-view></router-view>
 </template>
 

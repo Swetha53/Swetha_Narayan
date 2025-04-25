@@ -70,13 +70,13 @@ onUnmounted(() => {
 .slideshow {
   width: 18rem;
   aspect-ratio: 5 / 6;
-  background-color: $secondary;
+  background-color: var(--secondary);
   border-radius: 8px;
   position: relative;
   &__inner {
     width: 16rem;
     aspect-ratio: 1;
-    background-color: $primary;
+    background-color: var(--primary);
     position: absolute;
     left: 1rem;
     top: 1rem;
@@ -110,7 +110,7 @@ onUnmounted(() => {
     bottom: 3rem;
     left: 1rem;
     width: 16rem;
-    color: $primary;
+    color: var(--primary);
     text-align: right;
   }
 }

@@ -1,16 +1,17 @@
-import { createStore } from "vuex";
+import Vuex from "vuex";
+const { createStore } = Vuex;
 
 export default createStore({
   state: {
     isMobile: <boolean>false,
-    isDarkMode: <boolean>false,
+    theme: <string>"Brown",
   },
   getters: {
     getLayoutValue: (state: { isMobile: boolean }) => {
       return state.isMobile;
     },
-    getTheme: (state: { isDarkMode: boolean }) => {
-      return state.isDarkMode;
+    getTheme: (state: { theme: string }) => {
+      return state.theme;
     },
   },
   mutations: {
@@ -20,6 +21,9 @@ export default createStore({
       } else {
         state.isMobile = false;
       }
+    },
+    setTheme(state: { theme: string }, newTheme: string) {
+      state.theme = newTheme;
     },
   },
 });

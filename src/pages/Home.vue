@@ -51,7 +51,7 @@ import DownloadButton from "./../components/DownloadButton.vue";
     &-outer {
       height: 600px;
       aspect-ratio: 2 / 3;
-      background: $secondary;
+      background: var(--secondary);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -62,7 +62,7 @@ import DownloadButton from "./../components/DownloadButton.vue";
       height: 540px;
       aspect-ratio: 2 / 3;
       border-radius: 50%;
-      background: $primary;
+      background: var(--primary);
       background-image: url("src/assets/profile.png");
       background-size: cover;
       background-position: center;
@@ -71,7 +71,7 @@ import DownloadButton from "./../components/DownloadButton.vue";
   }
   &__summary {
     grid-area: summary;
-    border: 1px solid $secondary;
+    border: 1px solid var(--secondary);
     border-radius: 8px;
     border-bottom-right-radius: 0px;
     padding: 5px;

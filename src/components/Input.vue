@@ -39,30 +39,31 @@ function focusEventHandler() {
     @import "./../style.scss";
     .input {
         input, textarea {
-            border: 1px solid $secondary;
+            border: 1px solid var(--secondary);
             border-radius: 8px;
-            background-color: $primary;
-            color: $secondary;
+            background-color: var(--primary);
+            color: var(--secondary);
             font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
             padding: 0.25rem;
             width: calc(100% - 0.5rem - 2px);
             &:focus-visible {
-                border: 1px solid $secondary;
+                border: 1px solid var(--secondary);
             }
             &::placeholder {
-                color: $secondary-50;
+                color: var(--secondary);
+                opacity: 50%;
             }
             &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover {
-                -webkit-text-fill-color: $secondary;
+                -webkit-text-fill-color: var(--secondary);
                 -webkit-box-shadow: 0 0 0px 1000px transparent inset;
                 transition: background-color 5000s ease-in-out 0s;
             }
         }
         &__error {
-            border: 2px solid $tertiary !important;
+            border: 2px solid var(--tertiary) !important;
             &-message {
-                background-color: $tertiary-50;
-                color: $secondary;
+                background-color: var(--tertiary-50);
+                color: var(--secondary);
                 font-size: 16px;
                 border-radius: 8px;
                 padding: 5px;

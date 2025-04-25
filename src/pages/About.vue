@@ -188,15 +188,113 @@ const events = [
       },
       {
         type: "text",
-        text: "Pursuing Master's in Computer Science at the University of Ottawa, Ontario, Canada.",
+        text: "Completed Master of Computer Science degree at the University of Ottawa, Ontario, Canada.",
+      },
+
+      // Fall 2023
+      {
+        type: "header",
+        text: "Fall 2023",
+      },
+      {
+        type: "list",
+        title: "Courses",
+        listItems: [
+          "Software Usability — A+",
+          "Algorithms for Data Science — A",
+        ],
+      },
+      {
+        type: "list",
+        title: "🛠 Skills",
+        listItems: [
+          "Human-computer interaction",
+          "usability testing",
+          "advanced algorithm design",
+          "data science foundations",
+        ],
+      },
+
+      // Winter 2024
+      {
+        type: "header",
+        text: "Winter 2024",
+      },
+      {
+        type: "list",
+        title: "Courses",
+        listItems: [
+          "Advanced Data Structures — A+",
+          "Combinatorial Algorithms — B",
+          "Principles of Distributed Computing — A",
+        ],
+      },
+      {
+        type: "list",
+        title: "🛠 Skills",
+        listItems: [
+          "Trees",
+          "heaps",
+          "hashing",
+          "graph traversal",
+          "distributed systems",
+          "concurrency models",
+        ],
+      },
+
+      // Fall 2024
+      {
+        type: "header",
+        text: "Fall 2024",
+      },
+      {
+        type: "list",
+        title: "Courses",
+        listItems: [
+          "Theory of Computing — A-",
+          "Machine Learning — A+",
+          "Algorithm Analysis and Design — B+",
+        ],
+      },
+      {
+        type: "list",
+        title: "🛠 Skills",
+        listItems: [
+          "Multiagent systems",
+          "ML algorithms",
+          "PAC learning",
+          "complexity analysis",
+          "theoretical CS",
+        ],
+      },
+
+      // Winter 2025 (Ongoing Project)
+      {
+        type: "header",
+        text: "Winter 2025",
+      },
+      {
+        type: "header",
+        text: "🛠 Intensive Graduate Project",
       },
       {
         type: "text",
-        text: "Focused on advanced topics like software systems, backend architecture, AI, and AR.",
+        text: "🚀 Building an AR-based e-commerce platform using microservices architecture.",
       },
       {
-        type: "text",
-        text: "Built an AR-based e-commerce platform using microservices, Java Spring Boot, FastAPI, React, Open3D, OpenMVS, Colmap and Blender.",
+        type: "list",
+        title: "Technologies",
+        listItems: [
+          "Java Spring Boot",
+          "Python FastAPI",
+          "React",
+          "Open3D",
+          "OpenMVS",
+          "Colmap",
+          "Blender",
+          "Kafka",
+          "Docker",
+        ],
       },
     ],
   },
@@ -595,10 +693,10 @@ $verticalLine: 6.5rem;
   &__summary {
     width: 80%;
     padding: 0 1rem;
-    border: 1px solid $secondary;
+    border: 1px solid var(--secondary);
     border-radius: 8px;
     margin: 0 auto;
-    box-shadow: 2px 2px 8px $tertiary;
+    box-shadow: 2px 2px 8px var(--tertiary);
   }
   &__timeline {
     display: flex;
@@ -622,14 +720,14 @@ $verticalLine: 6.5rem;
         width: 1rem;
         aspect-ratio: 1;
         border-radius: 50%;
-        border: 1px solid $secondary;
-        background-color: $primary;
+        border: 1px solid var(--secondary);
+        background-color: var(--primary);
         &::before {
           position: absolute;
           content: "";
           height: 1px;
           width: $horizontalLine;
-          background-color: $secondary;
+          background-color: var(--secondary);
           top: 0.5rem;
         }
         &::after {
@@ -637,7 +735,7 @@ $verticalLine: 6.5rem;
           position: absolute;
           width: 1px;
           height: $verticalLine;
-          background-color: $secondary;
+          background-color: var(--secondary);
           top: -$verticalLine;
           left: 0.5rem;
         }

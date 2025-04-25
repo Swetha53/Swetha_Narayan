@@ -166,7 +166,7 @@ $ribbon: 1rem;
     position: relative;
     display: grid;
     border-radius: 8px;
-    border: 1px solid $secondary;
+    border: 1px solid var(--secondary);
     padding: 1.5rem;
     padding-top: 3.5rem;
     &-ribbon {
@@ -174,8 +174,8 @@ $ribbon: 1rem;
       aspect-ratio: 6 / 1;
       position: absolute;
       top: 0.5rem;
-      background-color: $secondary;
-      color: $primary;
+      background-color: var(--secondary);
+      color: var(--primary);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -216,16 +216,16 @@ $ribbon: 1rem;
       }
     }
     button {
-      background-color: $secondary;
-      color: $primary;
+      background-color: var(--secondary);
+      color: var(--primary);
       border-radius: 8px;
       font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
-      box-shadow: 2px 2px 5px $tertiary;
+      box-shadow: 2px 2px 5px var(--tertiary);
       border: none;
       padding: 0.5rem;
       &:hover {
-        background-color: $tertiary;
-        color: $secondary;
+        background-color: var(--tertiary);
+        color: var(--secondary);
         box-shadow: none;
         cursor: pointer;
       }

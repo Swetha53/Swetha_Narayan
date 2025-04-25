@@ -1,25 +1,23 @@
 // TODO allow to view the website in colors other than light and dark
-
-$primary: #fde8cd;
-$secondary: #433520;
-$secondary-50: rgba(67, 53, 32, 0.5);
-$secondary-20: rgba(67, 53, 32, 0.2);
-$tertiary: #00917c;
-$tertiary-50: rgba(0, 145, 124, 0.5);
-$tertiary-10: rgba(0, 145, 124, 0.1);
 $black: #0000;
 $black-33: rgba(0, 0, 0, 0.33);
 $black-100: rgba(0, 0, 0, 1);
 
 :root {
+  --primary: #fde8cd;
+  --secondary: #433520;
+  --tertiary: #00917c;
+  --tertiary-10: rgba(0, 145, 124, 0.1);
+  --tertiary-50: rgba(0, 145, 124, 0.5);
+
   font-family: "Tapestry", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-size: max(1.5vw, 14px);
 
   color-scheme: light dark;
-  color: $secondary;
-  background-color: $primary;
+  color: var(--secondary);
+  background-color: var(--primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,7 +32,7 @@ body {
 }
 
 :focus-visible {
-  outline: $tertiary outset 1px;
+  outline: var(--tertiary) outset 1px;
 }
 
 h1 {

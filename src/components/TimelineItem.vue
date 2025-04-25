@@ -28,18 +28,18 @@ function emitClose() {
         $ribbon: 1rem;
         height: 7rem;
         aspect-ratio: 5 / 3;
-        border: 1px solid $secondary;
+        border: 1px solid var(--secondary);
         border-radius: 8px;
         cursor: pointer;
-        background-color: $primary;
+        background-color: var(--primary);
         z-index: 2;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         &__ribbon {
-            color: $primary;
-            background-color: $secondary;
+            color: var(--primary);
+            background-color: var(--secondary);
             font-size: 0.75rem;
             height: 1.75rem;
             aspect-ratio: 5 / 1;
@@ -66,11 +66,11 @@ function emitClose() {
             text-align: center;
         }
         &:hover {
-            background-color: $secondary;
-            color: $primary;
+            background-color: var(--secondary);
+            color: var(--primary);
             .timelineItem__ribbon {
-                background-color: $tertiary;
-                color: $secondary;
+                background-color: var(--tertiary);
+                color: var(--secondary);
             }
         }
     }

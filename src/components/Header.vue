@@ -3,6 +3,7 @@ import { reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Menu from "./Menu.vue";
 import store from "./../store";
+import Dropdown from "./Dropdown.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -40,7 +41,7 @@ function redirectToPage(section: string) {
       v-if="state.toggleMenu == 'open'"
       @click="redirectToPage('Home')"
     >
-      <img class="header__image" src="./../assets/home.svg" alt="Home" />
+      <div class="header__icon" />
       <p v-if="!store.getters.getLayoutValue">Home</p>
     </div>
     <div
@@ -52,7 +53,7 @@ function redirectToPage(section: string) {
       v-if="state.toggleMenu == 'open'"
       @click="redirectToPage('About')"
     >
-      <img class="header__image" src="./../assets/profile.svg" alt="About Me" />
+      <div class="header__icon header__icon-profile" />
       <p v-if="!store.getters.getLayoutValue">About Me</p>
     </div>
     <div
@@ -64,11 +65,7 @@ function redirectToPage(section: string) {
       v-if="state.toggleMenu == 'open'"
       @click="redirectToPage('Portfolio')"
     >
-      <img
-        class="header__image"
-        src="./../assets/website.svg"
-        alt="Portfolio"
-      />
+      <div class="header__icon header__icon-website" />
       <p v-if="!store.getters.getLayoutValue">Portfolio</p>
     </div>
     <div
@@ -80,13 +77,15 @@ function redirectToPage(section: string) {
       v-if="state.toggleMenu == 'open'"
       @click="redirectToPage('Contact')"
     >
-      <img class="header__image" src="./../assets/contact.svg" alt="Contact" />
+      <div class="header__icon header__icon-contact" />
       <p v-if="!store.getters.getLayoutValue">Contact</p>
     </div>
     <div v-if="state.toggleMenu == 'none'" class="header__info">
       <i v-for="i in 3" :key="i" class="header__info-arrow"></i>
       <p>Click here to open the menu</p>
     </div>
+    <!-- TODO -->
+    <div class="header__dropdown"><Dropdown /></div>
   </div>
 </template>
 
@@ -99,17 +98,17 @@ function redirectToPage(section: string) {
   position: relative;
   margin-bottom: 2rem;
   &__open {
-    grid: auto / repeat(5, minmax(0, 1fr));
+    grid: auto / repeat(6, minmax(0, 1fr));
   }
   &__close {
-    grid: auto / 1fr 4fr;
+    grid: auto / 1fr 4fr 1fr;
   }
   &__cell {
     cursor: pointer;
     place-items: center;
     display: grid;
     grid: auto / 1fr 3fr;
-    border-left: 1px solid $secondary;
+    border-left: 1px solid var(--secondary);
     &:first-child {
       display: flex;
       justify-content: center;
@@ -117,12 +116,12 @@ function redirectToPage(section: string) {
       border-left: none;
     }
     &-active {
-      border: 2px solid $tertiary;
+      border: 2px solid var(--tertiary);
       background-image: linear-gradient(
         135deg,
-        $tertiary 0%,
-        $tertiary-50 50%,
-        $tertiary-10 100%
+        var(--tertiary) 0%,
+        var(--tertiary-50) 50%,
+        var(--tertiary-10) 100%
       );
     }
     &-mobile {
@@ -131,9 +130,33 @@ function redirectToPage(section: string) {
       align-items: center;
     }
   }
-  &__image {
-    height: 32px;
+  &__dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__icon {
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
     width: 32px;
+    height: 32px;
+    mask-image: url("./../assets/home.svg");
+    -webkit-mask-image: url("./../assets/home.svg");
+    background-color: var(--secondary);
+    &-profile {
+      mask-image: url("./../assets/profile.svg");
+      -webkit-mask-image: url("./../assets/profile.svg");
+    }
+    &-website {
+      mask-image: url("./../assets/website.svg");
+      -webkit-mask-image: url("./../assets/website.svg");
+    }
+    &-contact {
+      mask-image: url("./../assets/contact.svg");
+      -webkit-mask-image: url("./../assets/contact.svg");
+    }
   }
   &__info {
     position: relative;
@@ -147,7 +170,7 @@ function redirectToPage(section: string) {
     align-items: center;
     width: 50%;
     &-arrow {
-      border: solid $secondary;
+      border: solid var(--secondary);
       border-width: 0 10px 10px 0;
       display: inline-block;
       padding: 14px;

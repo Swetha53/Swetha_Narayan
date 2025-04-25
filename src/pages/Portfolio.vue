@@ -22,8 +22,12 @@ const projects = [
     slides: <Array<slideType>>[
       {
         type: "text",
-        text: "Framework: Vue 2.0",
+        text: "Lang: JavaScript, HTML & SCSS",
       },
+      {
+        type: "text",
+        text: "Framework: Vue 2.0",
+      }
     ],
   },
   {
@@ -33,7 +37,19 @@ const projects = [
     slides: <Array<slideType>>[
       {
         type: "text",
-        text: "Used Vue 2.0, React JS and Angular JS framework for different projects of same website.",
+        text: "Maintained one of the largest Indonesian E-Commerce platform.",
+      },
+      {
+        type: "text",
+        text: "Framework: Vue 2.0, Website: Merchant facing promotion pages for the platform.",
+      },
+      {
+        type: "text",
+        text: "Framework: React JS, Website: Internal website for promotion creation for the platform.",
+      },
+      {
+        type: "text",
+        text: "Framework: Angular JS, Website: Older version of merchant facing promotion pages for the platform.",
       },
     ],
   },
@@ -66,8 +82,17 @@ const projects = [
     slides: <Array<slideType>>[
       {
         type: "text",
-        text: "Lang: Java & Python, Framework: SpringBoot and FastAPI",
+        text: "Lang: Java & Python",
       },
+      {
+        type: "text",
+        text: "Framework: SpringBoot and FastAPI",
+      },
+      {
+        type: "list",
+        title: "Other Technologies:",
+        listItems: ["Kafka", "Open 3D", "Open MVS", "Colmap", "Blender"]
+      }
     ],
   },
 ];
@@ -180,10 +205,10 @@ function closeProjectFooter() {
       "project2 project5 project7 project10 project11 project15"
       "project3 project5 project8 project10 project12 project15";
     &-project {
-      border: 1px solid $secondary;
+      border: 1px solid var(--secondary);
       border-radius: 8px;
       width: 7rem;
-      box-shadow: 2px 2px 5px $tertiary;
+      box-shadow: 2px 2px 5px var(--tertiary);
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -236,13 +261,13 @@ function closeProjectFooter() {
         grid-area: project15;
       }
       &:hover {
-        background: $secondary;
-        color: $primary;
+        background: var(--secondary);
+        color: var(--primary);
       }
       &__link {
         width: calc(100% - 10px);
         padding: 5px;
-        border-top: 1px solid $primary;
+        border-top: 1px solid var(--primary);
         position: absolute;
         bottom: 0;
         img {
@@ -282,7 +307,7 @@ function closeProjectFooter() {
           width: calc(20% - 6px);
           padding: 2.5px;
           border-top: unset;
-          border-left: 1px solid $primary;
+          border-left: 1px solid var(--primary);
         }
       }
     }
