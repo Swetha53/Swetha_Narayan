@@ -142,6 +142,14 @@ function closeProjectFooter() {
   state.activeProjectIndex = -1;
   state.currentSlides = [];
 }
+
+function projectFooter(index: number) {
+  if (state.activeProjectIndex == index) {
+    closeProjectFooter();
+  } else {
+    showProjectFooter(index);
+  }
+}
 </script>
 
 <template>
@@ -159,11 +167,12 @@ function closeProjectFooter() {
         :class="{
           'portfolio__projects-project__future':
             !projects[i - 1] || !projects[i - 1].title,
+          'portfolio__projects-project-active':
+            state.activeProjectIndex === i - 1,
         }"
         v-for="i in 15"
         :key="i"
-        @mouseover="showProjectFooter(i - 1)"
-        @mouseleave="closeProjectFooter"
+        @click="projectFooter(i - 1)"
       >
         <span v-if="projects[i - 1] && projects[i - 1].title">{{
           projects[i - 1].title
@@ -257,6 +266,10 @@ function closeProjectFooter() {
       }
       &:nth-of-type(15) {
         grid-area: project15;
+      }
+      &-active {
+        background: var(--secondary);
+        color: var(--primary);
       }
       &:hover {
         background: var(--secondary);

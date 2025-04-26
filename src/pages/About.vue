@@ -172,6 +172,7 @@ const state = reactive({
       knowledge: 10,
     },
   ],
+  slideIndex: -1,
 });
 
 const events = [
@@ -846,12 +847,14 @@ function scrollHandler() {
   }
 }
 
-function showSlideshow(miniEvent: miniEventType) {
+function showSlideshow(miniEvent: miniEventType, index: number) {
   state.currentSlides = miniEvent.slides;
+  state.slideIndex = index;
 }
 
 function closeSlideshow() {
   state.currentSlides = [];
+  state.slideIndex = -1;
 }
 
 onMounted(() => {
@@ -914,12 +917,13 @@ onUnmounted(() => {
         </div>
       </div>
       <div class="about__timeline-structure">
-        <template v-for="event in events">
+        <template v-for="(event, index) in events">
           <TimelineItem
             v-if="event.type == 'EDU'"
             :organization="event.organization"
             :title="event.title"
-            @showSlideshow="showSlideshow(event)"
+            :active="index == state.slideIndex"
+            @showSlideshow="showSlideshow(event, index)"
             @closeSlideshow="closeSlideshow"
           ></TimelineItem>
           <div class="about__timeline-structure__dates" v-else>
@@ -945,7 +949,8 @@ onUnmounted(() => {
             v-else
             :organization="event.organization"
             :title="event.title"
-            @showSlideshow="showSlideshow(event)"
+            :active="index == state.slideIndex"
+            @showSlideshow="showSlideshow(event, index)"
             @closeSlideshow="closeSlideshow"
           ></TimelineItem>
         </template>

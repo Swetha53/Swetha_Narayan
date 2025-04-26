@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive } from "vue";
 import { slideType } from "./../common/dataType.ts";
-import store from "./../store";
 const props = defineProps<{ slides: Array<slideType> }>();
 const state = reactive({
   slideNumber: 0,
+  status: "",
 });
 
 let timeout = 0;
@@ -17,25 +17,36 @@ function showSlides() {
   }
 }
 
-onMounted(() => {
+function startSlideshow() {
+  state.status = "";
   if (props.slides.length) {
     timeout = setInterval(showSlides, 2000);
   }
+}
+
+function pauseSlideshow() {
+  state.status = "Paused";
+  clearInterval(timeout);
+}
+
+onMounted(() => {
+  startSlideshow();
 });
 
 onUnmounted(() => {
-  clearInterval(timeout);
+  pauseSlideshow();
 });
 </script>
 
 <template>
   <div class="slideshow">
-    <div class="slideshow__inner">
+    <div
+      class="slideshow__inner"
+      @mouseenter="pauseSlideshow"
+      @mouseleave="startSlideshow"
+    >
       <p v-if="!slides.length" class="slideshow__placeholder monofett">
-        <span v-if="!store.getters.getLayoutValue"
-          >Hover over an event to see more info here.</span
-        >
-        <span v-else>Click over an event to see more info here.</span>
+        <span>Click over an event to see more info here.</span>
       </p>
       <div
         v-if="slides.length"
@@ -60,7 +71,8 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="slideshow__footer" v-if="slides.length">
-      {{ state.slideNumber + 1 }} / {{ slides.length }}
+      <p>{{ state.status }}</p>
+      <p>{{ state.slideNumber + 1 }} / {{ slides.length }}</p>
     </div>
   </div>
 </template>
@@ -111,7 +123,12 @@ onUnmounted(() => {
     left: 1rem;
     width: 16rem;
     color: var(--primary);
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      margin: unset;
+    }
   }
 }
 @media (max-width: 900px) {
