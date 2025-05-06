@@ -124,7 +124,7 @@ onMounted(() => {
         break;
     }
     Object.keys(images ?? {}).forEach((image) => {
-      const imageName = image.replace("./../assets/", "");
+      const imageName = image.replace("../assets/", "");
       project.slides.push({
         type: "image",
         image: imageName,

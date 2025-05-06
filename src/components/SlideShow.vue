@@ -29,6 +29,11 @@ function pauseSlideshow() {
   clearInterval(timeout);
 }
 
+function getImage(image?: String) {
+  if (!image) return "";
+  return new URL(`../assets/${image}`, import.meta.url).href;
+}
+
 onMounted(() => {
   startSlideshow();
 });
@@ -64,10 +69,7 @@ onUnmounted(() => {
             <li v-for="item in slide.listItems">{{ item }}</li>
           </ul>
         </div>
-        <img
-          v-else-if="slide.type == 'image'"
-          :src="`./../assets/${slide.image}`"
-        />
+        <img v-else-if="slide.type == 'image'" :src="getImage(slide.image)" />
       </div>
     </div>
     <div class="slideshow__footer" v-if="slides.length">
