@@ -66,7 +66,7 @@ onUnmounted(() => {
         </div>
         <img
           v-else-if="slide.type == 'image'"
-          :src="`src/assets/${slide.image}`"
+          :src="`./../assets/${slide.image}`"
         />
       </div>
     </div>

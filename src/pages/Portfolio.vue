@@ -105,26 +105,26 @@ onMounted(() => {
     let images;
     switch (project.key) {
       case "Py_TBA":
-        images = import.meta.glob("/src/assets/Py_TBA/*.{png, svg}");
+        images = import.meta.glob("./../assets/Py_TBA/*.{png, svg}");
         break;
       case "DDA":
-        images = import.meta.glob("/src/assets/DDA/*.{png, svg}");
+        images = import.meta.glob("./../assets/DDA/*.{png, svg}");
         break;
       case "Blibli":
-        images = import.meta.glob("/src/assets/Blibli/*.{png, svg}");
+        images = import.meta.glob("./../assets/Blibli/*.{png, svg}");
         break;
       case "TS_Resume":
-        images = import.meta.glob("/src/assets/TS_Resume/*.{png, svg}");
+        images = import.meta.glob("./../assets/TS_Resume/*.{png, svg}");
         break;
       case "Novamart":
-        images = import.meta.glob("/src/assets/Novamart/*.{png, svg}");
+        images = import.meta.glob("./../assets/Novamart/*.{png, svg}");
         break;
       case "Novamart_Backend":
-        images = import.meta.glob("/src/assets/Novamart_Backend/*.{png, svg}");
+        images = import.meta.glob("./../assets/Novamart_Backend/*.{png, svg}");
         break;
     }
     Object.keys(images ?? {}).forEach((image) => {
-      const imageName = image.replace("/src/assets/", "");
+      const imageName = image.replace("./../assets/", "");
       project.slides.push({
         type: "image",
         image: imageName,

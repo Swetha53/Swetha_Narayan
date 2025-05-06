@@ -46,7 +46,7 @@ import DownloadButton from "./../components/DownloadButton.vue";
     width: 28vw;
     aspect-ratio: 2/3;
     background: var(--primary);
-    background-image: url("src/assets/profile.png");
+    background-image: url("./../assets/profile.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
