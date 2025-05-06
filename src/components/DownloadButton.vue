@@ -1,9 +1,9 @@
+<script setup lang="ts">
+const resumeUrl = new URL("../assets/Swetha_Narayan.pdf", import.meta.url).href;
+</script>
+
 <template>
-  <a
-    class="flex-container downloadButton"
-    href="src/assets/Swetha_Narayan.pdf"
-    download
-  >
+  <a class="flex-container downloadButton" :href="resumeUrl" download>
     <div class="monofett downloadButton__arrow">
       <div class="downloadButton__arrow-base">
         <p>CV</p>
