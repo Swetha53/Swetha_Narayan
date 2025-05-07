@@ -143,6 +143,11 @@ onUnmounted(() => {
       left: 5%;
       top: 5%;
     }
+    &__footer {
+      bottom: 1rem;
+      left: 5%;
+      width: 90%;
+    }
   }
 }
 </style>

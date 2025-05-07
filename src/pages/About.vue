@@ -60,6 +60,14 @@ const state = reactive({
       knowledge: 25,
     },
     {
+      title: "Vuex",
+      amount: 0,
+      project: 6,
+      exp: 4,
+      work: 20,
+      knowledge: 25,
+    },
+    {
       title: "SQL",
       amount: 0,
       project: 4,
@@ -100,6 +108,14 @@ const state = reactive({
       knowledge: 20,
     },
     {
+      title: "Redux",
+      amount: 0,
+      project: 3,
+      exp: 4,
+      work: 15,
+      knowledge: 20,
+    },
+    {
       title: "Python",
       amount: 0,
       project: 6,
@@ -124,6 +140,14 @@ const state = reactive({
       knowledge: 15,
     },
     {
+      title: "Machine Learning",
+      amount: 0,
+      project: 3,
+      exp: 3,
+      work: 10,
+      knowledge: 15,
+    },
+    {
       title: "C++",
       amount: 0,
       project: 1,
@@ -136,6 +160,14 @@ const state = reactive({
       amount: 0,
       project: 1,
       exp: 1,
+      work: 5,
+      knowledge: 10,
+    },
+    {
+      title: "React Native",
+      amount: 0,
+      project: 1,
+      exp: 0.33,
       work: 5,
       knowledge: 10,
     },
@@ -165,6 +197,14 @@ const state = reactive({
     },
     {
       title: "C",
+      amount: 0,
+      project: 0,
+      exp: 1,
+      work: 5,
+      knowledge: 10,
+    },
+    {
+      title: "Android Studio",
       amount: 0,
       project: 0,
       exp: 1,
@@ -210,9 +250,9 @@ const events = [
         title: "🛠 Skills",
         listItems: [
           "Human-computer interaction",
-          "usability testing",
-          "advanced algorithm design",
-          "data science foundations",
+          "Usability testing",
+          "Advanced algorithm design",
+          "Data science foundations",
         ],
       },
 
@@ -235,11 +275,11 @@ const events = [
         title: "🛠 Skills",
         listItems: [
           "Trees",
-          "heaps",
-          "hashing",
-          "graph traversal",
-          "distributed systems",
-          "concurrency models",
+          "Heaps",
+          "Hashing",
+          "Graph traversal",
+          "Distributed systems",
+          "Concurrency models",
         ],
       },
 
@@ -264,8 +304,8 @@ const events = [
           "Multiagent systems",
           "ML algorithms",
           "PAC learning",
-          "complexity analysis",
-          "theoretical CS",
+          "Complexity analysis",
+          "Theoretical CS",
         ],
       },
 
@@ -289,13 +329,14 @@ const events = [
           "Java Spring Boot",
           "Python FastAPI",
           "React",
-          "Open3D",
-          "OpenMVS",
-          "Colmap",
-          "Blender",
           "Kafka",
           "Docker",
         ],
+      },
+      {
+        type: "list",
+        title: "Libraries",
+        listItems: ["Colmap", "Blender", "Open3D", "OpenMVS"],
       },
     ],
   },
@@ -358,23 +399,23 @@ const events = [
       {
         type: "list",
         title: "",
+        listItems: ["Vue.js", "Vuex", "React.js", "Redux", "AngularJS"],
+      },
+      {
+        type: "list",
+        title: "",
         listItems: [
-          "Vue.js",
-          "Vuex",
-          "React.js",
-          "Redux",
-          "AngularJS",
           "JavaScript (ES6+)",
           "HTML5",
           "CSS3 / SCSS",
+          "REST APIs",
+          "Git",
         ],
       },
       {
         type: "list",
         title: "",
         listItems: [
-          "REST APIs",
-          "Git",
           "JIRA",
           "Social Share",
           "Augmented Reality",
@@ -474,29 +515,23 @@ const events = [
       {
         type: "list",
         title: "",
-        listItems: [
-          "Vue.js",
-          "Vuex",
-          "React.js",
-          "JavaScript",
-          "HTML/CSS",
-          "SCSS",
-          "Firebase",
-          "Figma (for UI references)",
-        ],
+        listItems: ["Vue.js", "Vuex", "React.js", "JavaScript", "HTML/CSS"],
       },
       {
         type: "list",
         title: "",
         listItems: [
+          "SCSS",
+          "Firebase",
+          "Figma (for UI references)",
           "Spring Boot",
-          "SQL",
-          "Mongo DB",
           "REST APIs",
-          "Kafka",
-          "ElasticSearch",
-          "Git",
         ],
+      },
+      {
+        type: "list",
+        title: "",
+        listItems: ["SQL", "Mongo DB", "Kafka", "ElasticSearch", "Git"],
       },
       {
         type: "header",
@@ -573,9 +608,9 @@ const events = [
         title: "🔧 Skills",
         listItems: [
           "C",
-          "basic electronics",
-          "problem-solving",
-          "computational thinking",
+          "Basic electronics",
+          "Problem-solving",
+          "Computational thinking",
         ],
       },
 
@@ -596,10 +631,12 @@ const events = [
           "OOP in C++",
           "Digital Systems",
           "Algorithms",
-          "Java Programming",
-          "Microprocessors",
-          "Queuing Theory",
         ],
+      },
+      {
+        type: "list",
+        title: "Courses",
+        listItems: ["Java Programming", "Microprocessors", "Queuing Theory"],
       },
       {
         type: "list",
@@ -608,8 +645,8 @@ const events = [
           "C++",
           "Java",
           "DS & Algo",
-          "circuit design",
-          "complexity analysis",
+          "Circuit design",
+          "Complexity analysis",
         ],
       },
 
@@ -639,9 +676,9 @@ const events = [
         listItems: [
           "MySQL",
           "Android",
-          "mobile development",
+          "Mobile development",
           "TCP/IP stack",
-          "formal languages",
+          "Formal languages",
         ],
       },
 
@@ -669,8 +706,8 @@ const events = [
           "Python",
           "ML",
           "AI",
-          "full-stack web dev",
-          "cybersecurity basics",
+          "Full-stack web dev",
+          "Cybersecurity basics",
           "SDLC",
         ],
       },
@@ -895,17 +932,6 @@ onUnmounted(() => {
         seamless and intuitive.
       </p>
     </div>
-    <h1>Skills</h1>
-    <div class="about__skills">
-      <Skills
-        v-for="skill in state.skills"
-        :amount="skill.amount"
-        :title="skill.title"
-        :project="skill.project"
-        :exp="skill.exp"
-      >
-      </Skills>
-    </div>
     <h1>Timeline</h1>
     <div class="about__timeline">
       <div class="about__timeline-slides">
@@ -958,6 +984,17 @@ onUnmounted(() => {
         </template>
       </div>
     </div>
+    <h1>Skills</h1>
+    <div class="about__skills">
+      <Skills
+        v-for="skill in state.skills"
+        :amount="skill.amount"
+        :title="skill.title"
+        :project="skill.project"
+        :exp="skill.exp"
+      >
+      </Skills>
+    </div>
   </div>
 </template>
 
@@ -977,11 +1014,12 @@ $verticalLine: 6.5rem;
   &__timeline {
     display: flex;
     justify-content: space-around;
+    position: relative;
     &-slides {
       position: relative;
       width: 18rem;
       &__fixed {
-        position: fixed;
+        position: sticky;
         top: 0px;
       }
     }

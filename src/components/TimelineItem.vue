@@ -8,7 +8,6 @@ const props = defineProps<{
 const emit = defineEmits(["showSlideshow", "closeSlideshow"]);
 
 function emitClick() {
-  console.log("click");
   if (props.active) {
     emit("closeSlideshow");
   } else {
@@ -18,7 +17,11 @@ function emitClick() {
 </script>
 
 <template>
-  <div class="timelineItem" :class="{'timelineItem-active': active}" @click="emitClick()">
+  <div
+    class="timelineItem"
+    :class="{ 'timelineItem-active': active }"
+    @click="emitClick()"
+  >
     <div class="timelineItem__ribbon">
       <p>{{ organization }}</p>
     </div>
