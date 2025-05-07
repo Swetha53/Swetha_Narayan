@@ -872,25 +872,27 @@ onUnmounted(() => {
     <h1>About Me</h1>
     <div class="about__summary">
       <p>
-        Hey, I'm Swetha Narayan — a software engineer with 2 years of hands-on
-        experience in developing e-commerce platforms. Throughout my academic
-        and professional journey, I’ve had the opportunity to explore various
-        areas of software development, from front-end design to backend systems,
-        as well as projects involving Artificial Intelligence and Augmented
-        Reality. I’m always eager to learn, and I thrive on solving complex
-        problems with creative, out-of-the-box solutions.
+        I'm Swetha Narayan, a software engineer with 2 years of hands-on
+        experience working across the full stack — from frontend design to
+        backend systems.
       </p>
       <p>
-        Previously, I worked as a front-end developer at Blibli, a leading
-        Indonesian e-commerce company, where I contributed to building scalable
-        web interfaces using Vue.js, AngularJS, and React.js. I also gained
-        backend development experience with Spring Boot and Advanced Java,
-        giving me a full-stack perspective on building robust web applications.
-        Outside of traditional web development, I’ve also explored emerging
-        technologies. My recent academic projects include developing AR-based
-        e-commerce solutions using Open3D, OpenMVS, Blender, Colmap, FastAPI,
-        and Model Viewer, merging immersive 3D experiences with modern web
-        architecture.
+        At Blibli, a leading e-commerce platform in Indonesia, I built scalable
+        user interfaces using Vue.js, AngularJS, and React, while also diving
+        into backend development with Spring Boot and Advanced Java. That
+        full-stack exposure shaped my understanding of how great user
+        experiences are powered by thoughtful architecture under the hood.
+      </p>
+      <p>
+        During my Master’s at the University of Ottawa, I dove deeper into
+        emerging tech, working on AR-based e-commerce projects that combined 3D
+        modeling (with Open3D, Blender, and Colmap) and modern backend systems
+        (FastAPI, OpenMVS).
+      </p>
+      <p>
+        Beyond code, I enjoy tackling hard problems, learning new tools, and
+        blending creativity with engineering to build experiences that feel
+        seamless and intuitive.
       </p>
     </div>
     <h1>Skills</h1>

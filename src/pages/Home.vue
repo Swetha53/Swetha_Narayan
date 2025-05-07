@@ -6,22 +6,20 @@ import DownloadButton from "./../components/DownloadButton.vue";
   <div class="home">
     <div class="home__frame" />
     <div class="home__summary">
-      <h2>
-        Hello! I am Swetha Narayan, a passionate Full Stack Developer based in
-        Canada.
+      <h2 class="home__summary__title">
+        Hi, I'm Swetha
+        <div class="home__summary__title__icon" />
       </h2>
-      With 2 years of experience building and maintaining e-commerce platforms,
-      I specialize in creating clean, responsive, and user-friendly web
-      applications. I have recently completed my Master’s in Computer Science at
-      the University of Ottawa.<br />
-      My journey into web development began back in middle school, when I first
-      discovered HTML in a computer science class — and I’ve been hooked ever
-      since. At the University of Ottawa, I was working on an exciting AR-based
-      e-commerce platform as part of my capstone project. <br />
-      Over the years, my love for problem-solving and my knack for organization
-      have helped me tackle complex challenges and deliver projects efficiently
-      and creatively. I thrive on solving tough problems and love thinking
-      outside the box to craft innovative, reliable solutions.
+      I'm a Full Stack Developer based in Canada, passionate about building
+      clean, responsive, and user-first web applications.<br />With over 2 years
+      of experience working on e-commerce platforms, I enjoy crafting full-stack
+      solutions that are both functional and visually engaging. <br />I recently
+      completed my Master’s in Computer Science at the University of Ottawa,
+      where I worked on an AR-based e-commerce platform as my capstone
+      project.<br />
+      My journey with code began in middle school with a simple HTML page — and
+      I’ve been hooked ever since. I love solving complex problems, thinking
+      creatively, and turning ideas into polished, real-world applications.
     </div>
     <div class="home__button">
       <DownloadButton />
@@ -32,25 +30,25 @@ import DownloadButton from "./../components/DownloadButton.vue";
 <style lang="scss" scoped>
 @import "./../style.scss";
 .home {
-  width: 90%;
+  width: 86vw;
   margin-left: 50%;
   transform: translateX(-50%);
   display: grid;
-  grid: auto auto / 15vw 75vw;
+  grid: auto auto / 13vw 73vw;
   grid-template-areas:
     "frame summary"
     "frame button";
   &__frame {
     grid-area: frame;
     position: relative;
-    width: 28vw;
+    width: 25vw;
     aspect-ratio: 2/3;
     background: var(--primary);
     background-image: url("./../assets/profile.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border: 2vw solid var(--secondary);
+    border: 1.3vw solid var(--secondary);
     border-radius: 50%;
   }
   &__summary {
@@ -58,8 +56,24 @@ import DownloadButton from "./../components/DownloadButton.vue";
     border: 1px solid var(--secondary);
     border-radius: 8px;
     border-bottom-right-radius: 0px;
-    padding: 5px;
-    padding-left: 20vw;
+    padding: 1vw 3vw;
+    padding-left: 18vw;
+    &__title {
+      display: flex;
+      align-items: center;
+      &__icon {
+        margin-left: 0.5rem;
+        mask-size: 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        mask-image: url("./../assets/hand.svg");
+        -webkit-mask-image: url("./../assets/hand.svg");
+        background-color: var(--secondary);
+      }
+    }
   }
   &__button {
     grid-area: button;
@@ -89,8 +103,7 @@ import DownloadButton from "./../components/DownloadButton.vue";
     }
     &__summary {
       width: 90vw;
-      padding: 5px;
-      padding-top: 2rem;
+      padding: 3vw 2vw;
       position: relative;
       left: 50%;
       transform: translateX(-50%);

@@ -2,6 +2,7 @@ const themes = {
   "Café Tropic": {
     "--primary": "#fde8cd",
     "--secondary": "#433520",
+    "--secondary-15": "rgba(67, 53, 32, 0.15)",
     "--tertiary": "#00917c",
     "--tertiary-50": "rgba(0, 145, 124, 0.5)",
     "--tertiary-10": "rgba(0, 145, 124, 0.1)",
@@ -9,6 +10,7 @@ const themes = {
   "Terracotta Grove": {
     "--primary": "#ECE3CE",
     "--secondary": "#739072",
+    "--secondary-15": "rgba(115,144,114, 0.15)",
     "--tertiary": "#4F6F52",
     "--tertiary-50": "rgba(79, 111, 82, 0.5)",
     "--tertiary-10": "rgba(79, 111, 82, 0.1)",
@@ -16,6 +18,7 @@ const themes = {
   "Meadow Haze": {
     "--primary": "#12372A",
     "--secondary": "#436850",
+    "--secondary-15": "rgba(67,104,80, 0.15)",
     "--tertiary": "#ADBC9F",
     "--tertiary-50": "rgba(173, 188, 159, 0.5)",
     "--tertiary-10": "rgba(173, 188, 159, 0.1)",
@@ -23,6 +26,7 @@ const themes = {
   "Olive Aura": {
     "--primary": "#43766C",
     "--secondary": "#F8FAE5",
+    "--secondary-15": "rgba(248,250,229, 0.15)",
     "--tertiary": "#B19470",
     "--tertiary-50": "rgba(177, 148, 112, 0.5)",
     "--tertiary-10": "rgba(177, 148, 112, 0.1)",
@@ -30,6 +34,7 @@ const themes = {
   "Cocoa Harvest": {
     "--primary": "#F8F4E1",
     "--secondary": "#FEBA17",
+    "--secondary-15": "rgba(254,186,23, 0.15)",
     "--tertiary": "#74512D",
     "--tertiary-50": "rgba(116, 81, 45, 0.5)",
     "--tertiary-10": "rgba(116, 81, 45, 0.1)",
@@ -37,6 +42,7 @@ const themes = {
   "Summer Sorbet": {
     "--primary": "#F9ED69",
     "--secondary": "#F08A5D",
+    "--secondary-15": "rgba(240,138,93, 0.15)",
     "--tertiary": "#B83B5E",
     "--tertiary-50": "rgba(184, 59, 94, 0.5)",
     "--tertiary-10": "rgba(184, 59, 94, 0.1)",
@@ -44,6 +50,7 @@ const themes = {
   "Sun Pop": {
     "--primary": "#3EC1D3",
     "--secondary": "#F6F7D7",
+    "--secondary-15": "rgba(246,247,215, 0.15)",
     "--tertiary": "#FF9A00",
     "--tertiary-50": "rgba(255, 154, 0, 0.5)",
     "--tertiary-10": "rgba(255, 154, 0, 0.1)",
@@ -51,6 +58,7 @@ const themes = {
   "Berry Blossom": {
     "--primary": "#FDF4F5",
     "--secondary": "#E8A0BF",
+    "--secondary-15": "rgba(232,160,191, 0.15)",
     "--tertiary": "#BA90C6",
     "--tertiary-50": "rgba(186, 144, 198, 0.5)",
     "--tertiary-10": "rgba(186, 144, 198, 0.1)",
@@ -58,6 +66,7 @@ const themes = {
   "Amber Drift": {
     "--primary": "#102E50",
     "--secondary": "#F5C45E",
+    "--secondary-15": "rgba(245,196,94, 0.15)",
     "--tertiary": "#E78B48",
     "--tertiary-50": "rgba(231, 139, 72, 0.5)",
     "--tertiary-10": "rgba(231, 139, 72, 0.1)",
@@ -65,6 +74,7 @@ const themes = {
   "Modern Vintage": {
     "--primary": "#FE7743",
     "--secondary": "#EFEEEA",
+    "--secondary-15": "rgba(239,238,234, 0.15)",
     "--tertiary": "#273F4F",
     "--tertiary-50": "rgba(39, 63, 79, 0.5)",
     "--tertiary-10": "rgba(39, 63, 79, 0.1)",
@@ -72,6 +82,7 @@ const themes = {
   "Twilight Mauve": {
     "--primary": "#2A2F4F",
     "--secondary": "#917FB3",
+    "--secondary-15": "rgba(145,127,179, 0.15)",
     "--tertiary": "#E5BEEC",
     "--tertiary-50": "rgba(229, 190, 236, 0.5)",
     "--tertiary-10": "rgba(229, 190, 236, 0.1)",
@@ -79,6 +90,7 @@ const themes = {
   "Urban Mint": {
     "--primary": "#303841",
     "--secondary": "#00ADB5",
+    "--secondary-15": "rgba(0,173,181, 0.15)",
     "--tertiary": "#EEEEEE",
     "--tertiary-50": "rgba(238, 238, 238, 0.5)",
     "--tertiary-10": "rgba(238, 238, 238, 0.1)",
@@ -86,6 +98,7 @@ const themes = {
   "Steel Indigo": {
     "--primary": "#DDDDDD",
     "--secondary": "#222831",
+    "--secondary-15": "rgba(34,40,49, 0.15)",
     "--tertiary": "#30475E",
     "--tertiary-50": "rgba(48, 71, 94, 0.5)",
     "--tertiary-10": "rgba(48, 71, 94, 0.1)",
@@ -93,6 +106,7 @@ const themes = {
   "Neon Noir": {
     "--primary": "#000000",
     "--secondary": "#CF0F47",
+    "--secondary-15": "rgba(207,15,71, 0.15)",
     "--tertiary": "#FF0B55",
     "--tertiary-50": "rgba(255, 11, 85, 0.5)",
     "--tertiary-10": "rgba(255, 11, 85, 0.1)",
@@ -100,6 +114,7 @@ const themes = {
   Cyberwave: {
     "--primary": "#08D9D6",
     "--secondary": "#252A34",
+    "--secondary-15": "rgba(37,42,52, 0.15)",
     "--tertiary": "#FF2E63",
     "--tertiary-50": "rgba(255, 46, 99, 0.5)",
     "--tertiary-10": "rgba(255, 46, 99, 0.1)",
@@ -107,6 +122,7 @@ const themes = {
   "Crimson Ash": {
     "--primary": "#000000",
     "--secondary": "#8E1616",
+    "--secondary-15": "rgba(142,22,22, 0.15)",
     "--tertiary": "#E8C999",
     "--tertiary-50": "rgba(232, 201, 153, 0.5)",
     "--tertiary-10": "rgba(232, 201, 153, 0.1)",
@@ -114,6 +130,7 @@ const themes = {
   "Scarlet Sand": {
     "--primary": "#EEEBDD",
     "--secondary": "#810000",
+    "--secondary-15": "rgba(129,0,0, 0.15)",
     "--tertiary": "#630000",
     "--tertiary-50": "rgba(99, 0, 0, 0.5)",
     "--tertiary-10": "rgba(99, 0, 0, 0.1)",

@@ -182,6 +182,7 @@ function redirectToPage(section: string) {
 }
 @media (max-width: 900px) {
   .header {
+    margin-bottom: unset;
     &__info {
       &-arrow {
         border-width: 0 0.25rem 0.25rem 0;

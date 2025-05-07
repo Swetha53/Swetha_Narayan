@@ -151,7 +151,11 @@ function startFormEvaluations() {
 $height: 5rem;
 $fold: 0.75rem;
 $ribbon: 1rem;
+h1 {
+  margin-top: unset;
+}
 .contact {
+  margin-bottom: calc($height/4);
   display: grid;
   row-gap: calc($height/4);
   column-gap: calc($height/2);
