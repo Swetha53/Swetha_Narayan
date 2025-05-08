@@ -916,15 +916,15 @@ onUnmounted(() => {
       <p>
         At Blibli, a leading e-commerce platform in Indonesia, I built scalable
         user interfaces using Vue.js, AngularJS, and React, while also diving
-        into backend development with Spring Boot and Advanced Java. That
-        full-stack exposure shaped my understanding of how great user
-        experiences are powered by thoughtful architecture under the hood.
+        into backend development with Spring Boot and Java. That full-stack
+        exposure shaped my understanding of how great user experiences are
+        powered by thoughtful architecture under the hood.
       </p>
       <p>
         During my Master’s at the University of Ottawa, I dove deeper into
         emerging tech, working on AR-based e-commerce projects that combined 3D
-        modeling (with Open3D, Blender, and Colmap) and modern backend systems
-        (FastAPI, OpenMVS).
+        modeling (with Open3D, OpenMVS, Blender, and Colmap) and modern backend systems
+        (FastAPI, Python).
       </p>
       <p>
         Beyond code, I enjoy tackling hard problems, learning new tools, and
