@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "./../pages/Home.vue";
 import About from "./../pages/About.vue";
 import Portfolio from "./../pages/Portfolio.vue";
@@ -6,26 +6,26 @@ import Contact from "./../pages/Contact.vue";
 
 const routes = [
   {
-    path: "/Swetha_Narayan/",
+    path: "/",
     name: "Home",
     component: Home,
   },
   {
-    path: "/Swetha_Narayan/about",
+    path: "/about",
     name: "About",
     component: About,
   },
   {
-    path: "/Swetha_Narayan/portfolio",
+    path: "/portfolio",
     name: "Portfolio",
     component: Portfolio,
   },
   {
-    path: "/Swetha_Narayan/contact",
+    path: "/contact",
     name: "Contact",
     component: Contact,
   },
 ];
 
-const router = createRouter({ history: createWebHistory(), routes });
+const router = createRouter({ history: createWebHashHistory(), routes });
 export default router;
