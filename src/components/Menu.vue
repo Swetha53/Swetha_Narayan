@@ -4,7 +4,7 @@ import { reactive } from "vue";
 import keyboard from "./../assets/keyboard.jpeg";
 import store from "./../store";
 
-const emit = defineEmits(["sendToggleData"]);
+const emit = defineEmits(["sendToggleData", "menuClicked"]);
 const state = reactive({
   deviceState: "none",
   darkMode: store.getters.getTheme,
@@ -16,9 +16,10 @@ function toggleDevice() {
   } else {
     state.deviceState = "close";
   }
+  emit("menuClicked")
   setTimeout(() => {
     emit("sendToggleData", state.deviceState);
-  }, 4000);
+  }, 2000);
 }
 </script>
 
@@ -126,51 +127,51 @@ $height: 80px;
 .open {
   .device {
     &__back {
-      animation: 6s 1 normal deviceTop;
+      animation: 3s 1 normal deviceTop;
       animation-fill-mode: forwards;
       box-shadow: unset;
     }
     &__bottom {
-      animation: 2s 1 normal deviceVisible;
+      animation: 1s 1 normal deviceVisible;
       animation-fill-mode: forwards;
-      animation-delay: 3s;
+      animation-delay: 1.5s;
     }
     &__front {
-      animation: 2s 1 normal deviceBackHidden;
+      animation: 1s 1 normal deviceBackHidden;
       animation-fill-mode: forwards;
-      animation-delay: 2.25s;
+      animation-delay: 1.125s;
     }
     &__display {
-      animation: 2s 1 normal deviceVisible;
+      animation: 1s 1 normal deviceVisible;
       animation-fill-mode: forwards;
-      animation-delay: 3s;
+      animation-delay: 1.5s;
     }
   }
 }
 .close {
   .device {
     &__back {
-      animation: 6s 1 normal deviceTopClose;
+      animation: 3s 1 normal deviceTopClose;
       animation-fill-mode: forwards;
     }
     &__bottom {
       visibility: visible;
-      animation: 2s 1 normal deviceInvisible;
+      animation: 1s 1 normal deviceInvisible;
       animation-fill-mode: forwards;
-      animation-delay: 2.5s;
+      animation-delay: 1.25s;
     }
     &__front {
       backface-visibility: hidden;
       background: var(--secondary);
       animation: 0s 1 normal deviceBackVisible;
       animation-fill-mode: forwards;
-      animation-delay: 2.5s;
+      animation-delay: 1.25s;
     }
     &__display {
       visibility: visible;
       animation: 0s 1 normal deviceInvisible;
       animation-fill-mode: forwards;
-      animation-delay: 2.5s;
+      animation-delay: 1.25s;
     }
   }
 }
@@ -214,7 +215,7 @@ $height: 80px;
   .close {
     .device {
       &__back {
-        animation: 6s 1 normal deviceTopCloseMobile;
+        animation: 3s 1 normal deviceTopCloseMobile;
         animation-fill-mode: forwards;
       }
     }

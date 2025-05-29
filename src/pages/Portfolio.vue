@@ -163,7 +163,7 @@ function projectFooter(index: number) {
     </div>
     <div class="portfolio__projects">
       <div
-        class="portfolio__projects-project monofett"
+        class="portfolio__projects-project"
         :class="{
           'portfolio__projects-project__future':
             !projects[i - 1] || !projects[i - 1].title,
@@ -174,7 +174,7 @@ function projectFooter(index: number) {
         :key="i"
         @click="projectFooter(i - 1)"
       >
-        <span v-if="projects[i - 1] && projects[i - 1].title">{{
+        <span v-if="projects[i - 1] && projects[i - 1].title" class="portfolio__projects-project__title">{{
           projects[i - 1].title
         }}</span>
         <span v-else>Coming soon!!</span>
@@ -274,6 +274,9 @@ function projectFooter(index: number) {
       &:hover {
         background: var(--secondary);
         color: var(--primary);
+      }
+      &__title {
+        width: 90%;
       }
       &__link {
         width: calc(100% - 10px);

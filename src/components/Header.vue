@@ -10,10 +10,16 @@ const route = useRoute();
 const state = reactive({
   toggleMenu: "none",
   activeSection: "Home",
+  menuLoad: false
 });
+
+function menuClicked() {
+  state.menuLoad = true
+}
 
 function receiveToggleData(toggleState: string) {
   state.toggleMenu = toggleState;
+  state.menuLoad = false
   if (toggleState == "open" && route.name) {
     state.activeSection = <string>route.name;
   }
@@ -26,11 +32,11 @@ function redirectToPage(section: string) {
 
 <template>
   <div
-    class="header monofett"
+    class="header"
     :class="state.toggleMenu == 'open' ? 'header-open' : 'header-close'"
   >
     <div class="header__cell">
-      <Menu @sendToggleData="receiveToggleData"></Menu>
+      <Menu @sendToggleData="receiveToggleData" @menuClicked="menuClicked"></Menu>
     </div>
     <div
       class="header__cell"
@@ -80,12 +86,12 @@ function redirectToPage(section: string) {
       <div class="header__icon header__icon-contact" />
       <p v-if="!store.getters.getLayoutValue">Contact</p>
     </div>
-    <div v-if="state.toggleMenu == 'none'" class="header__info">
+    <div v-if="state.toggleMenu == 'none' && !state.menuLoad" class="header__info">
       <i v-for="i in 2" :key="i" class="header__info-arrow"></i>
       <p v-if="!store.getters.getLayoutValue">Click here to open the menu</p>
       <p v-else>Open Menu</p>
     </div>
-    <div v-else-if="state.toggleMenu == 'close'" class="header__info"></div>
+    <div v-else-if="state.toggleMenu == 'close' || state.toggleMenu == 'none' && state.menuLoad" class="header__info"></div>
     <div class="header__dropdown"><Dropdown /></div>
   </div>
 </template>

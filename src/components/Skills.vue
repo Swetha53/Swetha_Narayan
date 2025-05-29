@@ -21,7 +21,7 @@ const cssProps = computed(() => {
       {{ title }}
     </div>
     <div class="skills__chart">
-      <div class="skills__chart-pie monofett" :style="cssProps">
+      <div class="skills__chart-pie" :style="cssProps">
         <p>{{ amount }}%</p>
       </div>
     </div>

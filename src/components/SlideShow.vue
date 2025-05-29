@@ -50,7 +50,7 @@ onUnmounted(() => {
       @mouseenter="pauseSlideshow"
       @mouseleave="startSlideshow"
     >
-      <p v-if="!slides.length" class="slideshow__placeholder monofett">
+      <p v-if="!slides.length" class="slideshow__placeholder">
         <span>Click over an event to see more info here.</span>
       </p>
       <div
