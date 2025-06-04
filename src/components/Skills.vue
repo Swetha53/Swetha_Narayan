@@ -8,7 +8,7 @@ const props = defineProps<{
   exp: number;
 }>();
 
-const cssProps = computed(() => {
+const cssProps = computed<Record<string, number>>(() => {
   return {
     "--amount": props.amount,
   };

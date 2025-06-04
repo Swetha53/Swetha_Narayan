@@ -3,16 +3,12 @@ const resumeUrl = new URL("../assets/Swetha_Narayan.pdf", import.meta.url).href;
 </script>
 
 <template>
-  <a class="flex-container downloadButton" :href="resumeUrl" download>
-    <div class="monofett downloadButton__arrow">
-      <div class="downloadButton__arrow-base">
-        <p>CV</p>
-      </div>
-      <div class="downloadButton__arrow-triangle"></div>
+  <a class="flex-container download-button" :href="resumeUrl" download>
+    <div class="monofett download-button__arrow">
+      <div class="arrow-base">CV</div>
+      <div class="arrow-triangle"></div>
     </div>
-    <div class="downloadButton__placeholder">
-      <p>Download</p>
-    </div>
+    <div class="download-button__heading">Download</div>
   </a>
 </template>
 
@@ -20,64 +16,55 @@ const resumeUrl = new URL("../assets/Swetha_Narayan.pdf", import.meta.url).href;
 @import "./../style.scss";
 $height: 3rem;
 
-.downloadButton {
+.download-button {
   background-color: var(--secondary);
   color: var(--primary);
   width: 100%;
   height: $height;
   border-radius: 8px;
   border-top-right-radius: 0px;
-  &:link {
-    text-decoration: none;
-  }
+  text-decoration: none;
   &__arrow {
     position: relative;
-    width: $height;
     height: $height;
+    width: $height;
     font-size: 1.75em;
-    &-base {
-      background-color: var(--tertiary);
-      width: 100%;
-      height: 100%;
-      p {
-        margin: unset;
-        color: var(--primary);
-        text-align: center;
-      }
-    }
-    &-triangle {
-      &::after {
-        position: absolute;
-        top: $height;
-        left: calc(0px - $height/2);
-        content: "";
-        border-top: $height solid var(--tertiary);
-        border-bottom: $height solid transparent;
-        border-left: $height solid transparent;
-        border-right: $height solid transparent;
-      }
-    }
   }
-  &__placeholder {
+  &__heading {
     width: 100%;
     text-align: center;
-    p {
-      margin: unset;
-    }
   }
-  &:hover {
+}
+.arrow {
+  &-base {
     background-color: var(--tertiary);
+    width: 100%;
+    height: 100%;
+    text-align: center;
     color: var(--primary);
-    .downloadButton__arrow {
-      &-base {
-        background-color: var(--secondary);
-        p {
-          color: var(--primary);
-        }
-      }
-      &-triangle::after {
-        border-top: $height solid var(--secondary);
-      }
+  }
+  &-triangle::after {
+    position: absolute;
+    top: $height;
+    left: calc(0px - $height/2);
+    content: "";
+    border-top: $height solid var(--tertiary);
+    border-bottom: $height solid transparent;
+    border-left: $height solid transparent;
+    border-right: $height solid transparent;
+  }
+}
+
+.download-button:hover {
+  background-color: var(--tertiary);
+  color: var(--primary);
+  .arrow {
+    &-base {
+      background-color: var(--secondary);
+      color: var(--primary);
+    }
+    &-triangle::after {
+      border-top: $height solid var(--secondary);
     }
   }
 }

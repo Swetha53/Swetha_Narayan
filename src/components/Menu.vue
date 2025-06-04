@@ -1,24 +1,27 @@
-// TODO optimise css
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref } from "vue";
 import keyboard from "./../assets/keyboard.jpeg";
 import store from "./../store";
 
-const emit = defineEmits(["sendToggleData", "menuClicked"]);
-const state = reactive({
-  deviceState: "none",
-  darkMode: store.getters.getTheme,
-});
+enum DeviceState {
+  None = "none",
+  Open = "open",
+  Close = "close"
+}
 
-function toggleDevice() {
-  if (["none", "close"].includes(state.deviceState)) {
-    state.deviceState = "open";
+const emit = defineEmits(["sendToggleData", "menuClicked"]);
+
+const deviceState = ref<DeviceState>(DeviceState.None);
+
+function toggleDevice(): void {
+  if ([DeviceState.None, DeviceState.Close].includes(deviceState.value)) {
+    deviceState.value = DeviceState.Open;
   } else {
-    state.deviceState = "close";
+    deviceState.value = DeviceState.Close;
   }
   emit("menuClicked")
   setTimeout(() => {
-    emit("sendToggleData", state.deviceState);
+    emit("sendToggleData", deviceState.value);
   }, 2000);
 }
 </script>
@@ -27,8 +30,8 @@ function toggleDevice() {
   <div
     class="device"
     :class="{
-      open: state.deviceState == 'open',
-      close: state.deviceState == 'close',
+      open: deviceState == DeviceState.Open,
+      close: deviceState == DeviceState.Close,
     }"
   >
     <div class="device__back" @click="toggleDevice">

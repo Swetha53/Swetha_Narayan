@@ -1,31 +1,36 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Menu from "./Menu.vue";
 import store from "./../store";
 import Dropdown from "./Dropdown.vue";
 
+enum ToggleMenuState {
+  None = "none",
+  Open = "open",
+  Close = "close"
+}
+
 const router = useRouter();
 const route = useRoute();
-const state = reactive({
-  toggleMenu: "none",
-  activeSection: "Home",
-  menuLoad: false
-});
 
-function menuClicked() {
-  state.menuLoad = true
+const toggleMenu = ref<ToggleMenuState>(ToggleMenuState.None)
+const activeSection = ref<string>("Home")
+const isMenuLoading = ref<boolean>(false);
+
+function menuClicked(): void {
+  isMenuLoading.value = true
 }
 
-function receiveToggleData(toggleState: string) {
-  state.toggleMenu = toggleState;
-  state.menuLoad = false
-  if (toggleState == "open" && route.name) {
-    state.activeSection = <string>route.name;
+function receiveToggleData(toggleState: ToggleMenuState): void {
+  toggleMenu.value = toggleState;
+  isMenuLoading.value = false
+  if (toggleState == ToggleMenuState.Open && route.name) {
+    activeSection.value = route.name as string;
   }
 }
-function redirectToPage(section: string) {
-  state.activeSection = section;
+function redirectToPage(section: string): void {
+  activeSection.value = section;
   router.push({ name: section });
 }
 </script>
@@ -33,7 +38,7 @@ function redirectToPage(section: string) {
 <template>
   <div
     class="header"
-    :class="state.toggleMenu == 'open' ? 'header-open' : 'header-close'"
+    :class="toggleMenu == ToggleMenuState.Open ? 'header-open' : 'header-close'"
   >
     <div class="header__cell">
       <Menu @sendToggleData="receiveToggleData" @menuClicked="menuClicked"></Menu>
@@ -41,10 +46,10 @@ function redirectToPage(section: string) {
     <div
       class="header__cell"
       :class="{
-        'header__cell-active': state.activeSection == 'Home',
+        'header__cell-active': activeSection == 'Home',
         'header__cell-mobile': store.getters.getLayoutValue,
       }"
-      v-if="state.toggleMenu == 'open'"
+      v-if="toggleMenu == ToggleMenuState.Open"
       @click="redirectToPage('Home')"
     >
       <div class="header__icon" />
@@ -53,10 +58,10 @@ function redirectToPage(section: string) {
     <div
       class="header__cell"
       :class="{
-        'header__cell-active': state.activeSection == 'About',
+        'header__cell-active': activeSection == 'About',
         'header__cell-mobile': store.getters.getLayoutValue,
       }"
-      v-if="state.toggleMenu == 'open'"
+      v-if="toggleMenu == ToggleMenuState.Open"
       @click="redirectToPage('About')"
     >
       <div class="header__icon header__icon-profile" />
@@ -65,10 +70,10 @@ function redirectToPage(section: string) {
     <div
       class="header__cell"
       :class="{
-        'header__cell-active': state.activeSection == 'Portfolio',
+        'header__cell-active': activeSection == 'Portfolio',
         'header__cell-mobile': store.getters.getLayoutValue,
       }"
-      v-if="state.toggleMenu == 'open'"
+      v-if="toggleMenu == ToggleMenuState.Open"
       @click="redirectToPage('Portfolio')"
     >
       <div class="header__icon header__icon-website" />
@@ -77,21 +82,21 @@ function redirectToPage(section: string) {
     <div
       class="header__cell"
       :class="{
-        'header__cell-active': state.activeSection == 'Contact',
+        'header__cell-active': activeSection == 'Contact',
         'header__cell-mobile': store.getters.getLayoutValue,
       }"
-      v-if="state.toggleMenu == 'open'"
+      v-if="toggleMenu == ToggleMenuState.Open"
       @click="redirectToPage('Contact')"
     >
       <div class="header__icon header__icon-contact" />
       <p v-if="!store.getters.getLayoutValue">Contact</p>
     </div>
-    <div v-if="state.toggleMenu == 'none' && !state.menuLoad" class="header__info">
+    <div v-if="toggleMenu == ToggleMenuState.None && !isMenuLoading" class="header__info">
       <i v-for="i in 2" :key="i" class="header__info-arrow"></i>
       <p v-if="!store.getters.getLayoutValue">Click here to open the menu</p>
       <p v-else>Open Menu</p>
     </div>
-    <div v-else-if="state.toggleMenu == 'close' || state.toggleMenu == 'none' && state.menuLoad" class="header__info"></div>
+    <div v-else-if="toggleMenu == ToggleMenuState.Close || toggleMenu == ToggleMenuState.None && isMenuLoading" class="header__info"></div>
     <div class="header__dropdown"><Dropdown /></div>
   </div>
 </template>

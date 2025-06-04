@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref } from "vue";
 import themes from "./../common/themes";
 import store from "./../store";
 
-const state = reactive({
-  currentTheme: store.getters.getTheme,
-});
+type ThemeName = keyof typeof themes;
 
-function updateTheme() {
-  store.commit("setTheme", state.currentTheme);
-  type ThemeName = keyof typeof themes;
-  const colors = themes[state.currentTheme as ThemeName];
+const currentTheme = ref<ThemeName>(store.getters.getTheme);
+
+function updateTheme(): void {
+  store.commit("setTheme", currentTheme.value);
+  const colors = themes[currentTheme.value];
   const root = document.querySelector(":root") as HTMLElement;
 
   for (const [key, value] of Object.entries(colors)) {
@@ -22,7 +21,7 @@ function updateTheme() {
 </script>
 
 <template>
-  <select v-model="state.currentTheme" @change="updateTheme()" class="dropdown">
+  <select v-model="currentTheme" @change="updateTheme()" class="dropdown">
     <option v-for="theme in Object.keys(themes)" :key="theme" :value="theme">
       {{ theme }}
     </option>

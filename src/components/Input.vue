@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import {reactive} from 'vue'
+import {ref} from 'vue'
 
 const props = defineProps<{ inputType: string, placeholder: string, name: string, hasError: boolean }>()
 const emit = defineEmits(['storeInputData'])
-const state = reactive({
-    inputData: ""
-})
 
-function focusEventHandler() {
-    emit('storeInputData', props.name, state.inputData)
+const inputData = ref<string>("")
+
+function focusEventHandler(): void {
+    emit('storeInputData', props.name, inputData.value)
 }
 </script>
 
 <template>
     <div class="input">
         <textarea v-if="inputType === 'textarea'"
-            v-model="state.inputData"
+            v-model="inputData"
             :placeholder
             rows="10"
             :name
@@ -23,11 +22,12 @@ function focusEventHandler() {
             @focusout="focusEventHandler">
         </textarea>
         <input v-else
-            v-model="state.inputData"
+            v-model="inputData"
             :type="inputType"
             :placeholder
             :name
             :class="{'input__error': hasError}"
+            :aria-invalid="hasError"
             @focusout="focusEventHandler"/>
         <span v-if="hasError" class="input__error-message">
             This field has some issues please re-check the value before trying again.
