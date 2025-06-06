@@ -24,17 +24,20 @@ $height: 3rem;
   border-radius: 8px;
   border-top-right-radius: 0px;
   text-decoration: none;
+
   &__arrow {
     position: relative;
     height: $height;
     width: $height;
     font-size: 1.75em;
   }
+
   &__heading {
     width: 100%;
     text-align: center;
   }
 }
+
 .arrow {
   &-base {
     background-color: var(--tertiary);
@@ -43,6 +46,7 @@ $height: 3rem;
     text-align: center;
     color: var(--primary);
   }
+
   &-triangle::after {
     position: absolute;
     top: $height;
@@ -58,11 +62,13 @@ $height: 3rem;
 .download-button:hover {
   background-color: var(--tertiary);
   color: var(--primary);
+
   .arrow {
     &-base {
       background-color: var(--secondary);
       color: var(--primary);
     }
+
     &-triangle::after {
       border-top: $height solid var(--secondary);
     }

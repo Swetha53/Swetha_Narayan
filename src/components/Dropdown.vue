@@ -30,6 +30,7 @@ function updateTheme(): void {
 
 <style lang="scss" scoped>
 @import "./../style.scss";
+
 .dropdown {
   width: 80%;
   background: var(--primary);

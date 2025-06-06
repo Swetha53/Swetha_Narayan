@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import keyboard from "./../assets/keyboard.jpeg";
 import store from "./../store";
+import keyboard from "./../assets/keyboard.jpeg";
 
 enum DeviceState {
   None = "none",
   Open = "open",
-  Close = "close"
+  Close = "close",
 }
 
 const emit = defineEmits(["sendToggleData", "menuClicked"]);
@@ -19,7 +19,7 @@ function toggleDevice(): void {
   } else {
     deviceState.value = DeviceState.Close;
   }
-  emit("menuClicked")
+  emit("menuClicked");
   setTimeout(() => {
     emit("sendToggleData", deviceState.value);
   }, 2000);
@@ -52,13 +52,16 @@ function toggleDevice(): void {
 
 <style lang="scss" scoped>
 @import "./../style.scss";
+
 $height: 80px;
+
 .device {
   width: calc(2 * $height);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+
   &__back {
     background: var(--secondary);
     height: $height;
@@ -71,6 +74,7 @@ $height: 80px;
     background-image: url("./../assets/logo.svg");
     z-index: 1;
   }
+
   &__front {
     height: $height;
     aspect-ratio: 2 / 1;
@@ -79,6 +83,7 @@ $height: 80px;
     justify-content: center;
     align-items: center;
   }
+
   &__display {
     visibility: hidden;
     background: #0d0000;
@@ -91,6 +96,7 @@ $height: 80px;
     height: calc($height - 4px);
     aspect-ratio: 2 / 1;
   }
+
   &__bottom {
     visibility: hidden;
     height: calc($height / 2);
@@ -102,10 +108,12 @@ $height: 80px;
     transform-origin: bottom;
     transform-style: preserve-3d;
     transform: perspective(80px) rotateX(30deg);
+
     &::before {
       content: "";
       position: absolute;
     }
+
     &::after {
       content: "";
       position: absolute;
@@ -116,6 +124,7 @@ $height: 80px;
       transform: perspective(2000px) rotateX(-30deg);
       background: var(--secondary);
     }
+
     img {
       position: absolute;
       top: 5px;
@@ -127,6 +136,7 @@ $height: 80px;
     }
   }
 }
+
 .open {
   .device {
     &__back {
@@ -134,16 +144,19 @@ $height: 80px;
       animation-fill-mode: forwards;
       box-shadow: unset;
     }
+
     &__bottom {
       animation: 1s 1 normal deviceVisible;
       animation-fill-mode: forwards;
       animation-delay: 1.5s;
     }
+
     &__front {
       animation: 1s 1 normal deviceBackHidden;
       animation-fill-mode: forwards;
       animation-delay: 1.125s;
     }
+
     &__display {
       animation: 1s 1 normal deviceVisible;
       animation-fill-mode: forwards;
@@ -151,18 +164,21 @@ $height: 80px;
     }
   }
 }
+
 .close {
   .device {
     &__back {
       animation: 3s 1 normal deviceTopClose;
       animation-fill-mode: forwards;
     }
+
     &__bottom {
       visibility: visible;
       animation: 1s 1 normal deviceInvisible;
       animation-fill-mode: forwards;
       animation-delay: 1.25s;
     }
+
     &__front {
       backface-visibility: hidden;
       background: var(--secondary);
@@ -170,6 +186,7 @@ $height: 80px;
       animation-fill-mode: forwards;
       animation-delay: 1.25s;
     }
+
     &__display {
       visibility: visible;
       animation: 0s 1 normal deviceInvisible;
@@ -178,22 +195,27 @@ $height: 80px;
     }
   }
 }
+
 @media (max-width: 900px) {
   .device {
     width: calc($height/2);
+
     &__back {
       height: calc($height/2);
       aspect-ratio: 1 / 1;
       background-size: 80%;
       box-shadow: 2px 2px 2px var(--secondary);
     }
+
     &__front {
       height: calc($height/2);
       aspect-ratio: 1 / 1;
     }
+
     &__display {
       height: calc($height/2 - 4px);
       aspect-ratio: 1 / 1;
+
       &-below {
         background: #0d0000;
         background: linear-gradient(
@@ -209,12 +231,14 @@ $height: 80px;
         left: 5%;
       }
     }
+
     &__bottom {
       height: calc($height/3);
       width: calc($height/3 + 20px);
       top: 82%;
     }
   }
+
   .close {
     .device {
       &__back {
@@ -224,73 +248,86 @@ $height: 80px;
     }
   }
 }
+
 @keyframes deviceTop {
   25% {
     transform-style: preserve-3d;
     transform: rotateX(180deg);
   }
+
   50% {
     transform-origin: bottom;
     transform-style: preserve-3d;
     transform: perspective(390px) rotateX(-107deg);
     box-shadow: unset;
   }
+
   100% {
     transform-origin: bottom;
     transform: rotateX(0deg);
     box-shadow: unset;
   }
 }
+
 @keyframes deviceVisible {
   100% {
     visibility: visible;
   }
 }
+
 @keyframes deviceBackHidden {
   100% {
     backface-visibility: hidden;
     background: var(--secondary);
   }
 }
+
 @keyframes deviceTopClose {
   0% {
     transform-origin: bottom;
     transform: rotateX(0deg);
     box-shadow: unset;
   }
+
   75% {
     transform-origin: bottom;
     transform-style: preserve-3d;
     transform: perspective(390px) rotateX(-107deg);
     box-shadow: unset;
   }
+
   100% {
     transform-origin: bottom;
     transform: rotateX(0deg);
   }
 }
+
 @keyframes deviceTopCloseMobile {
   0% {
     transform-origin: bottom;
     transform: rotateX(0deg);
     box-shadow: unset;
   }
+
   75% {
     transform-origin: bottom;
     transform-style: preserve-3d;
     transform: perspective(390px) rotateX(-116deg);
     box-shadow: unset;
   }
+
   100% {
     transform-origin: bottom;
     transform: rotateX(0deg);
   }
 }
+
 @keyframes deviceInvisible {
   100% {
     visibility: hidden;
   }
 }
+
 @keyframes deviceBackVisible {
   100% {
     backface-visibility: visible;

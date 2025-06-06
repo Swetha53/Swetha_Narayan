@@ -1,23 +1,33 @@
 <script setup lang="ts">
+import { reactive, onMounted, onUnmounted } from "vue";
 import { slideType } from "./../common/dataType.ts";
+import store from "./../store";
 import Skills from "./../components/Skills.vue";
 import SlideShow from "./../components/SlideShow.vue";
 import TimelineItem from "./../components/TimelineItem.vue";
-import { reactive, onMounted, onUnmounted } from "vue";
-import store from "./../store";
 
-type miniEventType = {
+interface MiniEventType {
   type: string;
   title: string;
   organization: string;
   startDate: number;
   endDate: number;
-  slides: Array<slideType>;
+  slides: slideType[];
 };
+
+interface SkillType {
+  title: string;
+  amount: number;
+  project: number;
+  exp: number;
+  work: number;
+  knowledge: number;
+}
 
 const state = reactive({
   timelineShowing: false,
-  currentSlides: <Array<slideType>>[],
+  currentSlides: [] as slideType[],
+  slideIndex: -1,
   skills: [
     {
       title: "HTML",
@@ -211,8 +221,7 @@ const state = reactive({
       work: 5,
       knowledge: 10,
     },
-  ],
-  slideIndex: -1,
+  ] as SkillType[],
 });
 
 const events = [
@@ -851,7 +860,16 @@ const events = [
   },
 ];
 
-function addSkillAmount() {
+onMounted(() => {
+  addSkillAmount();
+  window.addEventListener("scroll", scrollHandler);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", scrollHandler);
+});
+
+function addSkillAmount(): void {
   state.skills.forEach((skill) => {
     const projectCount = skill.project <= 5 ? skill.project : 5;
     skill.amount = Math.round(
@@ -860,7 +878,7 @@ function addSkillAmount() {
   });
 }
 
-function getEventDate(eventDate: number) {
+function getEventDate(eventDate: number): string {
   let date = new Date(eventDate);
   return (
     date.toLocaleString("default", { month: "short" }) +
@@ -869,7 +887,7 @@ function getEventDate(eventDate: number) {
   );
 }
 
-function scrollHandler() {
+function scrollHandler(): void {
   const element = <HTMLElement>(
     document.getElementsByClassName("about__timeline-slides")[0]
   );
@@ -884,211 +902,220 @@ function scrollHandler() {
   }
 }
 
-function showSlideshow(miniEvent: miniEventType, index: number) {
+function showSlideshow(miniEvent: MiniEventType, index: number): void {
   state.currentSlides = miniEvent.slides;
   state.slideIndex = index;
 }
 
-function closeSlideshow() {
+function closeSlideshow(): void {
   state.currentSlides = [];
   state.slideIndex = -1;
 }
-
-onMounted(() => {
-  addSkillAmount();
-  window.addEventListener("scroll", scrollHandler);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", scrollHandler);
-});
 </script>
 
 <template>
   <div class="about">
-    <h1>About Me</h1>
-    <div class="about__summary">
-      <p>
-        I'm Swetha Narayan, a software engineer with 2 years of hands-on
-        experience working across the full stack — from frontend design to
-        backend systems.
-      </p>
-      <p>
-        At Blibli, a leading e-commerce platform in Indonesia, I built scalable
-        user interfaces using Vue.js, AngularJS, and React, while also diving
-        into backend development with Spring Boot and Java. That full-stack
-        exposure shaped my understanding of how great user experiences are
-        powered by thoughtful architecture under the hood.
-      </p>
-      <p>
-        During my Master’s at the University of Ottawa, I dove deeper into
-        emerging tech, working on AR-based e-commerce projects that combined 3D
-        modeling (with Open3D, OpenMVS, Blender, and Colmap) and modern backend systems
-        (FastAPI, Python).
-      </p>
-      <p>
-        Beyond code, I enjoy tackling hard problems, learning new tools, and
-        blending creativity with engineering to build experiences that feel
-        seamless and intuitive.
-      </p>
-    </div>
-    <h1>Timeline</h1>
-    <div class="about__timeline">
-      <div class="about__timeline-slides">
-        <div
-          :class="{ 'about__timeline-slides__fixed': state.timelineShowing }"
-        >
-          <SlideShow
-            :key="state.currentSlides.length"
-            :slides="state.currentSlides"
-          ></SlideShow>
+    <section class="about__section">
+      <h1>About Me</h1>
+      <div class="about__summary">
+        <p>
+          I'm Swetha Narayan, a software engineer with 2 years of hands-on
+          experience working across the full stack — from frontend design to
+          backend systems.
+        </p>
+        <p>
+          At Blibli, a leading e-commerce platform in Indonesia, I built
+          scalable user interfaces using Vue.js, AngularJS, and React, while
+          also diving into backend development with Spring Boot and Java. That
+          full-stack exposure shaped my understanding of how great user
+          experiences are powered by thoughtful architecture under the hood.
+        </p>
+        <p>
+          During my Master’s at the University of Ottawa, I dove deeper into
+          emerging tech, working on AR-based e-commerce projects that combined
+          3D modeling (with Open3D, OpenMVS, Blender, and Colmap) and modern
+          backend systems (FastAPI, Python).
+        </p>
+        <p>
+          Beyond code, I enjoy tackling hard problems, learning new tools, and
+          blending creativity with engineering to build experiences that feel
+          seamless and intuitive.
+        </p>
+      </div>
+    </section>
+
+    <section class="about__section">
+      <h1>Timeline</h1>
+      <div class="about__timeline">
+        <div class="about__timeline-slides">
+          <div
+            :class="{ 'about__timeline-slides--fixed': state.timelineShowing }"
+          >
+            <SlideShow
+              :key="state.currentSlides.length"
+              :slides="state.currentSlides"
+            />
+          </div>
+        </div>
+        <div class="about__timeline-structure">
+          <template v-for="(event, index) in events" :key="index">
+            <TimelineItem
+              v-if="event.type == 'EDU'"
+              :organization="event.organization"
+              :title="event.title"
+              :active="index == state.slideIndex"
+              @showSlideshow="showSlideshow(event, index)"
+              @closeSlideshow="closeSlideshow"
+            />
+            <div v-else>
+              {{ getEventDate(event.startDate) }} -
+              {{ getEventDate(event.endDate) }}
+            </div>
+            <div
+              class="about__event-connector"
+              :class="
+                event.type == 'EDU'
+                  ? 'about__event-connector--left'
+                  : 'about__event-connector--right'
+              "
+            ></div>
+            <div v-if="event.type == 'EDU'">
+              {{ getEventDate(event.startDate) }} -
+              {{ getEventDate(event.endDate) }}
+            </div>
+            <TimelineItem
+              v-else
+              :organization="event.organization"
+              :title="event.title"
+              :active="index == state.slideIndex"
+              @showSlideshow="showSlideshow(event, index)"
+              @closeSlideshow="closeSlideshow"
+            />
+          </template>
         </div>
       </div>
-      <div class="about__timeline-structure">
-        <template v-for="(event, index) in events">
-          <TimelineItem
-            v-if="event.type == 'EDU'"
-            :organization="event.organization"
-            :title="event.title"
-            :active="index == state.slideIndex"
-            @showSlideshow="showSlideshow(event, index)"
-            @closeSlideshow="closeSlideshow"
-          ></TimelineItem>
-          <div class="about__timeline-structure__dates" v-else>
-            {{ getEventDate(event.startDate) }} -
-            {{ getEventDate(event.endDate) }}
-          </div>
-          <div
-            class="about__timeline-structure__connector"
-            :class="
-              event.type == 'EDU'
-                ? 'about__timeline-structure__connector-left'
-                : 'about__timeline-structure__connector-right'
-            "
-          ></div>
-          <div
-            class="about__timeline-structure__dates"
-            v-if="event.type == 'EDU'"
-          >
-            {{ getEventDate(event.startDate) }} -
-            {{ getEventDate(event.endDate) }}
-          </div>
-          <TimelineItem
-            v-else
-            :organization="event.organization"
-            :title="event.title"
-            :active="index == state.slideIndex"
-            @showSlideshow="showSlideshow(event, index)"
-            @closeSlideshow="closeSlideshow"
-          ></TimelineItem>
-        </template>
+    </section>
+
+    <section class="about__section">
+      <h1>Skills</h1>
+      <div class="about__skills">
+        <Skills
+          v-for="skill in state.skills"
+          :amount="skill.amount"
+          :title="skill.title"
+          :project="skill.project"
+          :exp="skill.exp"
+        />
       </div>
-    </div>
-    <h1>Skills</h1>
-    <div class="about__skills">
-      <Skills
-        v-for="skill in state.skills"
-        :amount="skill.amount"
-        :title="skill.title"
-        :project="skill.project"
-        :exp="skill.exp"
-      >
-      </Skills>
-    </div>
+    </section>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "./../style.scss";
-$horizontalLine: 3rem;
-$verticalLine: 6.5rem;
+
+$horizontal-line: 3rem;
+$vertical-line: 6.5rem;
+$vertical-line-mobile: 5rem;
+
 .about {
   &__summary {
     width: 80%;
     padding: 0 1rem;
+    margin: 0 auto;
     border: 1px solid var(--secondary);
     border-radius: 8px;
-    margin: 0 auto;
     box-shadow: 2px 2px 8px var(--tertiary);
   }
+
   &__timeline {
     display: flex;
     justify-content: space-around;
     position: relative;
+
     &-slides {
       position: relative;
       width: 18rem;
-      &__fixed {
+
+      &--fixed {
         position: sticky;
-        top: 0px;
+        top: 0;
       }
     }
+
     &-structure {
       display: grid;
       grid: repeat(6, auto) / 40% 20% 40%;
       row-gap: 0.5rem;
       place-items: center;
       margin-top: 4rem;
-      &__connector {
-        position: relative;
-        width: 1rem;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        border: 1px solid var(--secondary);
-        background-color: var(--primary);
-        &::before {
-          position: absolute;
-          content: "";
-          height: 1px;
-          width: $horizontalLine;
-          background-color: var(--secondary);
-          top: 0.5rem;
-        }
-        &::after {
-          content: "";
-          position: absolute;
-          width: 1px;
-          height: $verticalLine;
-          background-color: var(--secondary);
-          top: -$verticalLine;
-          left: 0.5rem;
-        }
-        &-left::before {
-          left: -$horizontalLine;
-        }
-        &-right::before {
-          left: 1rem;
-        }
-      }
+    }
+  }
+
+  &__event-connector {
+    position: relative;
+    width: 1rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid var(--secondary);
+    background-color: var(--primary);
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: $horizontal-line;
+      background-color: var(--secondary);
+      top: 0.5rem;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: $vertical-line;
+      background-color: var(--secondary);
+      top: -$vertical-line;
+      left: 0.5rem;
+    }
+
+    &--left::before {
+      left: -$horizontal-line;
+    }
+
+    &--right::before {
+      left: 1rem;
     }
   }
 }
+
 @media (max-width: 900px) {
-  $verticalLine: 5rem;
   .about {
+    &__timeline {
+      display: block;
+
+      &-slides {
+        z-index: 3;
+        width: 95%;
+        margin: auto;
+      }
+
+      &-structure {
+        margin: 1rem auto;
+      }
+    }
+
+    &__event-connector::after {
+      height: $vertical-line-mobile;
+      top: -$vertical-line-mobile;
+    }
+
     &__skills {
       width: 95%;
       display: inline-flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-    }
-    &__timeline {
-      display: block;
-      &-slides {
-        z-index: 3;
-        margin: auto;
-        width: 95%;
-      }
-      &-structure {
-        margin: 1rem auto;
-        &__connector {
-          &::after {
-            height: $verticalLine;
-            top: -$verticalLine;
-          }
-        }
-      }
     }
   }
 }

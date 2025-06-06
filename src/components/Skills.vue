@@ -34,6 +34,7 @@ const cssProps = computed<Record<string, number>>(() => {
 
 <style lang="scss" scoped>
 @import "./../style.scss";
+
 $breadth: 10px;
 $width: 100px;
 
@@ -45,13 +46,16 @@ $width: 100px;
     "title title"
     "chart summary";
   margin: 10px 2.5%;
+
   &__title {
     grid-area: title;
     text-align: center;
   }
+
   &__chart {
     grid-area: chart;
     position: relative;
+
     &-pie {
       width: $width;
       aspect-ratio: 1;
@@ -60,6 +64,7 @@ $width: 100px;
       place-content: center;
       margin: 5px;
       background-color: var(--primary);
+
       p {
         text-align: center;
       }
@@ -71,6 +76,7 @@ $width: 100px;
         border-radius: 50%;
         border: 1px solid var(--secondary);
       }
+
       &::before {
         inset: 0;
         background: radial-gradient(farthest-side, var(--secondary) 98%, $black)
@@ -87,6 +93,7 @@ $width: 100px;
           $black-100 calc(100% - $breadth)
         );
       }
+
       &::after {
         inset: calc(50% - $breadth/2);
         background: var(--secondary);
@@ -95,6 +102,7 @@ $width: 100px;
       }
     }
   }
+
   &__summary {
     grid-area: summary;
     border: 1px solid var(--secondary);
@@ -104,6 +112,7 @@ $width: 100px;
     display: -ms-inline-grid;
     place-content: center;
     text-align: center;
+
     p {
       margin: unset;
     }
@@ -119,6 +128,7 @@ $width: 100px;
       "chart"
       "summary";
     font-size: 20px;
+
     &__summary {
       padding: 10px;
       padding-top: calc($width / 2 + 10px);
