@@ -16,7 +16,7 @@ export default createStore({
   },
   mutations: {
     setLayoutValue(state: { isMobile: boolean }) {
-      if (window.screen.width <= 900) {
+      if (window.innerWidth <= 900) {
         state.isMobile = true;
       } else {
         state.isMobile = false;

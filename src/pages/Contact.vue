@@ -2,23 +2,34 @@
 import { reactive } from "vue";
 import Input from "./../components/Input.vue";
 
-const mainInfo = {
-  Email: "swethanarayan25@gmail.com",
-  Location: "Ottawa, Ontario, Canada",
-  Languages: ["English", "Hindi", "Tamil"],
-};
-const socialLinks = {
-  LinkedIn: "https://www.linkedin.com/in/swetha-narayan-engineer/",
-  Github: "https://github.com/Swetha53",
-};
-const state = reactive({
+interface InfoVariables {
+  name: String;
+  subject: String;
+  message: String;
+}
+
+interface ValidationRule {
+  key: keyof InfoVariables;
+  validationFunc: Function;
+  evaluator: any;
+  validationStatus: boolean;
+}
+
+interface State {
+  infoVariables: InfoVariables;
+  hasValidationError: boolean;
+  isFormValid: boolean;
+  validations: ValidationRule[];
+}
+
+const state = reactive<State>({
   infoVariables: {
     name: "",
     subject: "",
     message: "",
   },
-  hasError: false,
-  finalValidation: true,
+  hasValidationError: false,
+  isFormValid: true,
   validations: [
     {
       key: "name",
@@ -47,21 +58,38 @@ const state = reactive({
   ],
 });
 
-function storeInputData(variableName: string, inputValue: string) {
+const mainInfo = {
+  Email: "swethanarayan25@gmail.com",
+  Location: "Ottawa, Ontario, Canada",
+  Languages: ["English", "Hindi", "Tamil"],
+};
+
+const socialLinks = {
+  LinkedIn: "https://www.linkedin.com/in/swetha-narayan-engineer/",
+  Github: "https://github.com/Swetha53",
+};
+
+function storeInputData(variableName: string, inputValue: string): void {
   state.infoVariables[variableName as keyof typeof state.infoVariables] =
     inputValue.replace(/\s+/g, " ").trim();
 }
 
-function isInvalidPatternValidation(stringToEvaluate: string, pattern: RegExp) {
+function isInvalidPatternValidation(
+  stringToEvaluate: string,
+  pattern: RegExp
+): boolean {
   return !pattern.test(stringToEvaluate);
 }
 
-function isTooLittleValidation(stringToEvaluate: string, minLength: number) {
+function isTooLittleValidation(
+  stringToEvaluate: string,
+  minLength: number
+): boolean {
   return stringToEvaluate.length < minLength;
 }
 
-function startFormEvaluations() {
-  state.finalValidation = true;
+function startFormEvaluations(): void {
+  state.isFormValid = true;
   state.validations.forEach((validation) => {
     type InfoKey = keyof typeof state.infoVariables;
     const result = (validation.validationFunc as any)(
@@ -70,13 +98,17 @@ function startFormEvaluations() {
     );
     validation.validationStatus = !result;
     if (!validation.validationStatus) {
-      state.finalValidation = false;
+      state.isFormValid = false;
     }
   });
-  state.hasError = !state.finalValidation;
-  if (state.finalValidation) {
+  state.hasValidationError = !state.isFormValid;
+  if (state.isFormValid) {
     window.open(
-      `mailto:swethanarayan25@gmail.com?subject=${state.infoVariables.subject}&body=${state.infoVariables.message}%0D%0A${state.infoVariables.name}`
+      `mailto:swethanarayan25@gmail.com?subject=${encodeURIComponent(
+        `${state.infoVariables.subject}`
+      )}&body=${encodeURIComponent(
+        `Message:\n${state.infoVariables.message}\n\nFrom:\n${state.infoVariables.name}`
+      )}`
     );
   }
 }
@@ -85,7 +117,7 @@ function startFormEvaluations() {
 <template>
   <h1>Contact</h1>
   <div class="contact">
-    <div class="contact__block contact__mainInfo">
+    <div class="contact__block contact__main">
       <template v-for="key in Object.keys(mainInfo)">
         <div>{{ key }}:</div>
         <ul v-if="typeof mainInfo[key as keyof typeof mainInfo] == 'object'">
@@ -97,9 +129,7 @@ function startFormEvaluations() {
           {{ mainInfo[key as keyof typeof mainInfo] }}
         </div>
       </template>
-      <div class="contact__block-ribbon contact__block-ribbon__right">
-        Information
-      </div>
+      <div class="ribbon ribbon--right">Information</div>
     </div>
     <div class="contact__block contact__form">
       <Input
@@ -107,7 +137,7 @@ function startFormEvaluations() {
         placeholder="Name"
         name="name"
         :hasError="
-          state.hasError &&
+          state.hasValidationError &&
           (!state.validations[0].validationStatus ||
             !state.validations[1].validationStatus)
         "
@@ -117,20 +147,22 @@ function startFormEvaluations() {
         inputType="text"
         placeholder="Subject"
         name="subject"
-        :hasError="state.hasError && !state.validations[2].validationStatus"
+        :hasError="
+          state.hasValidationError && !state.validations[2].validationStatus
+        "
         @storeInputData="storeInputData"
       />
       <Input
         inputType="textarea"
         placeholder="Your Message"
         name="message"
-        :hasError="state.hasError && !state.validations[3].validationStatus"
+        :hasError="
+          state.hasValidationError && !state.validations[3].validationStatus
+        "
         @storeInputData="storeInputData"
       />
       <button @click="startFormEvaluations">Submit</button>
-      <div class="contact__block-ribbon contact__block-ribbon__left">
-        Contact Form
-      </div>
+      <div class="ribbon ribbon--left">Contact Form</div>
     </div>
     <div class="contact__block contact__social">
       <template v-for="key in Object.keys(socialLinks)">
@@ -139,86 +171,52 @@ function startFormEvaluations() {
           {{ socialLinks[key as keyof typeof socialLinks] }}
         </a>
       </template>
-      <div class="contact__block-ribbon contact__block-ribbon__right">
-        Social Media
-      </div>
+      <div class="ribbon ribbon--right">Social Media</div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "./../style.scss";
-$height: 5rem;
-$fold: 0.75rem;
-$ribbon: 1rem;
+
+$block-min-height: 5rem;
+$ribbon-fold: 0.75rem;
+$ribbon-cut: 1rem;
+
 h1 {
   margin-top: unset;
 }
+
 .contact {
-  margin-bottom: calc($height/4);
+  margin-bottom: calc($block-min-height/4);
   display: grid;
-  row-gap: calc($height/4);
-  column-gap: calc($height/2);
+  row-gap: calc($block-min-height/4);
+  column-gap: calc($block-min-height/2);
   justify-content: space-around;
   grid-template-columns: 45% 45%;
   grid-template-areas:
-    "mainInfo form"
+    "main form"
     "social form";
+
   &__block {
-    min-height: $height;
-    min-width: calc(4 * $height - 3rem);
+    min-height: $block-min-height;
+    min-width: calc(4 * $block-min-height - 3rem);
     position: relative;
     display: grid;
     border-radius: 8px;
     border: 1px solid var(--secondary);
-    padding: 1.5rem;
-    padding-top: 3.5rem;
-    &-ribbon {
-      height: 2.5rem;
-      aspect-ratio: 6 / 1;
-      position: absolute;
-      top: 0.5rem;
-      background-color: var(--secondary);
-      color: var(--primary);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-bottom: $fold solid $black-33;
-      &__right {
-        border-right: $ribbon solid $black;
-        clip-path: polygon(
-          0 0,
-          100% 0,
-          100% calc(100% - $fold),
-          calc(100% - $fold) 100%,
-          calc(100% - $fold) calc(100% - $fold),
-          0 calc(100% - $fold),
-          $ribbon calc(50% - $fold/2)
-        );
-        right: calc(-1 * $fold);
-      }
-      &__left {
-        border-left: $ribbon solid $black;
-        clip-path: polygon(
-          0 0,
-          0 calc(100% - $fold),
-          $fold 100%,
-          $fold calc(100% - $fold),
-          100% calc(100% - $fold),
-          calc(100% - $ribbon) calc(50% - $fold/2),
-          100% 0
-        );
-        left: calc(-1 * $fold);
-      }
-    }
+    padding: 3.5rem 1.5rem 1.5rem;
+
     ul {
       margin: unset;
       padding-left: 1rem;
       list-style-type: "✰";
+
       li {
         padding-left: 0.5rem;
       }
     }
+
     button {
       background-color: var(--secondary);
       color: var(--primary);
@@ -227,6 +225,7 @@ h1 {
       box-shadow: 2px 2px 5px var(--tertiary);
       border: none;
       padding: 0.5rem;
+
       &:hover {
         background-color: var(--tertiary);
         color: var(--secondary);
@@ -235,19 +234,63 @@ h1 {
       }
     }
   }
-  &__mainInfo {
-    grid-area: mainInfo;
+
+  &__main {
+    grid-area: main;
     grid: auto auto auto / auto auto;
   }
+
   &__form {
     grid-area: form;
-    row-gap: calc($height/4);
+    row-gap: calc($block-min-height/4);
   }
+
   &__social {
     grid-area: social;
     grid: auto auto / auto auto;
-    column-gap: calc($height/2);
+    column-gap: calc($block-min-height/2);
     word-break: break-all;
+  }
+}
+
+.ribbon {
+  height: 2.5rem;
+  aspect-ratio: 6 / 1;
+  position: absolute;
+  top: 0.5rem;
+  background-color: var(--secondary);
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: $ribbon-fold solid $black-33;
+
+  &--right {
+    border-right: $ribbon-cut solid $black;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - $ribbon-fold),
+      calc(100% - $ribbon-fold) 100%,
+      calc(100% - $ribbon-fold) calc(100% - $ribbon-fold),
+      0 calc(100% - $ribbon-fold),
+      $ribbon-cut calc(50% - $ribbon-fold/2)
+    );
+    right: calc(-1 * $ribbon-fold);
+  }
+
+  &--left {
+    border-left: $ribbon-cut solid $black;
+    clip-path: polygon(
+      0 0,
+      0 calc(100% - $ribbon-fold),
+      $ribbon-fold 100%,
+      $ribbon-fold calc(100% - $ribbon-fold),
+      100% calc(100% - $ribbon-fold),
+      calc(100% - $ribbon-cut) calc(50% - $ribbon-fold/2),
+      100% 0
+    );
+    left: calc(-1 * $ribbon-fold);
   }
 }
 
@@ -257,7 +300,7 @@ h1 {
     grid-template-areas:
       "form"
       "form"
-      "mainInfo"
+      "main"
       "social";
   }
 }
