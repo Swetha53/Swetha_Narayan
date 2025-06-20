@@ -6,9 +6,9 @@ import DownloadButton from "./../components/DownloadButton.vue";
   <div class="home">
     <div class="home__frame" />
     <div class="home__summary">
-      <h2 class="home__summary__title">
+      <h2 class="home__title">
         Hi, I'm Swetha
-        <div class="home__summary__title__icon" />
+        <div class="home__title__icon" />
       </h2>
       I'm a Full Stack Developer based in Canada, passionate about building
       clean, responsive, and user-first web applications.<br />With over 2 years
@@ -29,18 +29,18 @@ import DownloadButton from "./../components/DownloadButton.vue";
 
 <style lang="scss" scoped>
 @import "./../style.scss";
+
 .home {
   width: 86vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  margin-inline: auto;
   display: grid;
-  grid: auto auto / 13vw 73vw;
   grid-template-areas:
     "frame summary"
     "frame button";
+  grid-template-columns: 13vw 73vw;
+
   &__frame {
     grid-area: frame;
-    position: relative;
     width: 25vw;
     aspect-ratio: 2/3;
     background: var(--primary);
@@ -50,68 +50,69 @@ import DownloadButton from "./../components/DownloadButton.vue";
     background-repeat: no-repeat;
     border: 1.3vw solid var(--secondary);
     border-radius: 50%;
+    position: relative;
   }
+
   &__summary {
     grid-area: summary;
     border: 1px solid var(--secondary);
-    border-radius: 8px;
-    border-bottom-right-radius: 0px;
-    padding: 1vw 3vw;
-    padding-left: 18vw;
-    &__title {
-      display: flex;
-      align-items: center;
-      &__icon {
-        margin-left: 0.5rem;
-        mask-size: 100%;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        mask-position: center;
-        width: 1.5rem;
-        height: 1.5rem;
-        mask-image: url("./../assets/hand.svg");
-        -webkit-mask-image: url("./../assets/hand.svg");
-        background-color: var(--secondary);
-      }
+    border-radius: 8px 8px 0 8px;
+    padding: 1vw 3vw 1vw 18vw;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      margin-left: 0.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: var(--secondary);
+      mask-image: url("./../assets/hand.svg");
+      -webkit-mask-image: url("./../assets/hand.svg");
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: center;
     }
   }
+
   &__button {
     grid-area: button;
     margin-left: auto;
-    margin-right: 0;
     width: 55vw;
   }
 }
+
 @media (max-width: 900px) {
   .home {
-    position: relative;
     width: 100%;
-    grid: auto auto auto / auto;
     grid-template-areas:
       "frame"
       "summary"
       "button";
-    margin: unset;
-    transform: unset;
+    grid-template-columns: 1fr;
+
     &__frame {
       z-index: 2;
-      position: relative;
       margin: auto;
       top: 2rem;
       width: 60vw;
       border-width: 15px;
     }
+
     &__summary {
       width: 90vw;
+      margin-inline: auto;
       padding: 3vw 2vw;
       position: relative;
-      left: 50%;
-      transform: translateX(-50%);
       border-bottom-right-radius: 8px;
+      transform: none;
     }
+
     &__button {
-      margin: auto;
       width: 80vw;
+      margin: auto;
     }
   }
 }
